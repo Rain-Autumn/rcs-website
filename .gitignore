@@ -1,0 +1,39 @@
+# Dependencies and generated output
+node_modules/
+.next/
+out/
+coverage/
+playwright-report/
+test-results/
+*.tsbuildinfo
+*.log
+
+# Runtime configuration and private data
+.env
+.env.*
+!.env.example
+/.data/
+/data/
+/storage/
+/uploads/
+/research-publications/
+/team-members/
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Deployment artifacts and local backups
+*.tar.gz
+*.backup-*
+*.before-*
+.deploy-*
+.team-deploy-*
+CODEX_CONTEXT.md
+public/CV.pdf
+
+# Editor and operating-system files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
