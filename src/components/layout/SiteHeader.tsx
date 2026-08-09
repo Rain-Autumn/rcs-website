@@ -29,10 +29,13 @@ export function SiteHeader({ locale, copy, mode = 'presentation' }: { locale: Lo
     return () => observer.disconnect();
   }, [copy.nav, mode]);
 
-  const switchLocale = (target: Locale) => {
-    const suffix = mode === 'research' ? '/research' : mode === 'team' ? '/team' : (window.location.hash || '#core');
+  const languageHref = (target: Locale) => {
+    const suffix = mode === 'research' ? '/research' : mode === 'team' ? '/team' : '#core';
+    return `/${target}${suffix}`;
+  };
+
+  const rememberLocale = (target: Locale) => {
     window.localStorage.setItem('rcs-locale', target);
-    window.location.assign(`/${target}${suffix}`);
   };
 
   useEffect(() => {
@@ -55,15 +58,17 @@ export function SiteHeader({ locale, copy, mode = 'presentation' }: { locale: Lo
 
       <div className="header-language" aria-label={copy.languageLabel}>
         {(['fr', 'en', 'nl'] as Locale[]).map((target) => (
-          <button
-            type="button"
+          <a
             key={target}
+            href={languageHref(target)}
+            hrefLang={target}
+            lang={target}
             className={locale === target ? 'is-active' : undefined}
-            onClick={() => switchLocale(target)}
-            aria-current={locale === target ? 'true' : undefined}
+            onClick={() => rememberLocale(target)}
+            aria-current={locale === target ? 'page' : undefined}
           >
             {target.toUpperCase()}
-          </button>
+          </a>
         ))}
       </div>
 

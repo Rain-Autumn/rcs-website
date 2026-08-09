@@ -19,12 +19,16 @@ function walk(dir) {
 sourceRoots.forEach((dir) => walk(path.join(root, dir)));
 const textFiles = files.filter((file) => /\.(ts|tsx|css|md|svg|json)$/.test(file));
 const text = textFiles.map((file) => fs.readFileSync(file, 'utf8')).join('\n');
+const languageGate = fs.readFileSync(path.join(root, 'src', 'components', 'ui', 'LanguageGate.tsx'), 'utf8');
+const siteHeader = fs.readFileSync(path.join(root, 'src', 'components', 'layout', 'SiteHeader.tsx'), 'utf8');
 
 const checks = [
   ['forbidden identity absent', !text.includes(['Capitaine', 'Autumn'].join(' '))],
   ['interactive terminal absent', !/terminal-form|nginx -t|curl -I/i.test(text)],
   ['RCS Core institutional identity present', /RCS CORE/.test(text) && /RAIJU CLOUD SYSTEM/.test(text)],
   ['multilingual routes present', fs.existsSync(path.join(root, 'src', 'app', '(localized)', '[locale]', 'page.tsx')) && /NEDERLANDS/.test(text) && /FRANÇAIS/.test(text)],
+  ['portal has a semantic heading and crawlable language links', /<h1 className="boot-brand">RAIJU CLOUD SYSTEM<\/h1>/.test(languageGate) && /href={`\/\$\{option\.locale\}`}/.test(languageGate)],
+  ['header language switch uses crawlable links', /href={languageHref\(target\)}/.test(siteHeader) && !/<button[\s\S]*?switchLocale/.test(siteHeader)],
   ['research routes present', fs.existsSync(path.join(root, 'src', 'app', '(localized)', '[locale]', 'research', 'page.tsx'))],
   ['research storage stays private', !fs.existsSync(path.join(root, 'public', 'research-publications')) && /MAX_PDF_BYTES/.test(text)],
   ['research publication is password protected', /verifyResearchPassword/.test(text) && /httpOnly: true/.test(text)],

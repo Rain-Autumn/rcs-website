@@ -385,6 +385,15 @@ h3 { font-family: var(--display); letter-spacing: -.025em; }
   white-space: nowrap;
 }
 
+.boot-summary {
+  width: min(38rem, 86vw);
+  margin: 1rem 0 0;
+  color: #75716b;
+  font: 500 clamp(.64rem, .95vw, .78rem)/1.65 var(--mono);
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+
 .boot-label {
   display: flex;
   align-items: center;
@@ -471,6 +480,31 @@ h3 { font-family: var(--display); letter-spacing: -.025em; }
     inset 0 0 0 4px rgba(239, 237, 232, .78),
     inset 0 0 0 5px rgba(80, 77, 72, .14),
     0 .6rem 1.6rem rgba(60, 56, 50, .08);
+}
+
+.boot-language-links {
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  margin-top: 1rem;
+}
+
+.boot-language-links a {
+  min-width: 2.9rem;
+  padding: .45rem .6rem;
+  color: #77726b;
+  border: 1px solid rgba(80, 77, 72, .18);
+  font: 600 .56rem var(--mono);
+  letter-spacing: .14em;
+  text-decoration: none;
+  transition: color .18s ease, background-color .18s ease, border-color .18s ease;
+}
+
+.boot-language-links a:hover,
+.boot-language-links a:focus-visible {
+  color: #4e4b46;
+  background: rgba(255, 255, 255, .44);
+  border-color: rgba(80, 77, 72, .46);
 }
 
 .boot-corner {
@@ -572,6 +606,12 @@ h3 { font-family: var(--display); letter-spacing: -.025em; }
     margin-top: 1.35rem;
     font-size: clamp(.98rem, 5.1vw, 1.3rem);
     letter-spacing: clamp(.18em, 1.25vw, .27em);
+  }
+
+  .boot-summary {
+    width: min(29rem, 84vw);
+    font-size: .56rem;
+    letter-spacing: .08em;
   }
 
   .boot-label {
@@ -1034,6 +1074,7 @@ body.language-gate-active { overflow: hidden !important; }
   background: rgba(247,243,234,.56);
   border: 1px solid rgba(31,28,24,.24);
   cursor: pointer;
+  text-decoration: none;
   transition: transform .18s ease, background .18s ease, border-color .18s ease;
 }
 
@@ -1071,7 +1112,7 @@ body.language-gate-active { overflow: hidden !important; }
   border: 1px solid rgba(238,234,225,.12);
 }
 
-.header-language button {
+.header-language a {
   padding: .4rem .48rem;
   color: rgba(236,231,221,.44);
   background: transparent;
@@ -1079,10 +1120,11 @@ body.language-gate-active { overflow: hidden !important; }
   font: 600 .52rem var(--mono);
   letter-spacing: .1em;
   cursor: pointer;
+  text-decoration: none;
 }
 
-.header-language button:hover,
-.header-language button.is-active {
+.header-language a:hover,
+.header-language a.is-active {
   color: var(--light-text);
   background: rgba(236,231,221,.08);
 }
@@ -1210,7 +1252,7 @@ body.language-gate-active { overflow: hidden !important; }
   .site-header { gap: .55rem; }
   .brand-lockup strong { font-size: .66rem; }
   .header-language { order: 3; width: 100%; justify-content: center; margin-left: 0; }
-  .header-language button { flex: 1; }
+  .header-language a { flex: 1; text-align: center; }
   .nav-toggle { margin-left: auto; }
 
   .rcs-core-title {
