@@ -38,6 +38,9 @@ jobs:
       - name: Run static audit
         run: pnpm test:static
 
+      - name: Check deployment scripts
+        run: bash -n deploy/bootstrap-vps.sh deploy/rcs-deploy
+
       - name: Check TypeScript
         run: pnpm typecheck
 
@@ -51,3 +54,46 @@ jobs:
         env:
           NEXT_TELEMETRY_DISABLED: 1
         run: pnpm build
+
+      - name: Package standalone release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.RCS_DEPLOY_ENABLED == 'true'
+        run: |
+          test -f .next/standalone/server.js
+          install -d .next/standalone/public .next/standalone/.next/static
+          cp -a public/. .next/standalone/public/
+          cp -a .next/static/. .next/standalone/.next/static/
+          tar -C .next/standalone -czf "$RUNNER_TEMP/rcs-release.tar.gz" .
+
+      - name: Configure deployment identity
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.RCS_DEPLOY_ENABLED == 'true'
+        env:
+          RCS_DEPLOY_HOST: ${{ vars.RCS_DEPLOY_HOST }}
+          RCS_DEPLOY_USER: ${{ vars.RCS_DEPLOY_USER }}
+          RCS_DEPLOY_SSH_KEY_B64: ${{ secrets.RCS_DEPLOY_SSH_KEY_B64 }}
+          RCS_DEPLOY_KNOWN_HOSTS: ${{ secrets.RCS_DEPLOY_KNOWN_HOSTS }}
+        run: |
+          [[ "$RCS_DEPLOY_HOST" =~ ^[A-Za-z0-9.-]+$ ]]
+          [[ "$RCS_DEPLOY_USER" =~ ^[a-z_][a-z0-9_-]*$ ]]
+          test -n "$RCS_DEPLOY_SSH_KEY_B64"
+          test -n "$RCS_DEPLOY_KNOWN_HOSTS"
+
+          install -m 700 -d "$HOME/.ssh"
+          printf '%s' "$RCS_DEPLOY_SSH_KEY_B64" | base64 --decode > "$RUNNER_TEMP/rcs-deploy-key"
+          printf '%s\n' "$RCS_DEPLOY_KNOWN_HOSTS" > "$HOME/.ssh/known_hosts"
+          chmod 600 "$RUNNER_TEMP/rcs-deploy-key" "$HOME/.ssh/known_hosts"
+          ssh-keygen -y -f "$RUNNER_TEMP/rcs-deploy-key" > /dev/null
+
+      - name: Deploy atomically to the VPS
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.RCS_DEPLOY_ENABLED == 'true'
+        env:
+          RCS_DEPLOY_HOST: ${{ vars.RCS_DEPLOY_HOST }}
+          RCS_DEPLOY_USER: ${{ vars.RCS_DEPLOY_USER }}
+        run: |
+          cat "$RUNNER_TEMP/rcs-release.tar.gz" | timeout 240 ssh \
+            -i "$RUNNER_TEMP/rcs-deploy-key" \
+            -o BatchMode=yes \
+            -o IdentitiesOnly=yes \
+            -o ServerAliveInterval=15 \
+            -o ServerAliveCountMax=4 \
+            "$RCS_DEPLOY_USER@$RCS_DEPLOY_HOST" \
+            "deploy $GITHUB_SHA"
