@@ -3,10 +3,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { SiteHeader } from '@/components/layout/SiteHeader';
+import { StructuredData } from '@/components/seo/StructuredData';
 import { TeamMemberForm } from '@/components/team/TeamMemberForm';
 import { founder, localizedMember, teamCopy } from '@/content/team';
 import { getCopy, isLocale, type Locale } from '@/content/i18n';
 import { loadTeamMembers } from '@/lib/team-members';
+import { socialMetadata } from '@/lib/site-metadata';
+import { teamStructuredData } from '@/lib/structured-data';
 
 type PageProps = { params: Promise<{ locale: string }> };
 export const dynamic = 'force-dynamic';
@@ -15,7 +18,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { locale } = await params;
   if (!isLocale(locale)) return {};
   const copy = teamCopy[locale];
-  return { title: copy.metadataTitle, description: copy.metadataDescription, alternates: { canonical: `/${locale}/team`, languages: { 'fr-BE': '/fr/team', en: '/en/team', 'nl-BE': '/nl/team', 'x-default': '/en/team' } } };
+  const social = socialMetadata({ title: copy.metadataTitle, description: copy.metadataDescription, path: `/${locale}/team`, locale: getCopy(locale).metadata.ogLocale });
+  return { title: copy.metadataTitle, description: copy.metadataDescription, alternates: { canonical: `/${locale}/team`, languages: { 'fr-BE': '/fr/team', en: '/en/team', 'nl-BE': '/nl/team', 'x-default': '/en/team' } }, ...social };
 }
 
 export default async function TeamPage({ params }: PageProps) {
@@ -26,6 +30,7 @@ export default async function TeamPage({ params }: PageProps) {
   const members = [founder, ...(await loadTeamMembers())].map((member) => localizedMember(member, locale));
 
   return <>
+    <StructuredData data={teamStructuredData(locale, members)} />
     <SiteHeader locale={locale} copy={getCopy(locale)} mode="team" />
     <main id="main" className="team-page">
       <section className="technical-panel team-hero" data-section="RCS-T">

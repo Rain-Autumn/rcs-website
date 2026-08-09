@@ -3,9 +3,12 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { SiteHeader } from '@/components/layout/SiteHeader';
 import { ResearchProposalForm } from '@/components/research/ResearchProposalForm';
+import { StructuredData } from '@/components/seo/StructuredData';
 import { getResearchProjects, researchCopy } from '@/content/research';
 import { getCopy, isLocale, type Locale } from '@/content/i18n';
 import { loadResearch } from '@/lib/research-publications';
+import { socialMetadata } from '@/lib/site-metadata';
+import { researchStructuredData } from '@/lib/structured-data';
 
 type PageProps = { params: Promise<{ locale: string }> };
 export const dynamic = 'force-dynamic';
@@ -14,7 +17,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { locale } = await params;
   if (!isLocale(locale)) return {};
   const copy = researchCopy[locale];
-  return { title: copy.metadataTitle, description: copy.metadataDescription, alternates: { canonical: `/${locale}/research`, languages: { 'fr-BE': '/fr/research', en: '/en/research', 'nl-BE': '/nl/research', 'x-default': '/en/research' } } };
+  const social = socialMetadata({ title: copy.metadataTitle, description: copy.metadataDescription, path: `/${locale}/research`, locale: getCopy(locale).metadata.ogLocale });
+  return { title: copy.metadataTitle, description: copy.metadataDescription, alternates: { canonical: `/${locale}/research`, languages: { 'fr-BE': '/fr/research', en: '/en/research', 'nl-BE': '/nl/research', 'x-default': '/en/research' } }, ...social };
 }
 
 export default async function ResearchPage({ params }: PageProps) {
@@ -31,6 +35,7 @@ export default async function ResearchPage({ params }: PageProps) {
   }[locale];
 
   return <>
+    <StructuredData data={researchStructuredData(locale, projects, publications)} />
     <SiteHeader locale={locale} copy={getCopy(locale)} mode="research" />
     <main id="main" className="research-page">
       <section className="technical-panel research-hero" data-section="RCS-R">

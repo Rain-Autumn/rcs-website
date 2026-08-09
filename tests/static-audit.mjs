@@ -19,8 +19,10 @@ function walk(dir) {
 sourceRoots.forEach((dir) => walk(path.join(root, dir)));
 const textFiles = files.filter((file) => /\.(ts|tsx|css|md|svg|json)$/.test(file));
 const text = textFiles.map((file) => fs.readFileSync(file, 'utf8')).join('\n');
+const cssText = files.filter((file) => file.endsWith('.css')).map((file) => fs.readFileSync(file, 'utf8')).join('\n');
 const languageGate = fs.readFileSync(path.join(root, 'src', 'components', 'ui', 'LanguageGate.tsx'), 'utf8');
 const siteHeader = fs.readFileSync(path.join(root, 'src', 'components', 'layout', 'SiteHeader.tsx'), 'utf8');
+const workflow = fs.readFileSync(path.join(root, '.github', 'workflows', 'ci.yml'), 'utf8');
 
 const checks = [
   ['forbidden identity absent', !text.includes(['Capitaine', 'Autumn'].join(' '))],
@@ -40,7 +42,10 @@ const checks = [
   ['Linux stack visible', /DEBIAN 13/.test(text) && /NGINX/.test(text) && /OVH VPS/.test(text)],
   ['human validation visible', text.includes('HUGUES HENROTTE') && text.includes('HUMAN VALIDATION')],
   ['current public CV present', fs.existsSync(path.join(root, 'public', 'CV-Hugues-Henrotte-RCS-2026.pdf'))],
-  ['no remote image/font CDN', !/https?:\/\/(?!raijucloudsystem\.com)/i.test(text.replaceAll('http://www.w3.org/2000/svg', ''))],
+  ['LinkedIn social card present', fs.existsSync(path.join(root, 'public', 'images', 'rcs-social-card.png')) && /summary_large_image/.test(text) && /1200/.test(text) && /630/.test(text)],
+  ['structured data present', /application\/ld\+json/.test(text) && /https:\/\/schema\.org/.test(text) && /ScholarlyArticle/.test(text)],
+  ['IndexNow runs after deployment', /Deploy atomically[\s\S]+Notify participating search engines through IndexNow/.test(workflow) && /indexnow:submit/.test(workflow)],
+  ['no remote image/font CDN', !/@import\s+(?:url\()?['"]?https?:\/\//i.test(cssText) && !/url\(\s*['"]?https?:\/\//i.test(cssText) && !/<Image[^>]+src=["']https?:\/\//i.test(text)],
 ];
 
 let failed = false;

@@ -97,3 +97,8 @@ jobs:
             -o ServerAliveCountMax=4 \
             "$RCS_DEPLOY_USER@$RCS_DEPLOY_HOST" \
             "deploy $GITHUB_SHA"
+
+      - name: Notify participating search engines through IndexNow
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.RCS_DEPLOY_ENABLED == 'true'
+        continue-on-error: true
+        run: pnpm indexnow:submit

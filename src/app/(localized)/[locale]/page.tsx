@@ -10,8 +10,11 @@ import { ResearchSection } from '@/components/sections/ResearchSection';
 import { ProjectsSection } from '@/components/sections/ProjectsSection';
 import { DirectorSection } from '@/components/sections/DirectorSection';
 import { ContactSection } from '@/components/sections/ContactSection';
+import { StructuredData } from '@/components/seo/StructuredData';
 import { SmoothMotion } from '@/components/ui/SmoothMotion';
 import { getCopy, isLocale, locales, type Locale } from '@/content/i18n';
+import { socialMetadata } from '@/lib/site-metadata';
+import { coreStructuredData } from '@/lib/structured-data';
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -25,7 +28,12 @@ export async function generateMetadata({
   const { locale } = await params;
   if (!isLocale(locale)) return {};
   const copy = getCopy(locale);
-  const url = `https://raijucloudsystem.com/${locale}`;
+  const social = socialMetadata({
+    title: copy.metadata.title,
+    description: copy.metadata.description,
+    path: `/${locale}`,
+    locale: copy.metadata.ogLocale,
+  });
 
   return {
     title: copy.metadata.title,
@@ -39,14 +47,7 @@ export async function generateMetadata({
         'x-default': '/',
       },
     },
-    openGraph: {
-      type: 'website',
-      locale: copy.metadata.ogLocale,
-      url,
-      siteName: 'Raiju Cloud System',
-      title: copy.metadata.title,
-      description: copy.metadata.description,
-    },
+    ...social,
   };
 }
 
@@ -63,6 +64,7 @@ export default async function LocalizedHomePage({
 
   return (
     <>
+      <StructuredData data={coreStructuredData(locale)} />
       <a className="skip-link" href="#main">{copy.skipLink}</a>
       <SmoothMotion />
       <SiteHeader locale={locale} copy={copy} />
