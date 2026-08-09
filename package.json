@@ -19,6 +19,8 @@
     "test:e2e": "playwright test",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "assets:social": "node scripts/generate-social-card.mjs",
+    "indexnow:submit": "node scripts/submit-indexnow.mjs",
     "assets:gltf": "gltf-transform optimize"
   },
   "dependencies": {

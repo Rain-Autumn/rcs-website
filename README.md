@@ -14,6 +14,9 @@ Live site: [raijucloudsystem.com](https://raijucloudsystem.com)
 - Separate password-protected administration forms for Research and Team.
 - Private server-side storage for publication metadata and PDF reports.
 - Responsive navigation, reduced-motion support and progressive visual effects.
+- Branded 1200 × 630 social previews for LinkedIn and other Open Graph clients.
+- Structured Organization, Team and Research data expressed through JSON-LD.
+- Automatic IndexNow notification after successful production deployments.
 
 Planned research projects are clearly identified as future work. No result, benchmark or publication is presented as completed unless supporting data exists.
 

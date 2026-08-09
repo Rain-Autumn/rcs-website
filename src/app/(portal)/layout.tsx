@@ -1,5 +1,13 @@
 import type { Metadata, Viewport } from 'next';
 import '@/app/globals.css';
+import { socialMetadata } from '@/lib/site-metadata';
+
+const social = socialMetadata({
+  title: 'Raiju Cloud System | RCS Core',
+  description: 'Technology, systems, infrastructure and intelligence.',
+  path: '/',
+  locale: 'en_US',
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://raijucloudsystem.com'),
@@ -19,14 +27,7 @@ export const metadata: Metadata = {
     },
   },
 
-  openGraph: {
-    type: 'website',
-    url: 'https://raijucloudsystem.com/',
-    siteName: 'Raiju Cloud System',
-    title: 'Raiju Cloud System | RCS Core',
-    description:
-      'Technology, systems, infrastructure and intelligence.',
-  },
+  ...social,
 
   icons: {
     icon: '/icons/raiju-mark.svg',
