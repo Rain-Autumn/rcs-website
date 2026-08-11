@@ -8,7 +8,9 @@ Live site: [raijucloudsystem.com](https://raijucloudsystem.com)
 
 ## What the project contains
 
-- A multilingual public presentation in French, English and Dutch.
+- A multilingual system hub in French, English and Dutch.
+- A dedicated institutional presentation preserving the complete RCS narrative.
+- A public AI Squadron overview linked to the Dragon One demonstrator.
 - Dedicated Research routes with structured technical publications.
 - A normalized Team directory with localized roles, profiles and certifications.
 - Separate password-protected administration forms for Research and Team.
@@ -24,7 +26,9 @@ Planned research projects are clearly identified as future work. No result, benc
 
 | Area | French | English | Dutch |
 | --- | --- | --- | --- |
-| Presentation | `/fr` | `/en` | `/nl` |
+| System hub | `/fr` | `/en` | `/nl` |
+| Presentation | `/fr/presentation` | `/en/presentation` | `/nl/presentation` |
+| AI Squadron | `/fr/squadron` | `/en/squadron` | `/nl/squadron` |
 | Research | `/fr/research` | `/en/research` | `/nl/research` |
 | Team | `/fr/team` | `/en/team` | `/nl/team` |
 
@@ -36,7 +40,7 @@ The root route `/` provides the language entry point.
 src/
 ├── app/
 │   ├── (portal)/                  # Language entry point
-│   ├── (localized)/[locale]/      # Presentation, Research and Team pages
+│   ├── (localized)/[locale]/      # Hub, Presentation, Squadron, Research and Team
 │   └── api/                       # Authentication, publications and members
 ├── components/
 │   ├── layout/                    # Header and navigation
