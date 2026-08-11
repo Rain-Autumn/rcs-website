@@ -2196,3 +2196,295 @@ body.menu-open { overflow: hidden; }
   .hub-system-card, .hub-system-card::after, .squadron-signal i { animation: none; transition: none; }
 }
 /* === RCS SYSTEM ARCHITECTURE V3 END === */
+
+/* === RCS RESPONSIVE SYSTEM V4 START === */
+:root {
+  --max: calc(100vw - clamp(.5rem, 1.4vw, 2rem));
+  --reading-width: 108rem;
+}
+
+html,
+body { min-height: 100%; }
+
+body {
+  min-height: 100dvh;
+  background-attachment: fixed;
+}
+
+main,
+.site-header,
+.site-footer { width: var(--max); }
+
+main { padding-top: .25rem; }
+
+.technical-panel {
+  margin-top: .35rem;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, .16);
+}
+
+/* The panel fills ultra-wide screens while the actual information stays readable. */
+@media (min-width: 1800px) {
+  .hub-hero {
+    grid-template-columns:
+      minmax(2rem, 1fr)
+      minmax(0, 60rem)
+      minmax(22rem, 34rem)
+      minmax(2rem, 1fr);
+  }
+
+  .hub-hero__copy { grid-column: 2; }
+  .hub-principles { grid-column: 3; }
+
+  .hub-directory > .section-heading,
+  .hub-directory > .hub-system-grid {
+    width: min(100%, var(--reading-width));
+    margin-inline: auto;
+  }
+}
+
+.hub-hero {
+  min-height: clamp(37rem, calc(100svh - 6rem), 56rem);
+  padding-block: clamp(2.75rem, 7vh, 5.5rem);
+  gap: clamp(2rem, 5vw, 6rem);
+  background-image:
+    radial-gradient(circle at 78% 18%, transparent 0 5.6rem, rgba(26, 24, 21, .04) 5.65rem 5.72rem, transparent 5.78rem),
+    linear-gradient(115deg, transparent 0 73%, rgba(26, 24, 21, .035) 73.05%, transparent 73.12%),
+    linear-gradient(rgba(80, 80, 80, .038) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(80, 80, 80, .038) 1px, transparent 1px);
+}
+
+.hub-hero__copy {
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
+}
+
+.hub-hero__copy::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: clamp(18rem, 34vw, 38rem);
+  aspect-ratio: 1;
+  left: clamp(-8rem, -8vw, -3rem);
+  top: 50%;
+  border: 1px solid rgba(26, 24, 21, .055);
+  border-radius: 50%;
+  background:
+    linear-gradient(90deg, transparent 49.8%, rgba(26, 24, 21, .045) 50%, transparent 50.2%),
+    linear-gradient(transparent 49.8%, rgba(26, 24, 21, .045) 50%, transparent 50.2%),
+    radial-gradient(circle, transparent 0 31%, rgba(26, 24, 21, .05) 31.2% 31.5%, transparent 31.7%);
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+.hub-hero__copy::after {
+  content: "RCS // SYSTEM MAP // 04 NODES";
+  display: block;
+  width: fit-content;
+  margin-top: 1.6rem;
+  color: rgba(26, 24, 21, .28);
+  font: 600 .5rem var(--mono);
+  letter-spacing: .18em;
+}
+
+.hub-hero h1 {
+  max-width: 11ch;
+  font-size: clamp(4.25rem, 6.1vw, 7rem);
+}
+
+.hub-hero .hero-lead {
+  max-width: 43rem;
+  margin-top: 1.25rem;
+  font-size: clamp(.98rem, 1.15vw, 1.18rem);
+}
+
+.hub-principles {
+  position: relative;
+  box-shadow: 1.1rem 1.1rem 0 rgba(26, 24, 21, .025);
+}
+
+.hub-principles::before {
+  content: "";
+  position: absolute;
+  inset: -.6rem;
+  z-index: -1;
+  border: 1px solid rgba(26, 24, 21, .045);
+  clip-path: polygon(0 .9rem, .9rem 0, 100% 0, 100% calc(100% - .9rem), calc(100% - .9rem) 100%, 0 100%);
+}
+
+.hub-principles div { min-height: clamp(5.5rem, 10vh, 6.7rem); }
+.hub-directory { padding-top: clamp(3.2rem, 5vw, 5.5rem); }
+
+@media (max-width: 1350px) and (min-width: 1051px) {
+  .hub-hero h1 { font-size: clamp(4rem, 6vw, 5.4rem); }
+  .hub-hero { grid-template-columns: minmax(0, 1.08fr) minmax(20rem, .92fr); }
+  .hub-principles div { min-height: 5.25rem; }
+}
+
+@media (max-width: 1050px) {
+  .hub-hero {
+    min-height: auto;
+    padding-block: clamp(3.5rem, 8vw, 5rem);
+  }
+
+  .hub-hero h1,
+  .squadron-hero h1 { font-size: clamp(3.75rem, 9.5vw, 6rem); }
+}
+
+@media (max-width: 700px) {
+  :root { --max: 100%; }
+
+  .site-header {
+    top: 0;
+    width: 100%;
+    min-height: 0;
+    margin: 0;
+    padding: .42rem .5rem;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    grid-template-rows: auto auto;
+    gap: .38rem .35rem;
+    border-inline: 0;
+    border-top: 0;
+  }
+
+  .brand-lockup {
+    grid-column: 1;
+    grid-row: 1;
+    gap: .48rem;
+  }
+
+  .brand-lockup img {
+    width: 1.8rem;
+    height: 1.95rem;
+  }
+
+  .brand-lockup strong {
+    font-size: .58rem;
+    letter-spacing: .13em;
+  }
+
+  .brand-lockup small { display: none; }
+
+  .header-language {
+    grid-column: 2;
+    grid-row: 1;
+    width: auto;
+    margin: 0;
+    padding: .12rem;
+    gap: .08rem;
+  }
+
+  .header-language a {
+    min-width: 1.85rem;
+    padding: .34rem .28rem;
+    font-size: .44rem;
+    text-align: center;
+  }
+
+  .nav-toggle {
+    grid-column: 3;
+    grid-row: 1;
+    min-width: 2.3rem;
+    min-height: 2.1rem;
+    padding: .25rem;
+    justify-content: center;
+  }
+
+  .nav-toggle span { display: none; }
+
+  .section-nav {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: .08rem;
+    overflow: visible;
+  }
+
+  .section-nav a {
+    min-height: 2.35rem;
+    padding: .28rem .08rem;
+    flex-direction: row;
+    justify-content: center;
+    gap: 0;
+    font-size: clamp(.39rem, 1.72vw, .46rem);
+    letter-spacing: .025em;
+    line-height: 1.15;
+    white-space: nowrap;
+  }
+
+  .section-nav a span { display: none; }
+
+  main {
+    width: 100%;
+    padding: .18rem .22rem 2.5rem;
+  }
+
+  .technical-panel {
+    margin-top: .22rem;
+    padding-top: 3.35rem;
+    box-shadow: 0 .75rem 2rem rgba(0, 0, 0, .14);
+  }
+
+  .hub-hero,
+  .squadron-hero {
+    min-height: auto;
+    gap: 2rem;
+    padding-block: 3.35rem 2.6rem;
+  }
+
+  .hub-hero h1,
+  .squadron-hero h1 {
+    max-width: 11ch;
+    font-size: clamp(2.7rem, 11.7vw, 3.55rem);
+    line-height: .93;
+    overflow-wrap: normal;
+  }
+
+  .hub-hero .hero-lead,
+  .squadron-hero .hero-lead {
+    margin-top: 1.1rem;
+    font-size: .96rem;
+    line-height: 1.58;
+  }
+
+  .hub-hero__copy::before {
+    width: 20rem;
+    left: -7rem;
+    opacity: .7;
+  }
+
+  .hub-hero__copy::after {
+    margin-top: 1.15rem;
+    font-size: .43rem;
+    letter-spacing: .13em;
+  }
+
+  .hub-principles { box-shadow: .55rem .55rem 0 rgba(26, 24, 21, .025); }
+  .hub-principles div { min-height: 4.8rem; padding: .8rem; }
+  .hub-directory { padding-top: 3.2rem; }
+  .hub-system-card { min-height: 16.5rem; gap: 1.6rem; }
+  .hub-system-card h3 { font-size: clamp(2rem, 9.8vw, 3rem); }
+
+  .squadron-live-panel { min-height: 15rem; }
+  .squadron-live-panel > strong { margin-top: 2.2rem; font-size: clamp(2.35rem, 12vw, 3.5rem); }
+
+  .site-footer {
+    width: 100%;
+    padding-inline: .75rem;
+    font-size: .48rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .brand-lockup strong { font-size: .52rem; }
+  .header-language a { min-width: 1.6rem; padding-inline: .2rem; }
+  .section-nav a { font-size: .39rem; letter-spacing: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hub-hero__copy::before,
+  .hub-principles::before { animation: none; }
+}
+/* === RCS RESPONSIVE SYSTEM V4 END === */
