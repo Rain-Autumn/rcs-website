@@ -1936,7 +1936,19 @@ body.menu-open { overflow: hidden; }
 .team-member-identity strong { color: #79583e; font: 650 .64rem/1.5 var(--mono); letter-spacing: .12em; text-transform: uppercase; }
 .team-member-bio { align-self: center; max-width: 55rem; color: var(--ink-soft); font-size: clamp(1rem, 1.4vw, 1.2rem); }
 .team-certifications { grid-column: 1 / -1; padding-top: 1.2rem; border-top: 1px solid var(--line); }
-.team-cert-list { margin-top: .8rem; border-top: 1px solid var(--line-soft); }
+.team-certifications-disclosure > summary { min-height: 3.7rem; padding: .3rem 0; display: grid; grid-template-columns: auto 1fr auto; gap: .75rem; align-items: center; list-style: none; cursor: pointer; border-bottom: 1px solid var(--line-soft); }
+.team-certifications-disclosure > summary::-webkit-details-marker { display: none; }
+.team-certifications-disclosure > summary:focus-visible { outline: 2px solid var(--copper); outline-offset: .3rem; }
+.team-certifications-label, .team-certifications-count, .team-certifications-toggle { font: 650 .56rem var(--mono); letter-spacing: .13em; }
+.team-certifications-label { color: var(--ink-soft); }
+.team-certifications-count { width: fit-content; padding: .3rem .48rem; color: var(--copper); border: 1px solid rgba(155,95,48,.3); }
+.team-certifications-toggle { display: flex; align-items: center; gap: .7rem; color: var(--ink); }
+.team-certifications-toggle i { font-style: normal; font-size: .9rem; transition: transform .24s ease; }
+.team-certifications-open { display: none; }
+.team-certifications-disclosure[open] .team-certifications-open { display: inline; }
+.team-certifications-disclosure[open] .team-certifications-closed { display: none; }
+.team-certifications-disclosure[open] .team-certifications-toggle i { transform: rotate(180deg); }
+.team-cert-list { border-top: 0; }
 .team-cert-list article { min-height: 6rem; padding: .85rem 0; display: grid; grid-template-columns: 2.5rem 1fr auto; gap: 1rem; align-items: center; border-bottom: 1px solid var(--line-soft); }
 .team-cert-list article > span { color: rgba(26,24,21,.3); font: 600 .54rem var(--mono); }
 .team-cert-list strong { display: block; font-size: .95rem; }
@@ -1963,6 +1975,8 @@ body.menu-open { overflow: hidden; }
   .team-member { padding: 1rem; gap: 1.5rem; }
   .team-member-identity { grid-template-columns: 5.4rem 1fr; min-width: 0; }
   .team-member-identity h3 { font-size: clamp(2rem, 11vw, 3.2rem); overflow-wrap: anywhere; }
+  .team-certifications-disclosure > summary { grid-template-columns: auto auto 1fr; }
+  .team-certifications-toggle { justify-self: end; }
   .team-cert-list article { grid-template-columns: 1.8rem 1fr auto; gap: .6rem; }
   .team-cert-list strong, .team-cert-list p, .team-cert-list small { overflow-wrap: anywhere; }
   .team-cert-fields { grid-template-columns: 1fr; }
@@ -1970,6 +1984,7 @@ body.menu-open { overflow: hidden; }
 }
 @media (prefers-reduced-motion: reduce) {
   .team-member-mark--arkenstone::before, .team-member-mark--arkenstone::after { animation: none; }
+  .team-certifications-toggle i { transition: none; }
 }
 /* === RCS TEAM DIRECTORY END === */
 
