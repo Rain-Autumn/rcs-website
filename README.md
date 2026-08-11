@@ -10,7 +10,7 @@ Live site: [raijucloudsystem.com](https://raijucloudsystem.com)
 
 - A multilingual system hub in French, English and Dutch.
 - A dedicated institutional presentation preserving the complete RCS narrative.
-- A public AI Squadron overview linked to the Dragon One demonstrator.
+- A public AI Squadron overview linked to the Dragon One demonstrator at [`squadron.raijucloudsystem.com`](https://squadron.raijucloudsystem.com).
 - Dedicated Research routes with structured technical publications.
 - A normalized Team directory with localized roles, profiles and certifications.
 - Separate password-protected administration forms for Research and Team.
