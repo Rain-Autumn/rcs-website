@@ -1972,3 +1972,212 @@ body.menu-open { overflow: hidden; }
   .team-member-mark--arkenstone::before, .team-member-mark--arkenstone::after { animation: none; }
 }
 /* === RCS TEAM DIRECTORY END === */
+
+/* === RCS SYSTEM ARCHITECTURE V3 START === */
+.site-header {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto auto;
+  gap: .65rem 1rem;
+  padding: .55rem .75rem;
+}
+
+.brand-lockup { min-width: max-content; }
+.header-language { grid-column: 3; grid-row: 1; margin-left: 0; }
+.nav-toggle { grid-column: 4; grid-row: 1; }
+
+.section-nav {
+  grid-column: 2;
+  grid-row: 1;
+  min-width: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: stretch;
+  gap: .12rem;
+}
+
+.section-nav a {
+  min-width: 0;
+  padding: .62rem .58rem;
+  display: flex;
+  align-items: center;
+  gap: .36rem;
+  color: rgba(236,231,221,.48);
+  border: 1px solid transparent;
+  font: 600 .53rem var(--mono);
+  letter-spacing: .08em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.section-nav a span { color: rgba(236,231,221,.25); }
+.section-nav a:hover { color: var(--light-text); border-color: rgba(236,231,221,.14); }
+.section-nav a.is-active { color: var(--light-text); background: rgba(236,231,221,.08); border-color: rgba(236,231,221,.14); }
+.section-nav a.is-active span { color: var(--copper); }
+
+.primary-nav { grid-column: auto; grid-row: auto; }
+
+/* Localized system hub */
+.rcs-hub-page { padding-top: .5rem; }
+.hub-hero {
+  min-height: min(47rem, calc(100dvh - 6.5rem));
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(19rem, .8fr);
+  gap: clamp(2.5rem, 8vw, 9rem);
+  align-items: center;
+}
+
+.hub-hero h1 { max-width: 9ch; font-size: clamp(4rem, 9vw, 9.2rem); }
+.hub-hero .hero-lead { margin-top: 1.6rem; }
+.hub-principles { border: 1px solid var(--line); background: rgba(247,243,234,.48); }
+.hub-principles div { min-height: 7.2rem; padding: 1rem; display: grid; align-content: space-between; border-bottom: 1px solid var(--line-soft); }
+.hub-principles div:last-child { border-bottom: 0; }
+.hub-principles span { color: var(--ink-soft); font: 600 .52rem var(--mono); letter-spacing: .13em; }
+.hub-principles strong { font: 650 .67rem/1.5 var(--mono); letter-spacing: .07em; }
+
+.hub-directory { padding-top: clamp(4rem, 7vw, 7rem); }
+.hub-system-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; }
+.hub-system-card {
+  position: relative;
+  min-height: 23rem;
+  padding: clamp(1.15rem, 2.4vw, 2rem);
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 2.5rem;
+  color: var(--ink);
+  background: rgba(247,243,234,.48);
+  border: 1px solid var(--line);
+  text-decoration: none;
+  overflow: hidden;
+  transition: background .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+.hub-system-card::after {
+  content: '';
+  position: absolute;
+  right: -4rem;
+  bottom: -4rem;
+  width: 11rem;
+  height: 11rem;
+  border: 1px solid var(--line-soft);
+  border-radius: 50%;
+  transition: transform .35s ease;
+}
+
+.hub-system-card:hover { transform: translateY(-3px); background: #e8ddd0; border-color: var(--copper); }
+.hub-system-card:hover::after { transform: scale(1.15); }
+.hub-system-card__meta { display: flex; justify-content: space-between; color: var(--ink-soft); font: 650 .55rem var(--mono); letter-spacing: .14em; }
+.hub-system-card__meta small { opacity: .35; }
+.hub-system-card p { margin: 0 0 1.2rem; color: #79583e; font: 650 .54rem var(--mono); letter-spacing: .13em; }
+.hub-system-card h3 { max-width: 14ch; margin: 0 0 1rem; font-size: clamp(2.3rem, 4.2vw, 4.8rem); line-height: .92; }
+.hub-system-card__summary { max-width: 42rem; display: block; color: var(--ink-soft); font-size: 1rem; }
+.hub-system-card > strong { z-index: 1; display: flex; justify-content: space-between; gap: 1rem; padding-top: 1rem; border-top: 1px solid var(--line); font: 650 .58rem var(--mono); letter-spacing: .12em; }
+
+/* AI Squadron */
+.squadron-page { padding-top: .5rem; }
+.squadron-hero {
+  min-height: min(49rem, calc(100dvh - 6.5rem));
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(20rem, .85fr);
+  gap: clamp(2.5rem, 7vw, 8rem);
+  align-items: center;
+}
+
+.squadron-hero h1 { max-width: 10ch; font-size: clamp(4rem, 8.4vw, 8.8rem); }
+.squadron-hero .hero-lead { margin-top: 1.6rem; }
+.squadron-live-panel {
+  min-height: 25rem;
+  padding: clamp(1.2rem, 3vw, 2.4rem);
+  display: grid;
+  align-content: center;
+  border: 1px solid var(--line);
+  background: rgba(247,243,234,.48);
+}
+
+.squadron-live-panel > span { display: flex; align-items: center; gap: .6rem; color: #315f45; font: 700 .56rem var(--mono); letter-spacing: .13em; }
+.squadron-live-panel > span i { width: .48rem; height: .48rem; border-radius: 50%; background: #4a855f; box-shadow: 0 0 0 .3rem rgba(74,133,95,.11); }
+.squadron-live-panel > strong { margin-top: 3.5rem; font: 700 clamp(2.7rem, 5vw, 5rem)/.9 var(--display); letter-spacing: -.04em; }
+.squadron-live-panel > small { margin-top: .8rem; color: var(--ink-soft); font: 600 .53rem/1.6 var(--mono); letter-spacing: .12em; }
+.squadron-signal { height: 3.5rem; margin-top: 3rem; display: flex; align-items: end; gap: .45rem; border-bottom: 1px solid var(--line-soft); }
+.squadron-signal i { width: 100%; height: var(--signal-height, 40%); background: #777067; opacity: .26; transform-origin: bottom; animation: squadron-signal 1.8s ease-in-out infinite alternate; }
+.squadron-signal i:nth-child(1) { --signal-height: 28%; animation-delay: -.2s; }
+.squadron-signal i:nth-child(2) { --signal-height: 68%; animation-delay: -.8s; }
+.squadron-signal i:nth-child(3) { --signal-height: 44%; animation-delay: -1.1s; }
+.squadron-signal i:nth-child(4) { --signal-height: 86%; animation-delay: -.4s; }
+.squadron-signal i:nth-child(5) { --signal-height: 52%; animation-delay: -1.4s; }
+.squadron-signal i:nth-child(6) { --signal-height: 34%; animation-delay: -.7s; }
+@keyframes squadron-signal { to { transform: scaleY(.55); opacity: .12; } }
+
+.squadron-map { display: grid; grid-template-columns: minmax(18rem, .72fr) 1.28fr; gap: .8rem; }
+.squadron-specialists { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem; }
+.squadron-node { min-height: 16rem; padding: 1.2rem; display: flex; flex-direction: column; border: 1px solid var(--line); background: rgba(247,243,234,.45); }
+.squadron-node--one { min-height: 100%; justify-content: center; background: #e8ddd0; border-color: var(--copper); }
+.squadron-node span { color: var(--ink-soft); font: 650 .52rem var(--mono); letter-spacing: .13em; }
+.squadron-node h3 { margin: 2rem 0 .3rem; font-size: clamp(1.8rem, 3vw, 3.4rem); line-height: .95; }
+.squadron-node strong { color: #79583e; font: 650 .55rem var(--mono); letter-spacing: .12em; }
+.squadron-node p { margin: auto 0 0; padding-top: 1.2rem; color: var(--ink-soft); }
+
+.squadron-method { display: grid; grid-template-columns: minmax(0, .85fr) minmax(20rem, 1.15fr); gap: clamp(2rem, 6vw, 7rem); }
+.squadron-method .section-heading { align-self: start; }
+.squadron-steps { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
+.squadron-steps li { min-height: 8rem; padding: 1.1rem 0; display: grid; grid-template-columns: 3rem 1fr; gap: 1rem; border-bottom: 1px solid var(--line); }
+.squadron-steps li > span { color: var(--copper); font: 650 .55rem var(--mono); }
+.squadron-steps strong { font: 650 .7rem var(--mono); letter-spacing: .12em; }
+.squadron-steps p { max-width: 40rem; margin: .7rem 0 0; color: var(--ink-soft); }
+.squadron-limits { grid-column: 1 / -1; padding: clamp(1.2rem, 3vw, 2.2rem); border: 1px solid var(--line); background: rgba(247,243,234,.45); }
+.squadron-limits h3 { margin: 0 0 1.2rem; font-size: clamp(1.8rem, 3vw, 3rem); }
+.squadron-limits ul { margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); list-style: none; }
+.squadron-limits li { padding: .9rem 1rem .9rem 1.6rem; position: relative; border-top: 1px solid var(--line-soft); color: var(--ink-soft); }
+.squadron-limits li::before { content: '+'; position: absolute; left: .2rem; color: var(--copper); font-family: var(--mono); }
+.squadron-demo { min-height: 52vh; display: grid; grid-template-columns: 1fr minmax(17rem, .45fr); gap: 3rem; align-items: center; }
+.squadron-demo h2 { max-width: 10ch; }
+.squadron-demo .mechanical-button { margin-top: 2rem; }
+.squadron-demo__notice { margin: 0; padding: 1.2rem; color: var(--ink-soft); border: 1px solid var(--line); font: 650 .56rem/1.8 var(--mono); letter-spacing: .1em; }
+
+@media (max-width: 1280px) {
+  .section-nav a { padding-inline: .38rem; font-size: .49rem; letter-spacing: .055em; }
+}
+
+@media (max-width: 1050px) {
+  .site-header { grid-template-columns: auto minmax(0, 1fr) auto auto; }
+  .section-nav { grid-column: 1 / -1; grid-row: 2; width: 100%; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .section-nav a { justify-content: center; text-align: center; }
+  .hub-hero, .squadron-hero { grid-template-columns: 1fr; min-height: auto; }
+  .hub-system-grid, .squadron-method, .squadron-demo { grid-template-columns: 1fr; }
+  .squadron-map { grid-template-columns: 1fr; }
+  .squadron-node--one { min-height: 18rem; }
+  .squadron-demo__notice { max-width: 42rem; }
+}
+
+@media (max-width: 700px) {
+  .site-header { grid-template-columns: minmax(0, 1fr) auto; gap: .5rem; }
+  .brand-lockup { grid-column: 1; grid-row: 1; min-width: 0; }
+  .brand-lockup strong { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .brand-lockup small { font-size: .44rem; }
+  .nav-toggle { grid-column: 2; grid-row: 1; margin-left: 0; }
+  .header-language { grid-column: 1 / -1; grid-row: 2; width: 100%; }
+  .section-nav { grid-column: 1 / -1; grid-row: 3; gap: .18rem; overflow-x: auto; scrollbar-width: none; }
+  .section-nav::-webkit-scrollbar { display: none; }
+  .section-nav a { min-height: 3.2rem; padding: .45rem .2rem; flex-direction: column; justify-content: center; gap: .15rem; font-size: .43rem; letter-spacing: .035em; white-space: normal; }
+  .section-nav a span { font-size: .4rem; }
+
+  .rcs-hub-page, .squadron-page { overflow-x: clip; }
+  .rcs-hub-page .technical-panel, .squadron-page .technical-panel { min-width: 0; max-width: 100%; padding-right: 1rem; padding-left: 1rem; }
+  .hub-hero, .squadron-hero { gap: 2.5rem; }
+  .hub-hero h1, .squadron-hero h1 { width: 100%; max-width: 100%; font-size: clamp(2.85rem, 13.6vw, 4rem); line-height: .91; overflow-wrap: anywhere; }
+  .hub-hero .hero-lead, .squadron-hero .hero-lead { max-width: 100%; font-size: 1rem; overflow-wrap: anywhere; }
+  .hub-principles div { min-height: 6rem; }
+  .hub-system-grid, .squadron-specialists { grid-template-columns: 1fr; }
+  .hub-system-card { min-height: 19rem; }
+  .hub-system-card h3 { font-size: clamp(2.2rem, 11vw, 3.3rem); }
+  .squadron-live-panel { min-height: 19rem; }
+  .squadron-node { min-height: 14rem; }
+  .squadron-limits ul { grid-template-columns: 1fr; }
+  .squadron-hero .button-row, .squadron-hero .mechanical-button, .squadron-demo .mechanical-button { width: 100%; }
+  .squadron-hero .mechanical-button, .squadron-demo .mechanical-button { min-width: 0; white-space: normal; }
+  .squadron-demo h2 { max-width: 100%; font-size: clamp(2.8rem, 13vw, 4rem); overflow-wrap: anywhere; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hub-system-card, .hub-system-card::after, .squadron-signal i { animation: none; transition: none; }
+}
+/* === RCS SYSTEM ARCHITECTURE V3 END === */
