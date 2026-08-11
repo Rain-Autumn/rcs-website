@@ -8,7 +8,7 @@ import { getCopy, isLocale, type Locale } from "@/content/i18n";
 import { socialMetadata } from "@/lib/site-metadata";
 import { squadronStructuredData } from "@/lib/structured-data";
 
-const DRAGON_ONE_URL = "https://rcs-dragon-one.raijucloud.workers.dev/";
+const DRAGON_ONE_URL = "https://squadron.raijucloudsystem.com/";
 
 type PageProps = { params: Promise<{ locale: string }> };
 
@@ -69,8 +69,6 @@ export default async function SquadronPage({ params }: PageProps) {
               <a
                 className="mechanical-button mechanical-button--dark"
                 href={DRAGON_ONE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
               >
                 {copy.demoAction}
                 <span aria-hidden="true">↗</span>
@@ -162,8 +160,6 @@ export default async function SquadronPage({ params }: PageProps) {
             <a
               className="mechanical-button mechanical-button--dark"
               href={DRAGON_ONE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
             >
               {copy.demoAction}
               <span aria-hidden="true">↗</span>
