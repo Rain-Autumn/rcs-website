@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/layout/SiteHeader";
@@ -71,17 +72,37 @@ export default async function LocalizedHubPage({
             <h1>{copy.title}</h1>
             <p className="hero-lead">{copy.lead}</p>
           </div>
-          <div className="hub-principles" aria-label="RCS">
-            {copy.principles.map((principle, index) => (
-              <div key={principle.label}>
-                <span>
-                  {String(index + 1).padStart(2, "0")}
-                  {" // "}
-                  {principle.label}
-                </span>
-                <strong>{principle.value}</strong>
+          <div className="hub-atlas" aria-hidden="true">
+            <div className="hub-atlas__field" />
+            <div className="hub-atlas__orbit hub-atlas__orbit--outer" />
+            <div className="hub-atlas__orbit hub-atlas__orbit--inner" />
+            {copy.cards.map((card, index) => (
+              <div
+                className={`hub-atlas__plane hub-atlas__plane--${index + 1}`}
+                key={card.code}
+              >
+                <span>{card.code}</span>
+                <strong>{card.title}</strong>
               </div>
             ))}
+            <div className="hub-atlas__core">
+              <Image
+                src="/icons/raiju-dragon-vector.svg"
+                width={113}
+                height={121}
+                alt=""
+                priority
+              />
+              <span>RCS</span>
+            </div>
+            <div className="hub-atlas__axis hub-atlas__axis--x" />
+            <div className="hub-atlas__axis hub-atlas__axis--y" />
+            <div className="hub-atlas__scan" />
+            <p className="hub-atlas__caption">
+              <span>04</span>
+              {" // "}
+              SYSTEM SPACES
+            </p>
           </div>
         </section>
 

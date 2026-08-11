@@ -2488,3 +2488,636 @@ main { padding-top: .25rem; }
   .hub-principles::before { animation: none; }
 }
 /* === RCS RESPONSIVE SYSTEM V4 END === */
+
+/* === RCS EDITORIAL SCENES V5 === */
+:root {
+  --scene-gap: .45rem;
+  --scene-header: 5.35rem;
+  --scene-height: calc(100svh - var(--scene-header));
+}
+
+html {
+  scroll-padding-top: var(--scene-header);
+}
+
+body {
+  background:
+    radial-gradient(circle at 12% 18%, rgba(165, 107, 63, .1), transparent 30rem),
+    radial-gradient(circle at 88% 72%, rgba(112, 101, 85, .08), transparent 34rem),
+    var(--outer);
+}
+
+main {
+  padding-bottom: var(--scene-gap);
+}
+
+main > .technical-panel {
+  width: 100%;
+  min-height: var(--scene-height);
+  margin-top: var(--scene-gap);
+  scroll-margin-top: var(--scene-header);
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+  align-content: center;
+  background-color: var(--panel);
+  background-image:
+    radial-gradient(circle at 82% 18%, rgba(165, 107, 63, .075), transparent 18rem),
+    linear-gradient(rgba(80, 80, 80, .036) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(80, 80, 80, .036) 1px, transparent 1px);
+  background-size: auto, 32px 32px, 32px 32px;
+  box-shadow: 0 1.1rem 3.6rem rgba(0, 0, 0, .18);
+}
+
+main > .technical-panel > * {
+  position: relative;
+  z-index: 1;
+}
+
+h1 {
+  font-size: clamp(3.8rem, 7.4vw, 8rem);
+}
+
+h2 {
+  font-size: clamp(2.7rem, 5vw, 5.2rem);
+}
+
+.section-heading {
+  width: 100%;
+  max-width: none;
+  margin-bottom: clamp(2rem, 4.2vh, 3.6rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1.18fr) minmax(19rem, .52fr);
+  column-gap: clamp(2rem, 7vw, 8rem);
+  row-gap: .8rem;
+  align-items: end;
+}
+
+.section-heading .eyebrow {
+  grid-column: 1 / -1;
+  margin-bottom: .3rem;
+}
+
+.section-heading h2 {
+  grid-column: 1;
+  max-width: 19ch;
+}
+
+.section-heading .section-lead {
+  grid-column: 2;
+  max-width: 38rem;
+  margin: 0 0 .35rem;
+  justify-self: end;
+  font-size: clamp(.98rem, 1.15vw, 1.16rem);
+}
+
+/* Home: accessible visual system atlas */
+.hub-hero {
+  grid-template-columns: minmax(0, .76fr) minmax(29rem, 1.24fr);
+  gap: clamp(3rem, 9vw, 10rem);
+  align-items: center;
+}
+
+.hub-hero__copy,
+.hub-atlas {
+  grid-column: auto;
+}
+
+.hub-hero__copy {
+  max-width: 48rem;
+}
+
+.hub-hero h1 {
+  max-width: 8.5ch;
+  font-size: clamp(3.8rem, 6.7vw, 7.25rem);
+}
+
+.hub-atlas {
+  position: relative;
+  min-height: clamp(29rem, 64vh, 45rem);
+  overflow: hidden;
+  isolation: isolate;
+  perspective: 72rem;
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(circle at 50% 46%, rgba(165, 107, 63, .13), transparent 11rem),
+    linear-gradient(135deg, rgba(247, 243, 234, .78), rgba(226, 220, 209, .46));
+  box-shadow:
+    1.1rem 1.1rem 0 rgba(26, 24, 21, .025),
+    inset 0 0 5rem rgba(255, 255, 255, .26);
+}
+
+.hub-atlas__field {
+  position: absolute;
+  inset: 7%;
+  border: 1px solid var(--line-soft);
+  background:
+    linear-gradient(90deg, transparent 49.85%, rgba(26, 24, 21, .08) 50%, transparent 50.15%),
+    linear-gradient(transparent 49.85%, rgba(26, 24, 21, .08) 50%, transparent 50.15%);
+}
+
+.hub-atlas__field::before,
+.hub-atlas__field::after {
+  content: "";
+  position: absolute;
+  inset: 12%;
+  border: 1px solid rgba(26, 24, 21, .07);
+  transform: rotate(45deg);
+}
+
+.hub-atlas__field::after {
+  inset: 27%;
+}
+
+.hub-atlas__orbit {
+  position: absolute;
+  left: 50%;
+  top: 47%;
+  width: 74%;
+  aspect-ratio: 1;
+  border: 1px solid rgba(26, 24, 21, .11);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) rotateX(64deg) rotateZ(-17deg);
+}
+
+.hub-atlas__orbit--inner {
+  width: 44%;
+  border-color: rgba(165, 107, 63, .28);
+}
+
+.hub-atlas__plane {
+  --plane-offset: 0rem;
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 46%;
+  width: min(68%, 34rem);
+  height: clamp(5.2rem, 12vh, 7.6rem);
+  padding: .85rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  color: var(--ink);
+  border: 1px solid rgba(26, 24, 21, .2);
+  background:
+    linear-gradient(115deg, rgba(255, 255, 255, .77), rgba(222, 216, 205, .78)),
+    var(--panel-light);
+  box-shadow: 0 1.4rem 2.2rem rgba(26, 24, 21, .08);
+  transform:
+    translate(-50%, -50%)
+    translateY(var(--plane-offset))
+    rotateX(61deg)
+    rotateZ(-27deg);
+  transform-origin: center;
+  animation: hub-plane-breathe 7s ease-in-out infinite alternate;
+}
+
+.hub-atlas__plane span {
+  color: var(--copper);
+  font: 700 .5rem var(--mono);
+  letter-spacing: .14em;
+}
+
+.hub-atlas__plane strong {
+  max-width: 11rem;
+  text-align: right;
+  font: 650 .58rem/1.45 var(--mono);
+  letter-spacing: .08em;
+}
+
+.hub-atlas__plane--1 { --plane-offset: -8.7rem; opacity: .47; animation-delay: -1.4s; }
+.hub-atlas__plane--2 { --plane-offset: -3rem; opacity: .65; animation-delay: -3.2s; }
+.hub-atlas__plane--3 { --plane-offset: 2.8rem; opacity: .82; animation-delay: -4.8s; }
+.hub-atlas__plane--4 { --plane-offset: 8.7rem; animation-delay: -6.1s; }
+
+.hub-atlas__core {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  top: 45%;
+  width: clamp(7rem, 12vw, 10rem);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(26, 24, 21, .26);
+  border-radius: 50%;
+  background: rgba(247, 243, 234, .94);
+  box-shadow:
+    0 0 0 .75rem rgba(247, 243, 234, .5),
+    0 0 0 .8rem rgba(26, 24, 21, .08),
+    0 1rem 3rem rgba(26, 24, 21, .12);
+  transform: translate(-50%, -50%);
+}
+
+.hub-atlas__core img {
+  width: 48%;
+  height: 48%;
+  object-fit: contain;
+  opacity: .72;
+  filter: grayscale(1);
+}
+
+.hub-atlas__core span {
+  position: absolute;
+  bottom: 14%;
+  color: var(--ink-soft);
+  font: 700 .46rem var(--mono);
+  letter-spacing: .2em;
+}
+
+.hub-atlas__axis {
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 50%;
+  background: rgba(26, 24, 21, .12);
+}
+
+.hub-atlas__axis--x {
+  width: 86%;
+  height: 1px;
+  transform: translate(-50%, -50%);
+}
+
+.hub-atlas__axis--y {
+  width: 1px;
+  height: 84%;
+  transform: translate(-50%, -50%);
+}
+
+.hub-atlas__scan {
+  position: absolute;
+  z-index: 6;
+  left: 6%;
+  right: 6%;
+  top: 12%;
+  height: 1px;
+  opacity: .55;
+  background: linear-gradient(90deg, transparent, var(--copper), transparent);
+  box-shadow: 0 0 .8rem rgba(165, 107, 63, .22);
+  animation: hub-atlas-scan 6s linear infinite;
+}
+
+.hub-atlas__caption {
+  position: absolute;
+  z-index: 7;
+  left: 1rem;
+  bottom: .85rem;
+  margin: 0;
+  color: var(--ink-soft);
+  font: 650 .5rem var(--mono);
+  letter-spacing: .16em;
+}
+
+.hub-atlas__caption span {
+  color: var(--copper);
+}
+
+@keyframes hub-plane-breathe {
+  to {
+    transform:
+      translate(-50%, -50%)
+      translateY(calc(var(--plane-offset) - .35rem))
+      rotateX(61deg)
+      rotateZ(-27deg);
+  }
+}
+
+@keyframes hub-atlas-scan {
+  to { top: 88%; }
+}
+
+.hub-directory {
+  display: grid;
+  align-content: center;
+}
+
+.hub-system-card {
+  min-height: clamp(14rem, 27vh, 19rem);
+}
+
+/* Dense enough for laptop screens, spacious enough for large desktops. */
+@media (min-width: 900px) {
+  html {
+    scroll-snap-type: y proximity;
+  }
+
+  .hero-section {
+    min-height: var(--scene-height);
+  }
+
+  .director-section {
+    min-height: var(--scene-height);
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1700px),
+       (min-width: 900px) and (max-height: 900px) {
+  :root {
+    --scene-header: 5.7rem;
+  }
+
+  main > .technical-panel {
+    padding: clamp(1.75rem, 3.6vh, 2.7rem) clamp(2rem, 4vw, 3.8rem);
+  }
+
+  h1 {
+    font-size: clamp(3.35rem, 5.6vw, 5.6rem);
+  }
+
+  h2,
+  .section-heading h2 {
+    max-width: 22ch;
+    font-size: clamp(2.35rem, 3.65vw, 3.8rem);
+    line-height: .94;
+  }
+
+  .section-heading {
+    grid-template-columns: minmax(0, 1.12fr) minmax(17rem, .5fr);
+    margin-bottom: clamp(1.4rem, 3.2vh, 2.3rem);
+    column-gap: clamp(2rem, 5vw, 5rem);
+  }
+
+  .section-heading .section-lead,
+  .hero-lead {
+    font-size: .98rem;
+  }
+
+  .hub-hero {
+    grid-template-columns: minmax(0, .7fr) minmax(28rem, 1.3fr);
+    gap: clamp(3rem, 7vw, 7rem);
+  }
+
+  .hub-hero h1 {
+    max-width: 9.5ch;
+    font-size: clamp(3.45rem, 5vw, 5.25rem);
+  }
+
+  .hub-atlas {
+    min-height: min(63vh, 34rem);
+  }
+
+  .hub-system-card {
+    min-height: 13.5rem;
+    padding: 1.1rem;
+    gap: 1rem;
+  }
+
+  .hub-system-card h3 {
+    margin-bottom: .55rem;
+    font-size: clamp(1.9rem, 2.8vw, 2.75rem);
+  }
+
+  .hub-system-card__summary {
+    font-size: .88rem;
+  }
+
+  .hero-section {
+    grid-template-columns: minmax(0, .78fr) minmax(27rem, 1.22fr);
+    gap: clamp(2rem, 5vw, 5rem);
+  }
+
+  .rcs-core-title {
+    font-size: clamp(3.5rem, 6vw, 5.4rem);
+  }
+
+  .hero-scene {
+    height: min(54vh, 29rem);
+  }
+
+  .system-facts div {
+    min-height: 4.1rem;
+  }
+
+  .division-card {
+    min-height: 11.5rem;
+    padding: 1rem;
+  }
+
+  .division-card h3 {
+    margin: 1.25rem 0 .5rem;
+    font-size: clamp(1.45rem, 2.2vw, 2.3rem);
+  }
+
+  .division-card p {
+    font-size: .86rem;
+  }
+
+  .division-card small {
+    margin-top: .75rem;
+  }
+
+  .capability-card {
+    min-height: 12rem;
+    padding: 1.1rem;
+  }
+
+  .capability-card h3 {
+    margin: 1.7rem 0 .65rem;
+    font-size: clamp(1.55rem, 2.4vw, 2.45rem);
+  }
+
+  .infrastructure-canvas,
+  .infrastructure-canvas--2d {
+    min-height: 16rem;
+  }
+
+  .instrument-card {
+    min-height: 4.2rem;
+    padding: .55rem .7rem;
+  }
+
+  .infra-flow {
+    min-height: 13rem;
+    padding: .8rem;
+  }
+
+  .infrastructure-inspector {
+    padding: 1rem 1.2rem;
+  }
+
+  .infrastructure-inspector h3 {
+    margin: .35rem 0 .6rem;
+    font-size: clamp(1.65rem, 2.4vw, 2.5rem);
+  }
+
+  .infrastructure-inspector dl {
+    margin-top: .8rem;
+  }
+
+  .infrastructure-inspector dl > div {
+    padding: .45rem 0;
+  }
+
+  .linux-section .section-heading {
+    margin-bottom: .9rem;
+  }
+
+  .agent-map {
+    min-height: 27rem;
+  }
+
+  .project-row {
+    padding: .9rem 0;
+  }
+
+  .service-row {
+    padding: .6rem 0;
+  }
+
+  .research-section .button-row {
+    margin-top: 1rem;
+  }
+
+  .director-index-panel {
+    min-height: 21rem;
+  }
+
+  .director-copy h2 {
+    max-width: 14ch;
+    font-size: clamp(2.8rem, 5.2vw, 5rem);
+  }
+
+  .team-member-identity h3 {
+    font-size: clamp(2.4rem, 4vw, 4.1rem);
+  }
+
+  .team-member {
+    padding: 1rem 1.2rem;
+    gap: 1rem clamp(2rem, 4vw, 4rem);
+  }
+
+  .team-member-bio {
+    font-size: .94rem;
+  }
+
+  .squadron-hero h1 {
+    font-size: clamp(3.2rem, 5.2vw, 5.2rem);
+  }
+
+  .squadron-live-panel {
+    min-height: 18rem;
+    padding: 1.2rem;
+  }
+
+  .squadron-live-panel > strong {
+    margin-top: 2rem;
+    font-size: clamp(2.4rem, 4vw, 3.8rem);
+  }
+
+  .squadron-specialists {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .squadron-node {
+    min-height: 9.5rem;
+    padding: .75rem;
+  }
+
+  .squadron-node h3 {
+    margin: .7rem 0 .2rem;
+    font-size: clamp(1.35rem, 2vw, 1.9rem);
+  }
+
+  .squadron-node p {
+    padding-top: .55rem;
+    font-size: .78rem;
+    line-height: 1.42;
+  }
+
+  .squadron-steps li {
+    min-height: 4.6rem;
+    padding: .55rem 0;
+  }
+
+  .squadron-steps p {
+    margin-top: .3rem;
+    font-size: .84rem;
+  }
+
+  .squadron-limits {
+    padding: .8rem 1rem;
+  }
+
+  .squadron-limits h3 {
+    margin-bottom: .45rem;
+    font-size: 1.55rem;
+  }
+
+  .squadron-limits li {
+    padding: .4rem .7rem .4rem 1.4rem;
+    font-size: .82rem;
+  }
+}
+
+@media (max-width: 899px) {
+  :root {
+    --scene-header: 6.5rem;
+  }
+
+  html {
+    scroll-snap-type: none;
+  }
+
+  main > .technical-panel {
+    min-height: calc(100svh - var(--scene-header));
+    padding-top: clamp(3.4rem, 9vw, 5rem);
+    padding-bottom: clamp(3rem, 9vw, 5rem);
+  }
+
+  .section-heading {
+    display: block;
+  }
+
+  .section-heading .section-lead {
+    margin-top: 1.2rem;
+  }
+
+  .hub-hero {
+    grid-template-columns: 1fr;
+    gap: 2.4rem;
+  }
+
+  .hub-atlas {
+    min-height: clamp(21rem, 57vh, 30rem);
+  }
+}
+
+@media (max-width: 620px) {
+  .hub-hero h1 {
+    max-width: 10ch;
+    font-size: clamp(2.8rem, 12.6vw, 3.75rem);
+  }
+
+  .hub-atlas {
+    min-height: 18rem;
+  }
+
+  .hub-atlas__plane {
+    width: 72%;
+    height: 4.8rem;
+  }
+
+  .hub-atlas__plane strong {
+    display: none;
+  }
+
+  .hub-atlas__plane--1 { --plane-offset: -6.8rem; }
+  .hub-atlas__plane--2 { --plane-offset: -2.3rem; }
+  .hub-atlas__plane--3 { --plane-offset: 2.2rem; }
+  .hub-atlas__plane--4 { --plane-offset: 6.7rem; }
+
+  .hub-atlas__core {
+    width: 6.6rem;
+  }
+
+  .hub-system-card {
+    min-height: 15rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hub-atlas__plane,
+  .hub-atlas__scan { animation: none; }
+}
+/* === RCS EDITORIAL SCENES V5 END === */
