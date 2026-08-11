@@ -91,7 +91,7 @@ test("squadron route explains the real architecture and links to Dragon One", as
   await expect(page.getByRole("heading", { name: "Dragon Six" })).toBeVisible();
   await expect(
     page.getByRole("link", { name: /ESSAYER DRAGON ONE/i }).first(),
-  ).toHaveAttribute("href", "https://rcs-dragon-one.raijucloud.workers.dev/");
+  ).toHaveAttribute("href", "https://squadron.raijucloudsystem.com/");
 });
 
 test("mobile hub and Squadron pages have no horizontal overflow", async ({
@@ -132,6 +132,10 @@ test("team routes render Hugues Henrotte and certifications", async ({
   await expect(
     page.getByRole("heading", { name: "Hugues Henrotte" }),
   ).toBeVisible();
+  await expect(
+    page.getByText("AWS Knowledge: Cloud Essentials - Training Badge"),
+  ).toBeHidden();
+  await page.getByText("AFFICHER", { exact: true }).first().click();
   await expect(
     page.getByText("AWS Knowledge: Cloud Essentials - Training Badge"),
   ).toBeVisible();
