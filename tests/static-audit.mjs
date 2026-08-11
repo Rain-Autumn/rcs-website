@@ -94,7 +94,7 @@ const checks = [
         "page.tsx",
       ),
     ) &&
-      /rcs-dragon-one\.raijucloud\.workers\.dev/.test(text) &&
+      /squadron\.raijucloudsystem\.com/.test(text) &&
       /Dragon Six/.test(text),
   ],
   [
@@ -154,6 +154,12 @@ const checks = [
     /RCS-TM-001/.test(text) &&
       /AWS Knowledge: Cloud Essentials/.test(text) &&
       /Azure SQL Database/.test(text),
+  ],
+  [
+    "team certifications use a compact native disclosure",
+    /<details className="team-certifications-disclosure">/.test(text) &&
+      /showCertifications/.test(text) &&
+      /hideCertifications/.test(text),
   ],
   ["Three.js scene present", text.includes("@react-three/fiber")],
   ["GSAP motion present", text.includes("from 'gsap'")],
