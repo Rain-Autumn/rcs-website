@@ -2515,9 +2515,6 @@ main > .technical-panel {
   width: 100%;
   min-height: var(--scene-height);
   margin-top: var(--scene-gap);
-  scroll-margin-top: var(--scene-header);
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
   align-content: center;
   background-color: var(--panel);
   background-image:
@@ -2797,17 +2794,10 @@ h2 {
 
 /* Dense enough for laptop screens, spacious enough for large desktops. */
 @media (min-width: 900px) {
-  html {
-    scroll-snap-type: y mandatory;
-    overscroll-behavior-y: none;
-  }
-
   main > .technical-panel {
-    height: var(--scene-height);
     min-height: var(--scene-height);
-    overflow-x: hidden;
-    overflow-y: auto;
-    scrollbar-gutter: stable;
+    height: auto;
+    overflow: visible;
   }
 
   .hero-section {
@@ -3063,10 +3053,6 @@ h2 {
     --scene-header: 6.5rem;
   }
 
-  html {
-    scroll-snap-type: none;
-  }
-
   main > .technical-panel {
     min-height: calc(100svh - var(--scene-header));
     padding-top: clamp(3.4rem, 9vw, 5rem);
@@ -3130,77 +3116,3 @@ h2 {
   .hub-atlas__scan { animation: none; }
 }
 /* === RCS EDITORIAL SCENES V5 END === */
-
-/* === RCS ASYNCHRONOUS LINE TRANSITIONS V6 === */
-@media (min-width: 900px) {
-  .scene-transitions-ready.is-scene-switching {
-    scroll-behavior: auto !important;
-  }
-
-  main > .technical-panel {
-    scroll-margin-top: 0;
-  }
-
-  .scene-transitions-ready.motion-ready [data-reveal],
-  .scene-transitions-ready.motion-ready [data-reveal].is-revealed {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-
-  .scene-transition-source {
-    color: transparent !important;
-    text-decoration-color: transparent !important;
-    text-shadow: none !important;
-  }
-
-  .scene-transition-line {
-    position: absolute;
-    z-index: 30;
-    display: block;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    white-space: pre;
-    pointer-events: none;
-    opacity: 1;
-    clip-path: inset(0 0 0 0);
-    transform: translateZ(0);
-    transform-origin: left center;
-    transition:
-      clip-path 126ms cubic-bezier(.55, 0, .8, .35) var(--scene-enter-delay, 0ms),
-      opacity 96ms linear var(--scene-enter-delay, 0ms);
-    will-change: clip-path, opacity;
-  }
-
-  .is-scene-leaving .scene-transition-line {
-    opacity: 0;
-    clip-path: inset(0 100% 0 0);
-    transition:
-      clip-path 118ms cubic-bezier(.55, 0, .8, .35) var(--scene-exit-delay, 0ms),
-      opacity 92ms linear var(--scene-exit-delay, 0ms);
-  }
-
-  .scene-transition-line.is-concealed {
-    opacity: 0;
-    clip-path: inset(0 100% 0 0);
-    transition: none;
-  }
-
-  .site-footer {
-    scroll-snap-align: end;
-    scroll-snap-stop: always;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .scene-transition-line {
-    display: none;
-  }
-
-  .scene-transition-source {
-    color: inherit !important;
-    text-decoration-color: currentColor !important;
-  }
-}
-/* === RCS ASYNCHRONOUS LINE TRANSITIONS V6 END === */
