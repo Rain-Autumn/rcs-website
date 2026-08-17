@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from 'next';
 import '@/app/globals.css';
 
 import { isLocale } from '@/content/i18n';
-import { SceneTransitions } from '@/components/ui/SceneTransitions';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://raijucloudsystem.com'),
@@ -36,10 +35,7 @@ export default async function LocalizedRootLayout({
 
   return (
     <html lang={lang}>
-      <body>
-        <SceneTransitions />
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
