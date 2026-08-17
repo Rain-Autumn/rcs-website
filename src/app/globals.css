@@ -2517,7 +2517,7 @@ main > .technical-panel {
   margin-top: var(--scene-gap);
   scroll-margin-top: var(--scene-header);
   scroll-snap-align: start;
-  scroll-snap-stop: normal;
+  scroll-snap-stop: always;
   align-content: center;
   background-color: var(--panel);
   background-image:
@@ -2798,7 +2798,16 @@ h2 {
 /* Dense enough for laptop screens, spacious enough for large desktops. */
 @media (min-width: 900px) {
   html {
-    scroll-snap-type: y proximity;
+    scroll-snap-type: y mandatory;
+    overscroll-behavior-y: none;
+  }
+
+  main > .technical-panel {
+    height: var(--scene-height);
+    min-height: var(--scene-height);
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-gutter: stable;
   }
 
   .hero-section {
