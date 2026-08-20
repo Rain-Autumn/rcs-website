@@ -123,6 +123,16 @@ export default async function TeamPage({ params }: PageProps) {
                     </p>
                     <h3>{member.name}</h3>
                     <strong>{member.role}</strong>
+                    {member.orcid && (
+                      <a
+                        className="team-member-orcid"
+                        href={member.orcid}
+                        target="_blank"
+                        rel="noopener noreferrer me"
+                      >
+                        ORCID iD {member.orcid.split("/").at(-1)} ↗
+                      </a>
+                    )}
                   </div>
                 </div>
                 <p className="team-member-bio">{member.bio}</p>

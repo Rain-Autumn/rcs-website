@@ -88,7 +88,10 @@ test("squadron route explains the real architecture and links to Dragon One", as
       name: "L’IA coordonnée. Sous contrôle humain.",
     }),
   ).toBeVisible();
-  await expect(page.getByRole("heading", { name: "Dragon Six" })).toBeVisible();
+  await expect(
+    page.getByRole("heading", { name: "Agents éphémères" }),
+  ).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Dragon Two" })).toBeVisible();
   await expect(
     page.getByRole("link", { name: /ESSAYER DRAGON ONE/i }).first(),
   ).toHaveAttribute("href", "https://squadron.raijucloudsystem.com/");
@@ -117,6 +120,9 @@ test("mobile Research page has no horizontal overflow", async ({ page }) => {
       name: "Recherche documentée. Résultats transparents.",
     }),
   ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: /10\.5281\/zenodo\.21994886/ }),
+  ).toHaveAttribute("href", "https://doi.org/10.5281/zenodo.21994886");
   const overflow = await page.evaluate(
     () =>
       document.documentElement.scrollWidth >
@@ -144,6 +150,14 @@ test("team routes render Hugues Henrotte and certifications", async ({
       "Microsoft Applied Skills : Migrer des charges de travail SQL Server vers Azure SQL Database",
     ),
   ).toBeVisible();
+  await expect(
+    page.getByText(
+      "Microsoft Applied Skills : Créer un agent dans Microsoft Copilot Studio",
+    ),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: /ORCID iD 0009-0009-7729-6552/ }),
+  ).toHaveAttribute("href", "https://orcid.org/0009-0009-7729-6552");
 });
 
 test("mobile Team page has no horizontal overflow", async ({ page }) => {

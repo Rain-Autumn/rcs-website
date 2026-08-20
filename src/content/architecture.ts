@@ -279,54 +279,34 @@ export const squadronCopy: Record<Locale, SquadronCopy> = {
       "Découvrez et testez Dragon One, l’interface publique de l’escadron d’intelligence artificielle supervisée de RCS.",
     eyebrow: "RCS // AI SQUADRON",
     title: "L’IA coordonnée. Sous contrôle humain.",
-    lead: "Dragon One reçoit la demande, sélectionne les spécialistes nécessaires, assemble leurs analyses puis soumet les affirmations à un contradicteur avant de répondre.",
+    lead: "Dragon One reçoit la demande, crée jusqu’à deux spécialistes éphémères adaptés à l’objectif, assemble leurs dossiers puis soumet l’artefact exact à Dragon Two avant de répondre.",
     status: "DÉMONSTRATEUR CLOUD ACTIF",
     demoAction: "ESSAYER DRAGON ONE",
     back: "RETOUR À L’ACCUEIL",
     architectureEyebrow: "01 // ARCHITECTURE",
-    architectureTitle: "Un rôle précis par Dragon.",
+    architectureTitle:
+      "Un coordinateur. Des spécialistes à la demande. Un verrou.",
     architectureLead:
-      "Les agents spécialistes restent internes : l’utilisateur dialogue uniquement avec Dragon One.",
+      "Dragon One reste le seul point d’entrée public. Les spécialistes éphémères et Dragon Two sont privés et ne dialoguent jamais avec l’utilisateur final.",
     coordinator: {
       role: "INTERFAÇAGE & ORCHESTRATION",
       summary:
-        "Analyse l’objectif, répartit le travail, contrôle les retours et construit la réponse finale.",
+        "Analyse l’objectif, planifie une délégation bornée, assemble les dossiers et construit la seule réponse visible par l’utilisateur.",
     },
     specialists: [
       {
+        code: "E-01 / E-02",
+        name: "Agents éphémères",
+        role: "SPÉCIALISATION DYNAMIQUE",
+        summary:
+          "Une ou deux instances reçoivent une spécialité et une mission limitées à la requête, puis sont libérées après leur dossier.",
+      },
+      {
         code: "D-02",
         name: "Dragon Two",
-        role: "RECHERCHE FACTUELLE",
-        summary:
-          "Repère les faits à sourcer et distingue connaissance générale et vérification effective.",
-      },
-      {
-        code: "D-03",
-        name: "Dragon Three",
-        role: "GÉNIE LOGICIEL",
-        summary:
-          "Analyse architecture applicative, code, contrats, erreurs, tests et maintenabilité.",
-      },
-      {
-        code: "D-04",
-        name: "Dragon Four",
-        role: "CLOUD & SÉCURITÉ",
-        summary:
-          "Étudie infrastructure, Linux, réseau, permissions, disponibilité et frontières de confiance.",
-      },
-      {
-        code: "D-05",
-        name: "Dragon Five",
-        role: "DONNÉES & MESURES",
-        summary:
-          "Contrôle unités, échantillons, biais, statistiques, benchmarks et reproductibilité.",
-      },
-      {
-        code: "D-06",
-        name: "Dragon Six",
         role: "CONTRADICTION",
         summary:
-          "Conteste les affirmations et exige les preuves nécessaires avant validation.",
+          "Audite l’artefact verrouillé, exige les preuves utiles et rend un verdict catégorique avant la synthèse de Dragon One.",
       },
     ],
     methodEyebrow: "02 // MÉTHODE",
@@ -339,12 +319,12 @@ export const squadronCopy: Record<Locale, SquadronCopy> = {
       {
         title: "ANALYSE",
         summary:
-          "Les Dragons sélectionnés travaillent séparément sur une tâche limitée.",
+          "Un ou deux agents éphémères travaillent séparément sur une mission limitée.",
       },
       {
         title: "VERROU",
         summary:
-          "Dragon Six vérifie la solidité des affirmations et signale les éléments à confirmer.",
+          "Dragon Two classe l’artefact comme vérifié, non vérifié ou rejeté et précise les éléments à confirmer.",
       },
       {
         title: "RESTITUTION",
@@ -356,12 +336,12 @@ export const squadronCopy: Record<Locale, SquadronCopy> = {
     limits: [
       "Mémoire de conversation volontairement volatile.",
       "Capacité quotidienne limitée pour maîtriser les ressources.",
-      "Une piste non vérifiée reste explicitement présentée comme telle.",
+      "Une source Web ne devient jamais une vérité automatique ; une piste non vérifiée reste explicitement présentée comme telle.",
       "La validation finale et les actions sensibles restent humaines.",
     ],
     demoTitle: "Accéder à Dragon One.",
     demoLead:
-      "Le démonstrateur fonctionne sur Cloudflare Workers AI. Il peut mobiliser plusieurs spécialistes selon la demande.",
+      "Le démonstrateur fonctionne sur Cloudflare Workers AI. Il peut créer jusqu’à deux spécialistes logiques pour une requête, puis mobiliser Dragon Two comme contradicteur privé.",
     demoNotice:
       "Service expérimental · aucune action externe autonome · quotas et protections anti-abus actifs",
   },
@@ -371,54 +351,33 @@ export const squadronCopy: Record<Locale, SquadronCopy> = {
       "Discover and test Dragon One, the public interface to the RCS supervised artificial intelligence squadron.",
     eyebrow: "RCS // AI SQUADRON",
     title: "Coordinated AI. Under human control.",
-    lead: "Dragon One receives the request, selects the required specialists, assembles their analyses and submits claims to a challenger before answering.",
+    lead: "Dragon One receives the request, creates up to two ephemeral specialists tailored to the objective, assembles their dossiers and submits the exact artifact to Dragon Two before answering.",
     status: "LIVE CLOUD DEMONSTRATOR",
     demoAction: "TRY DRAGON ONE",
     back: "BACK TO HOME",
     architectureEyebrow: "01 // ARCHITECTURE",
-    architectureTitle: "One precise role per Dragon.",
+    architectureTitle: "One coordinator. Specialists on demand. One lock.",
     architectureLead:
-      "Specialist agents remain internal: users communicate only with Dragon One.",
+      "Dragon One remains the only public entry point. Ephemeral specialists and Dragon Two are private and never communicate with the end user.",
     coordinator: {
       role: "INTERFACE & ORCHESTRATION",
       summary:
-        "Analyses the objective, distributes work, checks returns and builds the final answer.",
+        "Analyses the objective, plans bounded delegation, assembles dossiers and builds the only answer visible to the user.",
     },
     specialists: [
       {
+        code: "E-01 / E-02",
+        name: "Ephemeral agents",
+        role: "DYNAMIC SPECIALISATION",
+        summary:
+          "One or two instances receive a specialty and mission limited to the request, then are released after returning their dossier.",
+      },
+      {
         code: "D-02",
         name: "Dragon Two",
-        role: "FACTUAL RESEARCH",
-        summary:
-          "Identifies claims requiring sources and separates general knowledge from effective verification.",
-      },
-      {
-        code: "D-03",
-        name: "Dragon Three",
-        role: "SOFTWARE ENGINEERING",
-        summary:
-          "Analyses application architecture, code, contracts, errors, tests and maintainability.",
-      },
-      {
-        code: "D-04",
-        name: "Dragon Four",
-        role: "CLOUD & SECURITY",
-        summary:
-          "Studies infrastructure, Linux, networking, permissions, availability and trust boundaries.",
-      },
-      {
-        code: "D-05",
-        name: "Dragon Five",
-        role: "DATA & MEASUREMENT",
-        summary:
-          "Checks units, samples, bias, statistics, benchmarks and reproducibility.",
-      },
-      {
-        code: "D-06",
-        name: "Dragon Six",
         role: "CHALLENGE",
         summary:
-          "Challenges claims and requires sufficient evidence before validation.",
+          "Audits the locked artifact, requires sufficient evidence and returns a categorical verdict before Dragon One synthesises the answer.",
       },
     ],
     methodEyebrow: "02 // METHOD",
@@ -430,12 +389,13 @@ export const squadronCopy: Record<Locale, SquadronCopy> = {
       },
       {
         title: "ANALYSE",
-        summary: "Selected Dragons work separately on a limited task.",
+        summary:
+          "One or two ephemeral agents work separately on a limited mission.",
       },
       {
         title: "LOCK",
         summary:
-          "Dragon Six checks claims and identifies what still requires confirmation.",
+          "Dragon Two classifies the artifact as verified, unverified or rejected and identifies what still requires confirmation.",
       },
       {
         title: "DELIVER",
@@ -447,12 +407,12 @@ export const squadronCopy: Record<Locale, SquadronCopy> = {
     limits: [
       "Conversation memory is intentionally volatile.",
       "Daily capacity is limited to control resources.",
-      "An unverified lead remains explicitly labelled as such.",
+      "A Web source never becomes automatic truth; an unverified lead remains explicitly labelled as such.",
       "Final validation and sensitive actions remain human.",
     ],
     demoTitle: "Access Dragon One.",
     demoLead:
-      "The demonstrator runs on Cloudflare Workers AI and can involve several specialists depending on the request.",
+      "The demonstrator runs on Cloudflare Workers AI. It can create up to two logical specialists for one request, then involve Dragon Two as its private challenger.",
     demoNotice:
       "Experimental service · no autonomous external action · quotas and anti-abuse controls active",
   },
@@ -462,53 +422,33 @@ export const squadronCopy: Record<Locale, SquadronCopy> = {
       "Ontdek en test Dragon One, de publieke interface van het AI-eskader van RCS onder menselijk toezicht.",
     eyebrow: "RCS // AI SQUADRON",
     title: "Gecoördineerde AI. Onder menselijk toezicht.",
-    lead: "Dragon One ontvangt de vraag, selecteert de nodige specialisten, bundelt hun analyses en legt beweringen voor aan een tegenspreker voordat hij antwoordt.",
+    lead: "Dragon One ontvangt de vraag, maakt maximaal twee tijdelijke specialisten op maat van het doel, bundelt hun dossiers en legt het exacte artefact voor aan Dragon Two voordat hij antwoordt.",
     status: "ACTIEVE CLOUDDEMONSTRATOR",
     demoAction: "PROBEER DRAGON ONE",
     back: "TERUG NAAR START",
     architectureEyebrow: "01 // ARCHITECTUUR",
-    architectureTitle: "Eén precieze rol per Dragon.",
+    architectureTitle: "Eén coördinator. Specialisten op aanvraag. Eén slot.",
     architectureLead:
-      "Specialistische agenten blijven intern: gebruikers spreken uitsluitend met Dragon One.",
+      "Dragon One blijft het enige publieke toegangspunt. Tijdelijke specialisten en Dragon Two zijn privé en spreken nooit met de eindgebruiker.",
     coordinator: {
       role: "INTERFACE & ORKESTRATIE",
       summary:
-        "Analyseert het doel, verdeelt het werk, controleert resultaten en bouwt het eindantwoord.",
+        "Analyseert het doel, plant een begrensde delegatie, bundelt dossiers en bouwt het enige antwoord dat de gebruiker ziet.",
     },
     specialists: [
       {
+        code: "E-01 / E-02",
+        name: "Tijdelijke agenten",
+        role: "DYNAMISCHE SPECIALISATIE",
+        summary:
+          "Eén of twee instanties krijgen een specialiteit en missie die tot de aanvraag beperkt zijn en worden na hun dossier vrijgegeven.",
+      },
+      {
         code: "D-02",
         name: "Dragon Two",
-        role: "FEITENONDERZOEK",
-        summary:
-          "Herkent feiten die bronnen vereisen en scheidt algemene kennis van werkelijke verificatie.",
-      },
-      {
-        code: "D-03",
-        name: "Dragon Three",
-        role: "SOFTWARE-ENGINEERING",
-        summary:
-          "Analyseert applicatiearchitectuur, code, contracten, fouten, tests en onderhoudbaarheid.",
-      },
-      {
-        code: "D-04",
-        name: "Dragon Four",
-        role: "CLOUD & BEVEILIGING",
-        summary:
-          "Bestudeert infrastructuur, Linux, netwerken, rechten, beschikbaarheid en vertrouwensgrenzen.",
-      },
-      {
-        code: "D-05",
-        name: "Dragon Five",
-        role: "DATA & METINGEN",
-        summary:
-          "Controleert eenheden, steekproeven, vertekening, statistiek, benchmarks en reproduceerbaarheid.",
-      },
-      {
-        code: "D-06",
-        name: "Dragon Six",
         role: "TEGENSPRAAK",
-        summary: "Betwist beweringen en eist voldoende bewijs vóór validatie.",
+        summary:
+          "Controleert het vergrendelde artefact, eist voldoende bewijs en geeft een categorisch oordeel vóór de synthese van Dragon One.",
       },
     ],
     methodEyebrow: "02 // METHODE",
@@ -521,12 +461,12 @@ export const squadronCopy: Record<Locale, SquadronCopy> = {
       {
         title: "ANALYSEREN",
         summary:
-          "Geselecteerde Dragons werken afzonderlijk aan een beperkte taak.",
+          "Eén of twee tijdelijke agenten werken afzonderlijk aan een beperkte missie.",
       },
       {
         title: "VERGRENDELEN",
         summary:
-          "Dragon Six controleert beweringen en benoemt wat nog bevestigd moet worden.",
+          "Dragon Two classificeert het artefact als geverifieerd, niet geverifieerd of verworpen en benoemt wat nog bevestigd moet worden.",
       },
       {
         title: "OPLEVEREN",
@@ -538,12 +478,12 @@ export const squadronCopy: Record<Locale, SquadronCopy> = {
     limits: [
       "Het gespreksgeheugen is bewust vluchtig.",
       "De dagelijkse capaciteit is beperkt om middelen te beheersen.",
-      "Een niet-geverifieerd spoor blijft duidelijk als zodanig aangeduid.",
+      "Een webbron wordt nooit automatisch waarheid; een niet-geverifieerd spoor blijft duidelijk als zodanig aangeduid.",
       "Eindvalidatie en gevoelige acties blijven menselijk.",
     ],
     demoTitle: "Open Dragon One.",
     demoLead:
-      "De demonstrator draait op Cloudflare Workers AI en kan naargelang de vraag meerdere specialisten inschakelen.",
+      "De demonstrator draait op Cloudflare Workers AI. Hij kan maximaal twee logische specialisten voor één aanvraag maken en daarna Dragon Two als private tegenspreker inschakelen.",
     demoNotice:
       "Experimentele dienst · geen autonome externe acties · quota en anti-misbruikbeveiliging actief",
   },
