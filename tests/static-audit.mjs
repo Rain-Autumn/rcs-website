@@ -82,7 +82,7 @@ const checks = [
     ) && /coreStructuredData/.test(text),
   ],
   [
-    "Squadron route and live Dragon One link present",
+    "Squadron route describes the current dynamic architecture",
     fs.existsSync(
       path.join(
         root,
@@ -95,7 +95,9 @@ const checks = [
       ),
     ) &&
       /squadron\.raijucloudsystem\.com/.test(text) &&
-      /Dragon Six/.test(text),
+      /Agents éphémères/.test(text) &&
+      /Dragon Two/.test(text) &&
+      !/Dragon (Three|Four|Five|Six)/.test(text),
   ],
   [
     "portal has a semantic heading and crawlable language links",
@@ -127,6 +129,13 @@ const checks = [
     ),
   ],
   [
+    "published RCS-RP-001 identifiers present",
+    /10\.5281\/zenodo\.21994886/.test(text) &&
+      /0009-0009-7729-6552/.test(text) &&
+      /RCS-RP-001/.test(text) &&
+      /status: ["']published["']/.test(text),
+  ],
+  [
     "research storage stays private",
     !fs.existsSync(path.join(root, "public", "research-publications")) &&
       /MAX_PDF_BYTES/.test(text),
@@ -153,7 +162,9 @@ const checks = [
     "founder certification record present",
     /RCS-TM-001/.test(text) &&
       /AWS Knowledge: Cloud Essentials/.test(text) &&
-      /Azure SQL Database/.test(text),
+      /Azure SQL Database/.test(text) &&
+      /Créer un agent dans Microsoft Copilot Studio/.test(text) &&
+      /8DDAC1CBF710F1DE/.test(text),
   ],
   [
     "team certifications use a compact native disclosure",

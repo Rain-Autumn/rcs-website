@@ -115,6 +115,7 @@ export const teamCopy = {
 export const founder: TeamMember = {
   id: "RCS-TM-001",
   name: "Hugues Henrotte",
+  orcid: "https://orcid.org/0009-0009-7729-6552",
   type: "direction",
   translations: {
     fr: {
@@ -149,6 +150,13 @@ export const founder: TeamMember = {
         "Microsoft Applied Skills : Migrer des charges de travail SQL Server vers Azure SQL Database",
       issued: "2026-08",
       credentialId: "FF1896B698E90600",
+    },
+    {
+      provider: "Microsoft",
+      title:
+        "Microsoft Applied Skills : Créer un agent dans Microsoft Copilot Studio",
+      issued: "2026-08",
+      credentialId: "8DDAC1CBF710F1DE",
     },
     {
       provider: "Google",

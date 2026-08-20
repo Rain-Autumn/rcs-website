@@ -177,6 +177,7 @@ export function teamStructuredData(locale: Locale, members: LocalizedMember[]) {
     url: pageUrl,
     memberOf: { "@id": organizationId },
     knowsAbout: member.specialties,
+    ...(member.orcid ? { sameAs: [member.orcid] } : {}),
     ...(member.certifications.length
       ? {
           hasCredential: member.certifications.map((certification) => ({
@@ -230,10 +231,11 @@ export function researchStructuredData(
   publications: StoredResearch[],
 ) {
   const pageUrl = `${RCS_SITE_URL}/${locale}/research`;
-  const planned = projects.map((project) => ({
-    "@type": "CreativeWork",
+  const catalog = projects.map((project) => ({
+    "@type":
+      project.status === "published" ? "ScholarlyArticle" : "CreativeWork",
     "@id": `${pageUrl}#${project.id}`,
-    identifier: project.id,
+    identifier: project.doi ? [project.id, project.doi] : project.id,
     name: project.title,
     abstract: project.question,
     description: project.summary,
@@ -241,6 +243,20 @@ export function researchStructuredData(
     about: project.topics,
     inLanguage: language[locale],
     publisher: { "@id": organizationId },
+    ...(project.publicationDate
+      ? { datePublished: project.publicationDate }
+      : {}),
+    ...(project.publicationUrl ? { url: project.publicationUrl } : {}),
+    ...(project.authorOrcid
+      ? {
+          author: {
+            "@id": founderId,
+            "@type": "Person",
+            name: "Hugues Henrotte",
+            sameAs: [project.authorOrcid],
+          },
+        }
+      : {}),
   }));
   const published = publications.map((publication) => ({
     "@type": "ScholarlyArticle",
@@ -259,7 +275,7 @@ export function researchStructuredData(
       contentUrl: `${RCS_SITE_URL}/api/research-files/${publication.id}`,
     },
   }));
-  const works = [...planned, ...published];
+  const works = [...catalog, ...published];
 
   return {
     "@context": "https://schema.org",

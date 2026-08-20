@@ -10,7 +10,7 @@ Live site: [raijucloudsystem.com](https://raijucloudsystem.com)
 
 - A multilingual system hub in French, English and Dutch.
 - A dedicated institutional presentation preserving the complete RCS narrative.
-- A public AI Squadron overview linked to the Dragon One demonstrator at [`squadron.raijucloudsystem.com`](https://squadron.raijucloudsystem.com).
+- A public AI Squadron overview linked to the Dragon One demonstrator at [`squadron.raijucloudsystem.com`](https://squadron.raijucloudsystem.com). Dragon One coordinates at most two request-scoped ephemeral specialists before the permanent private verifier, Dragon Two, audits the artifact.
 - Dedicated Research routes with structured technical publications.
 - A normalized Team directory with localized roles, profiles and certifications.
 - Separate password-protected administration forms for Research and Team.
@@ -20,17 +20,17 @@ Live site: [raijucloudsystem.com](https://raijucloudsystem.com)
 - Structured Organization, Team and Research data expressed through JSON-LD.
 - Automatic IndexNow notification after successful production deployments.
 
-Planned research projects are clearly identified as future work. No result, benchmark or publication is presented as completed unless supporting data exists.
+Published and planned research are distinguished explicitly. RCS-RP-001 v1.0 is publicly archived on Zenodo under DOI [`10.5281/zenodo.21994886`](https://doi.org/10.5281/zenodo.21994886); RCS-RP-002 remains planned work.
 
 ## Routes
 
-| Area | French | English | Dutch |
-| --- | --- | --- | --- |
-| System hub | `/fr` | `/en` | `/nl` |
+| Area         | French             | English            | Dutch              |
+| ------------ | ------------------ | ------------------ | ------------------ |
+| System hub   | `/fr`              | `/en`              | `/nl`              |
 | Presentation | `/fr/presentation` | `/en/presentation` | `/nl/presentation` |
-| AI Squadron | `/fr/squadron` | `/en/squadron` | `/nl/squadron` |
-| Research | `/fr/research` | `/en/research` | `/nl/research` |
-| Team | `/fr/team` | `/en/team` | `/nl/team` |
+| AI Squadron  | `/fr/squadron`     | `/en/squadron`     | `/nl/squadron`     |
+| Research     | `/fr/research`     | `/en/research`     | `/nl/research`     |
+| Team         | `/fr/team`         | `/en/team`         | `/nl/team`         |
 
 The root route `/` provides the language entry point.
 
