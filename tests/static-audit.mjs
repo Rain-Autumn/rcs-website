@@ -207,7 +207,7 @@ const checks = [
     "IndexNow runs after deployment",
     /Deploy atomically[\s\S]+Notify participating search engines through IndexNow/.test(
       workflow,
-    ) && /indexnow:submit/.test(workflow),
+    ) && /(indexnow:submit|submit-indexnow\.mjs)/.test(workflow),
   ],
   [
     "no remote image/font CDN",

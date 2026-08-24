@@ -20,10 +20,12 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
       - name: Set up Node.js
-        uses: actions/setup-node@v6
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version: 22
 
@@ -56,7 +58,7 @@ jobs:
         run: pnpm build
 
       - name: Package standalone release
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.RCS_DEPLOY_ENABLED == 'true'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
           test -f .next/standalone/server.js
           install -d .next/standalone/public .next/standalone/.next/static
@@ -64,8 +66,97 @@ jobs:
           cp -a .next/static/. .next/standalone/.next/static/
           tar -C .next/standalone -czf "$RUNNER_TEMP/rcs-release.tar.gz" .
 
+      - name: Retain the deployable release
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: rcs-release-${{ github.sha }}
+          path: ${{ runner.temp }}/rcs-release.tar.gz
+          if-no-files-found: error
+          retention-days: 14
+          compression-level: 0
+
+  attest:
+    name: Attest release and SBOM
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: validate
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      attestations: write
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Download deployable release
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: rcs-release-${{ github.sha }}
+          path: ${{ runner.temp }}/release-artifact
+
+      - name: Inspect release contents
+        run: |
+          test -s "$RUNNER_TEMP/release-artifact/rcs-release.tar.gz"
+          install -d "$RUNNER_TEMP/release-root"
+          tar -xzf "$RUNNER_TEMP/release-artifact/rcs-release.tar.gz" \
+            -C "$RUNNER_TEMP/release-root"
+          test -f "$RUNNER_TEMP/release-root/server.js"
+
+      - name: Generate SPDX SBOM
+        uses: anchore/sbom-action@e22c389904149dbc22b58101806040fa8d37a610 # v0.24.0
+        with:
+          path: ${{ runner.temp }}/release-root
+          format: spdx-json
+          output-file: ${{ runner.temp }}/rcs-release.spdx.json
+          upload-artifact: false
+          upload-release-assets: false
+
+      - name: Attest build provenance
+        uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4.2.2
+        with:
+          subject-path: ${{ runner.temp }}/release-artifact/rcs-release.tar.gz
+
+      - name: Attest release SBOM
+        uses: actions/attest@1e69f48acb82d1966a394da916b4c1698aa569d6 # v4.2.2
+        with:
+          subject-path: ${{ runner.temp }}/release-artifact/rcs-release.tar.gz
+          sbom-path: ${{ runner.temp }}/rcs-release.spdx.json
+
+      - name: Retain SPDX SBOM
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: rcs-sbom-${{ github.sha }}
+          path: ${{ runner.temp }}/rcs-release.spdx.json
+          if-no-files-found: error
+          retention-days: 90
+
+  deploy:
+    name: Deploy production
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.RCS_DEPLOY_ENABLED == 'true'
+    needs: [validate, attest]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+
+    steps:
+      - name: Check out deployment notifier
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 22
+
+      - name: Download attested release
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: rcs-release-${{ github.sha }}
+          path: ${{ runner.temp }}/release-artifact
+
       - name: Configure deployment identity
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.RCS_DEPLOY_ENABLED == 'true'
         env:
           RCS_DEPLOY_HOST: ${{ vars.RCS_DEPLOY_HOST }}
           RCS_DEPLOY_USER: ${{ vars.RCS_DEPLOY_USER }}
@@ -76,6 +167,7 @@ jobs:
           [[ "$RCS_DEPLOY_USER" =~ ^[a-z_][a-z0-9_-]*$ ]]
           test -n "$RCS_DEPLOY_SSH_KEY_B64"
           test -n "$RCS_DEPLOY_KNOWN_HOSTS"
+          test -s "$RUNNER_TEMP/release-artifact/rcs-release.tar.gz"
 
           install -m 700 -d "$HOME/.ssh"
           printf '%s' "$RCS_DEPLOY_SSH_KEY_B64" | base64 --decode > "$RUNNER_TEMP/rcs-deploy-key"
@@ -84,12 +176,11 @@ jobs:
           ssh-keygen -y -f "$RUNNER_TEMP/rcs-deploy-key" > /dev/null
 
       - name: Deploy atomically to the VPS
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.RCS_DEPLOY_ENABLED == 'true'
         env:
           RCS_DEPLOY_HOST: ${{ vars.RCS_DEPLOY_HOST }}
           RCS_DEPLOY_USER: ${{ vars.RCS_DEPLOY_USER }}
         run: |
-          cat "$RUNNER_TEMP/rcs-release.tar.gz" | timeout 240 ssh \
+          cat "$RUNNER_TEMP/release-artifact/rcs-release.tar.gz" | timeout 240 ssh \
             -i "$RUNNER_TEMP/rcs-deploy-key" \
             -o BatchMode=yes \
             -o IdentitiesOnly=yes \
@@ -99,6 +190,5 @@ jobs:
             "deploy $GITHUB_SHA"
 
       - name: Notify participating search engines through IndexNow
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.RCS_DEPLOY_ENABLED == 'true'
         continue-on-error: true
-        run: pnpm indexnow:submit
+        run: node scripts/submit-indexnow.mjs
