@@ -99,7 +99,7 @@ export function hubStructuredData(locale: Locale, description: string) {
   };
 }
 
-export function squadronStructuredData(
+export function evidenceEngineStructuredData(
   locale: Locale,
   description: string,
   applicationUrl: string,
@@ -113,7 +113,7 @@ export function squadronStructuredData(
         "@type": "WebPage",
         "@id": `${pageUrl}#webpage`,
         url: pageUrl,
-        name: "RCS AI Squadron",
+        name: "RCS Evidence Engine",
         description,
         inLanguage: language[locale],
         isPartOf: { "@id": websiteId },
@@ -122,7 +122,7 @@ export function squadronStructuredData(
       {
         "@type": "WebApplication",
         "@id": `${pageUrl}#application`,
-        name: "Dragon One — RCS AI Squadron",
+        name: "Dragon One — RCS Evidence Engine",
         description,
         url: applicationUrl,
         applicationCategory: "Artificial Intelligence",

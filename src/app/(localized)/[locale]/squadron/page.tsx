@@ -3,10 +3,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { StructuredData } from "@/components/seo/StructuredData";
-import { squadronCopy } from "@/content/architecture";
+import { evidenceEngineCopy } from "@/content/architecture";
 import { getCopy, isLocale, type Locale } from "@/content/i18n";
 import { socialMetadata } from "@/lib/site-metadata";
-import { squadronStructuredData } from "@/lib/structured-data";
+import { evidenceEngineStructuredData } from "@/lib/structured-data";
 
 const DRAGON_ONE_URL = "https://squadron.raijucloudsystem.com/";
 
@@ -17,7 +17,7 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { locale } = await params;
   if (!isLocale(locale)) return {};
-  const copy = squadronCopy[locale];
+  const copy = evidenceEngineCopy[locale];
   const social = socialMetadata({
     title: copy.metadataTitle,
     description: copy.metadataDescription,
@@ -40,16 +40,16 @@ export async function generateMetadata({
   };
 }
 
-export default async function SquadronPage({ params }: PageProps) {
+export default async function EvidenceEnginePage({ params }: PageProps) {
   const { locale: rawLocale } = await params;
   if (!isLocale(rawLocale)) notFound();
   const locale: Locale = rawLocale;
-  const copy = squadronCopy[locale];
+  const copy = evidenceEngineCopy[locale];
 
   return (
     <>
       <StructuredData
-        data={squadronStructuredData(
+        data={evidenceEngineStructuredData(
           locale,
           copy.metadataDescription,
           DRAGON_ONE_URL,
@@ -59,7 +59,7 @@ export default async function SquadronPage({ params }: PageProps) {
       <main id="main" className="squadron-page">
         <section
           className="technical-panel squadron-hero"
-          data-section="RCS-AI"
+          data-section="RCS-EE"
         >
           <div>
             <p className="eyebrow">{copy.eyebrow}</p>
@@ -170,7 +170,7 @@ export default async function SquadronPage({ params }: PageProps) {
       </main>
       <footer className="site-footer">
         <span>RAIJU CLOUD SYSTEM</span>
-        <span>RCS AI SQUADRON</span>
+        <span>RCS EVIDENCE ENGINE</span>
         <span>HUMAN SUPERVISION REQUIRED</span>
       </footer>
     </>

@@ -19,7 +19,12 @@ export const sectionNavigation: Record<Locale, SectionLink[]> = {
       mode: "presentation",
       path: "/presentation",
     },
-    { code: "02", label: "ESCADRON", mode: "squadron", path: "/squadron" },
+    {
+      code: "02",
+      label: "EVIDENCE ENGINE",
+      mode: "squadron",
+      path: "/squadron",
+    },
     { code: "03", label: "RECHERCHE", mode: "research", path: "/research" },
     { code: "04", label: "ÉQUIPE", mode: "team", path: "/team" },
   ],
@@ -31,7 +36,12 @@ export const sectionNavigation: Record<Locale, SectionLink[]> = {
       mode: "presentation",
       path: "/presentation",
     },
-    { code: "02", label: "SQUADRON", mode: "squadron", path: "/squadron" },
+    {
+      code: "02",
+      label: "EVIDENCE ENGINE",
+      mode: "squadron",
+      path: "/squadron",
+    },
     { code: "03", label: "RESEARCH", mode: "research", path: "/research" },
     { code: "04", label: "TEAM", mode: "team", path: "/team" },
   ],
@@ -43,7 +53,12 @@ export const sectionNavigation: Record<Locale, SectionLink[]> = {
       mode: "presentation",
       path: "/presentation",
     },
-    { code: "02", label: "ESKADER", mode: "squadron", path: "/squadron" },
+    {
+      code: "02",
+      label: "EVIDENCE ENGINE",
+      mode: "squadron",
+      path: "/squadron",
+    },
     { code: "03", label: "ONDERZOEK", mode: "research", path: "/research" },
     { code: "04", label: "TEAM", mode: "team", path: "/team" },
   ],
@@ -76,7 +91,7 @@ export const hubCopy: Record<Locale, HubCopy> = {
   fr: {
     metadataTitle: "Raiju Cloud System — Systèmes, cloud, IA et recherche",
     metadataDescription:
-      "Découvrez RCS, son architecture technique, son escadron d’intelligence artificielle supervisée, ses recherches et son équipe.",
+      "Découvrez RCS, son architecture technique, son Evidence Engine supervisé, ses recherches et son équipe.",
     eyebrow: "RCS // SYSTEM DIRECTORY",
     title: "Un système. Quatre espaces.",
     lead: "Raiju Cloud System réunit ingénierie web, infrastructure cloud, intelligence artificielle supervisée et recherche documentée dans une structure unique, lisible et vérifiable.",
@@ -95,12 +110,12 @@ export const hubCopy: Record<Locale, HubCopy> = {
         path: "/presentation",
       },
       {
-        code: "RCS-AI",
-        title: "Escadron IA",
+        code: "RCS-EE",
+        title: "RCS Evidence Engine",
         summary:
-          "Un démonstrateur cloud où Dragon One coordonne des agents spécialisés sous supervision humaine.",
-        status: "DÉMONSTRATEUR ACTIF",
-        action: "DÉCOUVRIR L’ESCADRON",
+          "Un moteur cloud où Dragon One coordonne des analyses spécialisées, confronte les éléments de preuve et expose les incertitudes sous supervision humaine.",
+        status: "MOTEUR EXPÉRIMENTAL ACTIF",
+        action: "DÉCOUVRIR EVIDENCE ENGINE",
         path: "/squadron",
       },
       {
@@ -132,7 +147,7 @@ export const hubCopy: Record<Locale, HubCopy> = {
   en: {
     metadataTitle: "Raiju Cloud System — Systems, cloud, AI and research",
     metadataDescription:
-      "Discover RCS, its technical architecture, supervised AI squadron, research programme and team.",
+      "Discover RCS, its technical architecture, supervised Evidence Engine, research programme and team.",
     eyebrow: "RCS // SYSTEM DIRECTORY",
     title: "One system. Four spaces.",
     lead: "Raiju Cloud System brings together web engineering, cloud infrastructure, supervised artificial intelligence and documented research in one readable and verifiable structure.",
@@ -151,12 +166,12 @@ export const hubCopy: Record<Locale, HubCopy> = {
         path: "/presentation",
       },
       {
-        code: "RCS-AI",
-        title: "AI Squadron",
+        code: "RCS-EE",
+        title: "RCS Evidence Engine",
         summary:
-          "A cloud demonstrator where Dragon One coordinates specialised agents under human supervision.",
-        status: "LIVE DEMONSTRATOR",
-        action: "DISCOVER THE SQUADRON",
+          "A cloud engine where Dragon One coordinates specialised analysis, challenges evidence and exposes uncertainty under human supervision.",
+        status: "LIVE EXPERIMENTAL ENGINE",
+        action: "DISCOVER EVIDENCE ENGINE",
         path: "/squadron",
       },
       {
@@ -188,7 +203,7 @@ export const hubCopy: Record<Locale, HubCopy> = {
   nl: {
     metadataTitle: "Raiju Cloud System — Systemen, cloud, AI en onderzoek",
     metadataDescription:
-      "Ontdek RCS, de technische architectuur, het AI-eskader onder toezicht, het onderzoeksprogramma en het team.",
+      "Ontdek RCS, de technische architectuur, de Evidence Engine onder toezicht, het onderzoeksprogramma en het team.",
     eyebrow: "RCS // SYSTEM DIRECTORY",
     title: "Eén systeem. Vier ruimtes.",
     lead: "Raiju Cloud System brengt webengineering, cloudinfrastructuur, kunstmatige intelligentie onder toezicht en gedocumenteerd onderzoek samen in één leesbare en verifieerbare structuur.",
@@ -207,12 +222,12 @@ export const hubCopy: Record<Locale, HubCopy> = {
         path: "/presentation",
       },
       {
-        code: "RCS-AI",
-        title: "AI-eskader",
+        code: "RCS-EE",
+        title: "RCS Evidence Engine",
         summary:
-          "Een clouddemonstrator waarin Dragon One gespecialiseerde agenten onder menselijk toezicht coördineert.",
-        status: "ACTIEVE DEMONSTRATOR",
-        action: "ONTDEK HET ESKADER",
+          "Een cloudengine waarin Dragon One gespecialiseerde analyses coördineert, bewijselementen betwist en onzekerheid toont onder menselijk toezicht.",
+        status: "ACTIEVE EXPERIMENTELE ENGINE",
+        action: "ONTDEK EVIDENCE ENGINE",
         path: "/squadron",
       },
       {
@@ -243,7 +258,7 @@ export const hubCopy: Record<Locale, HubCopy> = {
   },
 };
 
-type SquadronCopy = {
+type EvidenceEngineCopy = {
   metadataTitle: string;
   metadataDescription: string;
   eyebrow: string;
@@ -272,15 +287,15 @@ type SquadronCopy = {
   demoNotice: string;
 };
 
-export const squadronCopy: Record<Locale, SquadronCopy> = {
+export const evidenceEngineCopy: Record<Locale, EvidenceEngineCopy> = {
   fr: {
-    metadataTitle: "Escadron IA RCS — Démonstrateur multi-agent supervisé",
+    metadataTitle: "RCS Evidence Engine — Analyse multi-agent supervisée",
     metadataDescription:
-      "Découvrez et testez Dragon One, l’interface publique de l’escadron d’intelligence artificielle supervisée de RCS.",
-    eyebrow: "RCS // AI SQUADRON",
+      "Découvrez et testez Dragon One, l’interface publique de RCS Evidence Engine pour coordonner, confronter et restituer des analyses sous supervision humaine.",
+    eyebrow: "RCS // EVIDENCE ENGINE",
     title: "L’IA coordonnée. Sous contrôle humain.",
     lead: "Dragon One reçoit la demande, crée jusqu’à deux spécialistes éphémères adaptés à l’objectif, assemble leurs dossiers puis soumet l’artefact exact à Dragon Two avant de répondre.",
-    status: "DÉMONSTRATEUR CLOUD ACTIF",
+    status: "EVIDENCE ENGINE ACTIF",
     demoAction: "ESSAYER DRAGON ONE",
     back: "RETOUR À L’ACCUEIL",
     architectureEyebrow: "01 // ARCHITECTURE",
@@ -332,7 +347,7 @@ export const squadronCopy: Record<Locale, SquadronCopy> = {
           "Dragon One synthétise une réponse compréhensible et expose les incertitudes.",
       },
     ],
-    limitsTitle: "Transparence du démonstrateur",
+    limitsTitle: "Transparence de l’Evidence Engine",
     limits: [
       "Mémoire de conversation volontairement volatile.",
       "Capacité quotidienne limitée pour maîtriser les ressources.",
@@ -341,18 +356,18 @@ export const squadronCopy: Record<Locale, SquadronCopy> = {
     ],
     demoTitle: "Accéder à Dragon One.",
     demoLead:
-      "Le démonstrateur fonctionne sur Cloudflare Workers AI. Il peut créer jusqu’à deux spécialistes logiques pour une requête, puis mobiliser Dragon Two comme contradicteur privé.",
+      "RCS Evidence Engine fonctionne actuellement sur Cloudflare Workers AI. Il peut créer jusqu’à deux spécialistes logiques pour une requête, puis mobiliser Dragon Two comme contradicteur privé.",
     demoNotice:
       "Service expérimental · aucune action externe autonome · quotas et protections anti-abus actifs",
   },
   en: {
-    metadataTitle: "RCS AI Squadron — Supervised multi-agent demonstrator",
+    metadataTitle: "RCS Evidence Engine — Supervised multi-agent analysis",
     metadataDescription:
-      "Discover and test Dragon One, the public interface to the RCS supervised artificial intelligence squadron.",
-    eyebrow: "RCS // AI SQUADRON",
+      "Discover and test Dragon One, the public interface to RCS Evidence Engine for coordinating, challenging and delivering analysis under human supervision.",
+    eyebrow: "RCS // EVIDENCE ENGINE",
     title: "Coordinated AI. Under human control.",
     lead: "Dragon One receives the request, creates up to two ephemeral specialists tailored to the objective, assembles their dossiers and submits the exact artifact to Dragon Two before answering.",
-    status: "LIVE CLOUD DEMONSTRATOR",
+    status: "EVIDENCE ENGINE ONLINE",
     demoAction: "TRY DRAGON ONE",
     back: "BACK TO HOME",
     architectureEyebrow: "01 // ARCHITECTURE",
@@ -403,7 +418,7 @@ export const squadronCopy: Record<Locale, SquadronCopy> = {
           "Dragon One produces a readable answer and exposes uncertainty.",
       },
     ],
-    limitsTitle: "Demonstrator transparency",
+    limitsTitle: "Evidence Engine transparency",
     limits: [
       "Conversation memory is intentionally volatile.",
       "Daily capacity is limited to control resources.",
@@ -412,18 +427,18 @@ export const squadronCopy: Record<Locale, SquadronCopy> = {
     ],
     demoTitle: "Access Dragon One.",
     demoLead:
-      "The demonstrator runs on Cloudflare Workers AI. It can create up to two logical specialists for one request, then involve Dragon Two as its private challenger.",
+      "RCS Evidence Engine currently runs on Cloudflare Workers AI. It can create up to two logical specialists for one request, then involve Dragon Two as its private challenger.",
     demoNotice:
       "Experimental service · no autonomous external action · quotas and anti-abuse controls active",
   },
   nl: {
-    metadataTitle: "RCS AI-eskader — Multi-agentdemonstrator onder toezicht",
+    metadataTitle: "RCS Evidence Engine — Multi-agentanalyse onder toezicht",
     metadataDescription:
-      "Ontdek en test Dragon One, de publieke interface van het AI-eskader van RCS onder menselijk toezicht.",
-    eyebrow: "RCS // AI SQUADRON",
+      "Ontdek en test Dragon One, de publieke interface van RCS Evidence Engine voor gecoördineerde, betwiste en begrijpelijke analyses onder menselijk toezicht.",
+    eyebrow: "RCS // EVIDENCE ENGINE",
     title: "Gecoördineerde AI. Onder menselijk toezicht.",
     lead: "Dragon One ontvangt de vraag, maakt maximaal twee tijdelijke specialisten op maat van het doel, bundelt hun dossiers en legt het exacte artefact voor aan Dragon Two voordat hij antwoordt.",
-    status: "ACTIEVE CLOUDDEMONSTRATOR",
+    status: "EVIDENCE ENGINE ACTIEF",
     demoAction: "PROBEER DRAGON ONE",
     back: "TERUG NAAR START",
     architectureEyebrow: "01 // ARCHITECTUUR",
@@ -474,7 +489,7 @@ export const squadronCopy: Record<Locale, SquadronCopy> = {
           "Dragon One maakt een leesbaar antwoord en toont de onzekerheden.",
       },
     ],
-    limitsTitle: "Transparantie van de demonstrator",
+    limitsTitle: "Transparantie van de Evidence Engine",
     limits: [
       "Het gespreksgeheugen is bewust vluchtig.",
       "De dagelijkse capaciteit is beperkt om middelen te beheersen.",
@@ -483,7 +498,7 @@ export const squadronCopy: Record<Locale, SquadronCopy> = {
     ],
     demoTitle: "Open Dragon One.",
     demoLead:
-      "De demonstrator draait op Cloudflare Workers AI. Hij kan maximaal twee logische specialisten voor één aanvraag maken en daarna Dragon Two als private tegenspreker inschakelen.",
+      "RCS Evidence Engine draait momenteel op Cloudflare Workers AI. Het kan maximaal twee logische specialisten voor één aanvraag maken en daarna Dragon Two als private tegenspreker inschakelen.",
     demoNotice:
       "Experimentele dienst · geen autonome externe acties · quota en anti-misbruikbeveiliging actief",
   },
