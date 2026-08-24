@@ -63,7 +63,7 @@ const checks = [
     "localized hub exposes four permanent sections",
     /Un système\. Quatre espaces\./.test(text) &&
       /\/presentation/.test(text) &&
-      /\/squadron/.test(text) &&
+      /\/evidence-engine/.test(text) &&
       /\/research/.test(text) &&
       /\/team/.test(text),
   ],
@@ -90,10 +90,22 @@ const checks = [
         "app",
         "(localized)",
         "[locale]",
-        "squadron",
+        "evidence-engine",
         "page.tsx",
       ),
     ) &&
+      fs.existsSync(
+        path.join(
+          root,
+          "src",
+          "app",
+          "(localized)",
+          "[locale]",
+          "squadron",
+          "page.tsx",
+        ),
+      ) &&
+      /permanentRedirect\(`\/\$\{locale\}\/evidence-engine`\)/.test(text) &&
       /RCS Evidence Engine/.test(text) &&
       /^const DRAGON_ONE_URL = "https:\/\/evidence-engine\.raijucloudsystem\.com\/";$/m.test(
         text,

@@ -13,7 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     })),
     ...["fr", "en", "nl"].map((locale) => ({
-      url: `${base}/${locale}/squadron`,
+      url: `${base}/${locale}/evidence-engine`,
       changeFrequency: "weekly" as const,
       priority: 0.9,
     })),
