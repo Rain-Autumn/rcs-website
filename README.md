@@ -11,7 +11,7 @@ Live site: [raijucloudsystem.com](https://raijucloudsystem.com)
 
 - A multilingual system hub in French, English and Dutch.
 - A dedicated institutional presentation preserving the complete RCS narrative.
-- A public AI Squadron overview linked to the Dragon One demonstrator at [`squadron.raijucloudsystem.com`](https://squadron.raijucloudsystem.com). Dragon One coordinates at most two request-scoped ephemeral specialists before the permanent private verifier, Dragon Two, audits the artifact.
+- A public **RCS Evidence Engine** overview linked to the Dragon One demonstrator at [`squadron.raijucloudsystem.com`](https://squadron.raijucloudsystem.com). Dragon One coordinates at most two request-scoped ephemeral specialists before the permanent private verifier, Dragon Two, audits the artifact.
 - Dedicated Research routes with structured technical publications.
 - A normalized Team directory with localized roles, profiles and certifications.
 - Separate password-protected administration forms for Research and Team.
@@ -25,13 +25,13 @@ Published and planned research are distinguished explicitly. RCS-RP-001 v1.0 is 
 
 ## Routes
 
-| Area         | French             | English            | Dutch              |
-| ------------ | ------------------ | ------------------ | ------------------ |
-| System hub   | `/fr`              | `/en`              | `/nl`              |
-| Presentation | `/fr/presentation` | `/en/presentation` | `/nl/presentation` |
-| AI Squadron  | `/fr/squadron`     | `/en/squadron`     | `/nl/squadron`     |
-| Research     | `/fr/research`     | `/en/research`     | `/nl/research`     |
-| Team         | `/fr/team`         | `/en/team`         | `/nl/team`         |
+| Area            | French             | English            | Dutch              |
+| --------------- | ------------------ | ------------------ | ------------------ |
+| System hub      | `/fr`              | `/en`              | `/nl`              |
+| Presentation    | `/fr/presentation` | `/en/presentation` | `/nl/presentation` |
+| Evidence Engine | `/fr/squadron`     | `/en/squadron`     | `/nl/squadron`     |
+| Research        | `/fr/research`     | `/en/research`     | `/nl/research`     |
+| Team            | `/fr/team`         | `/en/team`         | `/nl/team`         |
 
 The root route `/` provides the language entry point.
 
@@ -41,7 +41,7 @@ The root route `/` provides the language entry point.
 src/
 ├── app/
 │   ├── (portal)/                  # Language entry point
-│   ├── (localized)/[locale]/      # Hub, Presentation, Squadron, Research and Team
+│   ├── (localized)/[locale]/      # Hub, Presentation, Evidence Engine, Research and Team
 │   └── api/                       # Authentication, publications and members
 ├── components/
 │   ├── layout/                    # Header and navigation

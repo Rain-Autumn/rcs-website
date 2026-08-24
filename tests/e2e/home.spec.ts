@@ -26,7 +26,9 @@ test("welcome portal opens the language gate then the French RCS directory", asy
   await expect(
     page.getByRole("link", { name: /RCS en détail/i }),
   ).toBeVisible();
-  await expect(page.getByRole("link", { name: /Escadron IA/i })).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: /RCS Evidence Engine/i }),
+  ).toBeVisible();
   await expect(page.getByRole("link", { name: /Research/i })).toBeVisible();
   await expect(page.getByRole("link", { name: /Team/i })).toBeVisible();
 });
@@ -79,7 +81,7 @@ test("mobile presentation has no horizontal overflow", async ({ page }) => {
   expect(overflow).toBeFalsy();
 });
 
-test("squadron route explains the real architecture and links to Dragon One", async ({
+test("Evidence Engine route explains the real architecture and links to Dragon One", async ({
   page,
 }) => {
   await page.goto("/fr/squadron");
@@ -97,7 +99,7 @@ test("squadron route explains the real architecture and links to Dragon One", as
   ).toHaveAttribute("href", "https://squadron.raijucloudsystem.com/");
 });
 
-test("mobile hub and Squadron pages have no horizontal overflow", async ({
+test("mobile hub and Evidence Engine pages have no horizontal overflow", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });

@@ -82,7 +82,7 @@ const checks = [
     ) && /coreStructuredData/.test(text),
   ],
   [
-    "Squadron route describes the current dynamic architecture",
+    "Evidence Engine route describes the current dynamic architecture",
     fs.existsSync(
       path.join(
         root,
@@ -94,6 +94,7 @@ const checks = [
         "page.tsx",
       ),
     ) &&
+      /RCS Evidence Engine/.test(text) &&
       /squadron\.raijucloudsystem\.com/.test(text) &&
       /Agents éphémères/.test(text) &&
       /Dragon Two/.test(text) &&
