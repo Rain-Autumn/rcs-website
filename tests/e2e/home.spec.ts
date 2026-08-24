@@ -84,7 +84,7 @@ test("mobile presentation has no horizontal overflow", async ({ page }) => {
 test("Evidence Engine route explains the real architecture and links to Dragon One", async ({
   page,
 }) => {
-  await page.goto("/fr/squadron");
+  await page.goto("/fr/evidence-engine");
   await expect(
     page.getByRole("heading", {
       name: "L’IA coordonnée. Sous contrôle humain.",
@@ -99,11 +99,18 @@ test("Evidence Engine route explains the real architecture and links to Dragon O
   ).toHaveAttribute("href", "https://evidence-engine.raijucloudsystem.com/");
 });
 
+test("legacy Squadron route redirects permanently to Evidence Engine", async ({
+  page,
+}) => {
+  await page.goto("/fr/squadron");
+  await expect(page).toHaveURL(/\/fr\/evidence-engine$/);
+});
+
 test("mobile hub and Evidence Engine pages have no horizontal overflow", async ({
   page,
 }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  for (const route of ["/fr", "/fr/squadron"]) {
+  for (const route of ["/fr", "/fr/evidence-engine"]) {
     await page.goto(route);
     const overflow = await page.evaluate(
       () =>
@@ -178,7 +185,7 @@ test("private identity is never rendered", async ({ page }) => {
     "/",
     "/fr",
     "/fr/presentation",
-    "/fr/squadron",
+    "/fr/evidence-engine",
     "/en",
     "/nl",
   ]) {

@@ -90,7 +90,7 @@ export function hubStructuredData(locale: Locale, description: string) {
         about: { "@id": organizationId },
         hasPart: [
           `${pageUrl}/presentation`,
-          `${pageUrl}/squadron`,
+          `${pageUrl}/evidence-engine`,
           `${pageUrl}/research`,
           `${pageUrl}/team`,
         ].map((url) => ({ "@type": "WebPage", url })),
@@ -104,7 +104,7 @@ export function evidenceEngineStructuredData(
   description: string,
   applicationUrl: string,
 ) {
-  const pageUrl = `${RCS_SITE_URL}/${locale}/squadron`;
+  const pageUrl = `${RCS_SITE_URL}/${locale}/evidence-engine`;
 
   return {
     "@context": "https://schema.org",

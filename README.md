@@ -25,13 +25,13 @@ Published and planned research are distinguished explicitly. RCS-RP-001 v1.0 is 
 
 ## Routes
 
-| Area            | French             | English            | Dutch              |
-| --------------- | ------------------ | ------------------ | ------------------ |
-| System hub      | `/fr`              | `/en`              | `/nl`              |
-| Presentation    | `/fr/presentation` | `/en/presentation` | `/nl/presentation` |
-| Evidence Engine | `/fr/squadron`     | `/en/squadron`     | `/nl/squadron`     |
-| Research        | `/fr/research`     | `/en/research`     | `/nl/research`     |
-| Team            | `/fr/team`         | `/en/team`         | `/nl/team`         |
+| Area            | French                | English               | Dutch                 |
+| --------------- | --------------------- | --------------------- | --------------------- |
+| System hub      | `/fr`                 | `/en`                 | `/nl`                 |
+| Presentation    | `/fr/presentation`    | `/en/presentation`    | `/nl/presentation`    |
+| Evidence Engine | `/fr/evidence-engine` | `/en/evidence-engine` | `/nl/evidence-engine` |
+| Research        | `/fr/research`        | `/en/research`        | `/nl/research`        |
+| Team            | `/fr/team`            | `/en/team`            | `/nl/team`            |
 
 The root route `/` provides the language entry point.
 
