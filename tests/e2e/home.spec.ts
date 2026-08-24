@@ -96,7 +96,7 @@ test("Evidence Engine route explains the real architecture and links to Dragon O
   await expect(page.getByRole("heading", { name: "Dragon Two" })).toBeVisible();
   await expect(
     page.getByRole("link", { name: /ESSAYER DRAGON ONE/i }).first(),
-  ).toHaveAttribute("href", "https://squadron.raijucloudsystem.com/");
+  ).toHaveAttribute("href", "https://evidence-engine.raijucloudsystem.com/");
 });
 
 test("mobile hub and Evidence Engine pages have no horizontal overflow", async ({

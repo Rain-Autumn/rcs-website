@@ -95,7 +95,9 @@ const checks = [
       ),
     ) &&
       /RCS Evidence Engine/.test(text) &&
-      /squadron\.raijucloudsystem\.com/.test(text) &&
+      /^const DRAGON_ONE_URL = "https:\/\/evidence-engine\.raijucloudsystem\.com\/";$/m.test(
+        text,
+      ) &&
       /Agents éphémères/.test(text) &&
       /Dragon Two/.test(text) &&
       !/Dragon (Three|Four|Five|Six)/.test(text),

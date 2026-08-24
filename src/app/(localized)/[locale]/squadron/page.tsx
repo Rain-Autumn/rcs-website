@@ -8,7 +8,7 @@ import { getCopy, isLocale, type Locale } from "@/content/i18n";
 import { socialMetadata } from "@/lib/site-metadata";
 import { evidenceEngineStructuredData } from "@/lib/structured-data";
 
-const DRAGON_ONE_URL = "https://squadron.raijucloudsystem.com/";
+const DRAGON_ONE_URL = "https://evidence-engine.raijucloudsystem.com/";
 
 type PageProps = { params: Promise<{ locale: string }> };
 
