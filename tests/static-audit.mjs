@@ -95,7 +95,7 @@ const checks = [
       ),
     ) &&
       /RCS Evidence Engine/.test(text) &&
-      /evidence-engine\.raijucloudsystem\.com/.test(text) &&
+      text.includes("https://evidence-engine.raijucloudsystem.com/") &&
       /Agents éphémères/.test(text) &&
       /Dragon Two/.test(text) &&
       !/Dragon (Three|Four|Five|Six)/.test(text),
