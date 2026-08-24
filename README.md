@@ -1,6 +1,7 @@
 # Raiju Cloud System
 
 [![CI](https://github.com/Rain-Autumn/rcs-website/actions/workflows/ci.yml/badge.svg)](https://github.com/Rain-Autumn/rcs-website/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/Rain-Autumn/rcs-website/actions/workflows/codeql.yml/badge.svg)](https://github.com/Rain-Autumn/rcs-website/actions/workflows/codeql.yml)
 
 Public website for **Raiju Cloud System (RCS)**, an independent technology and systems structure founded by Hugues Henrotte. The interface combines a restrained retro-futurist identity with a predominantly light, editorial layout.
 
@@ -68,6 +69,15 @@ The application uses Next.js 16, React 19, TypeScript, Three.js, GSAP, Lenis, Zo
 - Runtime data, production environments, credentials and deployment backups are excluded from this repository.
 
 The examples in [`deploy/`](deploy/) are integration references and must be reviewed against the target server before use.
+
+## Supply-chain controls
+
+- CI permissions are read-only by default; deployment secrets are available only to the production deployment job.
+- Third-party GitHub Actions are pinned to immutable commit SHAs and monitored by Dependabot.
+- Pull requests receive dependency-diff review and CodeQL analysis in addition to the application test suite.
+- Every `main` release is retained as a standalone archive, described by an SPDX SBOM and covered by GitHub artifact attestations before deployment.
+- Sensitive repository and deployment paths have an explicit owner through `CODEOWNERS`.
+- Vulnerability reporting follows [`SECURITY.md`](SECURITY.md); disaster recovery follows [`docs/RECOVERY.md`](docs/RECOVERY.md).
 
 ## Local development
 
