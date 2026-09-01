@@ -221,7 +221,7 @@ const checks = [
   [
     "structured data present",
     /application\/ld\+json/.test(text) &&
-      /https:\/\/schema\.org/.test(text) &&
+      text.includes('"@context": "https://schema.org"') &&
       /ScholarlyArticle/.test(text),
   ],
   [
