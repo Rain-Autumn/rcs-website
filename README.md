@@ -21,7 +21,7 @@ Live site: [raijucloudsystem.com](https://raijucloudsystem.com)
 - Structured Organization, Team and Research data expressed through JSON-LD.
 - Automatic IndexNow notification after successful production deployments.
 
-Published and planned research are distinguished explicitly. RCS-RP-001 v1.0 is publicly archived on Zenodo under DOI [`10.5281/zenodo.21994886`](https://doi.org/10.5281/zenodo.21994886); RCS-RP-002 remains planned work.
+Published and planned research are distinguished explicitly. RCS-RP-001 v1.0 is publicly archived on Zenodo under DOI [`10.5281/zenodo.21994886`](https://doi.org/10.5281/zenodo.21994886), and RCS-RP-002 v0.2 is publicly archived under DOI [`10.5281/zenodo.22110548`](https://doi.org/10.5281/zenodo.22110548).
 
 ## Routes
 

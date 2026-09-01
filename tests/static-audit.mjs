@@ -151,6 +151,12 @@ const checks = [
       /status: ["']published["']/.test(text),
   ],
   [
+    "published RCS-RP-002 identifiers present",
+    /10\.5281\/zenodo\.22110548/.test(text) &&
+      /RCS-RP-002/.test(text) &&
+      /publicationDate: ["']2026-08-26["']/.test(text),
+  ],
+  [
     "research storage stays private",
     !fs.existsSync(path.join(root, "public", "research-publications")) &&
       /MAX_PDF_BYTES/.test(text),
