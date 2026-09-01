@@ -20,7 +20,7 @@ export const researchCopy = {
     catalogEyebrow: "01 // PROGRAMME",
     catalogTitle: "Projets de recherche",
     catalogLead:
-      "RCS-RP-001 est publié avec son rapport et son corpus initial. Les travaux futurs restent explicitement signalés comme tels.",
+      "RCS-RP-001 et RCS-RP-002 sont publiés avec leurs rapports et leurs données documentées. Les travaux futurs restent explicitement signalés comme tels.",
     status: {
       planned: "PROJET ENVISAGÉ",
       "in-preparation": "EN PRÉPARATION",
@@ -99,7 +99,7 @@ export const researchCopy = {
     catalogEyebrow: "01 // PROGRAM",
     catalogTitle: "Research projects",
     catalogLead:
-      "RCS-RP-001 is published with its report and initial corpus. Future work remains explicitly labelled as such.",
+      "RCS-RP-001 and RCS-RP-002 are published with their reports and documented data. Future work remains explicitly labelled as such.",
     status: {
       planned: "PLANNED PROJECT",
       "in-preparation": "IN PREPARATION",
@@ -178,7 +178,7 @@ export const researchCopy = {
     catalogEyebrow: "01 // PROGRAMMA",
     catalogTitle: "Onderzoeksprojecten",
     catalogLead:
-      "RCS-RP-001 is gepubliceerd met het rapport en de eerste gegevensverzameling. Toekomstig werk blijft uitdrukkelijk als zodanig aangeduid.",
+      "RCS-RP-001 en RCS-RP-002 zijn gepubliceerd met hun rapporten en gedocumenteerde gegevens. Toekomstig werk blijft uitdrukkelijk als zodanig aangeduid.",
     status: {
       planned: "GEPLAND PROJECT",
       "in-preparation": "IN VOORBEREIDING",
@@ -270,14 +270,18 @@ const projectBase = {
     {
       id: "RCS-RP-002",
       slug: "hardware-aware-compression-performance",
-      status: "planned",
+      status: "published",
       title: "Hardware-Aware Compression Performance Study",
       question:
         "Comment le processeur, la mémoire, le système et la configuration influencent-ils les performances d’algorithmes de compression ?",
       summary:
-        "Projet combinant potentiellement benchmarks réels, résultats publics documentés et estimations explicitement signalées. Le chiffrement est hors périmètre.",
+        "Rapport technique v0.2 publié le 26 août 2026. Il combine un modèle transparent de 1 100 scénarios sur 100 CPU AMD et Intel, fondé sur des sources externes, et un pilote local de 11 profils sur Intel Core i7-13620H. Estimations et mesures restent séparées.",
       topics: ["COMPRESSION", "CPU", "MEMORY", "BENCHMARKS"],
       evidence: [],
+      publicationDate: "2026-08-26",
+      doi: "10.5281/zenodo.22110548",
+      publicationUrl: "https://doi.org/10.5281/zenodo.22110548",
+      authorOrcid: "https://orcid.org/0009-0009-7729-6552",
     },
   ],
   en: [
@@ -305,14 +309,18 @@ const projectBase = {
     {
       id: "RCS-RP-002",
       slug: "hardware-aware-compression-performance",
-      status: "planned",
+      status: "published",
       title: "Hardware-Aware Compression Performance Study",
       question:
         "How do CPU, memory, operating system and hardware configuration affect compression algorithm performance?",
       summary:
-        "A project potentially combining real benchmarks, documented public results and clearly identified estimates. Encryption is out of scope.",
+        "Technical report v0.2 published on 26 August 2026. It combines a transparent 1,100-scenario model for 100 AMD and Intel CPUs, based on external sources, with a local 11-profile pilot on an Intel Core i7-13620H. Estimates and measurements remain distinct.",
       topics: ["COMPRESSION", "CPU", "MEMORY", "BENCHMARKS"],
       evidence: [],
+      publicationDate: "2026-08-26",
+      doi: "10.5281/zenodo.22110548",
+      publicationUrl: "https://doi.org/10.5281/zenodo.22110548",
+      authorOrcid: "https://orcid.org/0009-0009-7729-6552",
     },
   ],
   nl: [
@@ -340,14 +348,18 @@ const projectBase = {
     {
       id: "RCS-RP-002",
       slug: "hardware-aware-compression-performance",
-      status: "planned",
+      status: "published",
       title: "Hardware-Aware Compression Performance Study",
       question:
         "Hoe beïnvloeden CPU, geheugen, besturingssysteem en hardwareconfiguratie de prestaties van compressiealgoritmen?",
       summary:
-        "Een project dat mogelijk echte benchmarks, gedocumenteerde openbare resultaten en duidelijk gemarkeerde schattingen combineert. Encryptie valt buiten de scope.",
+        "Technisch rapport v0.2, gepubliceerd op 26 augustus 2026. Het combineert een transparant model van 1.100 scenario's op 100 AMD- en Intel-cpu's, gebaseerd op externe bronnen, met een lokale proef met 11 profielen op een Intel Core i7-13620H. Schattingen en metingen blijven gescheiden.",
       topics: ["COMPRESSION", "CPU", "MEMORY", "BENCHMARKS"],
       evidence: [],
+      publicationDate: "2026-08-26",
+      doi: "10.5281/zenodo.22110548",
+      publicationUrl: "https://doi.org/10.5281/zenodo.22110548",
+      authorOrcid: "https://orcid.org/0009-0009-7729-6552",
     },
   ],
 } as const;
