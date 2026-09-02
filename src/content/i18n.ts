@@ -90,18 +90,7 @@ export type RcsCopy = {
     title: string;
     lead: string;
     techLabel: string;
-    futureEyebrow: string;
-    futureTitle: string;
-    futureLead: string;
     items: Array<{
-      code: string;
-      title: string;
-      status: string;
-      type: string;
-      description: string;
-      tech: string;
-    }>;
-    futureItems: Array<{
       code: string;
       title: string;
       status: string;
@@ -410,13 +399,9 @@ export const copyByLocale: Record<Locale, RcsCopy> = {
     },
     projects: {
       eyebrow: "07 // RCS PROJECTS",
-      title: "Systèmes actifs. Futurs systèmes.",
-      lead: "RCS distingue les capacités en activité de ses prochains projets : des systèmes à explorer, documenter et prototyper sans les présenter comme déjà réalisés.",
+      title: "Systèmes en activité.",
+      lead: "Chaque projet documente une capacité concrète de Raiju Cloud System, avec son contexte, sa stack et son état réel.",
       techLabel: "TECH",
-      futureEyebrow: "07.A // FUTURS SYSTÈMES RCS",
-      futureTitle: "Projets futurs. Conçus pour rester maîtrisés.",
-      futureLead:
-        "Ces six projets constituent la prochaine trajectoire de RCS. Chacun commencera par un prototype local, réversible et documenté ; aucun n'est encore en production.",
       items: [
         {
           code: "PRJ-001",
@@ -444,62 +429,6 @@ export const copyByLocale: Record<Locale, RcsCopy> = {
           description:
             "Administration, déploiement, permissions, diagnostics, sauvegardes et procédures de rollback.",
           tech: "SSH · Debian · Git · HTTP · Nginx · VPS",
-        },
-      ],
-      futureItems: [
-        {
-          code: "FUT-001",
-          title: "RCS Agent Passport",
-          status: "PROJET FUTUR",
-          type: "GOUVERNANCE DES AGENTS",
-          description:
-            "Un cadre d'identité, de permissions limitées, d'expiration, de révocation et de validation humaine pour encadrer les actions d'un agent IA.",
-          tech: "Profils d'identité · Permissions bornées · Journal d'audit",
-        },
-        {
-          code: "FUT-002",
-          title: "RCS Offline Node",
-          status: "PROJET FUTUR",
-          type: "IA LOCALE / CONTINUITÉ",
-          description:
-            "Un assistant local fondé sur des documents contrôlés, utile sans Internet, lorsque la confidentialité prime ou quand le quota cloud est indisponible.",
-          tech: "Modèle local · Index documentaire · Espace hors ligne",
-        },
-        {
-          code: "FUT-003",
-          title: "RCS Digital Continuity Box",
-          status: "PROJET FUTUR",
-          type: "RÉSILIENCE NUMÉRIQUE",
-          description:
-            "Une trousse locale de procédures, contacts, exports ouverts et checklists pour maintenir l'essentiel pendant une panne numérique.",
-          tech: "Procédures locales · Exports ouverts · Tests de reprise",
-        },
-        {
-          code: "FUT-004",
-          title: "RCS Compute Commons",
-          status: "PROJET FUTUR",
-          type: "CALCUL DISTRIBUÉ CONTRÔLÉ",
-          description:
-            "Un environnement où des machines autorisées coopèrent sur des tâches publiques ou fictives, avec quotas, traçabilité et arrêt vérifiable.",
-          tech: "Nœuds authentifiés · Quotas de ressources · Tâches vérifiables",
-        },
-        {
-          code: "FUT-005",
-          title: "RCS AI Energy Router",
-          status: "PROJET FUTUR",
-          type: "POLITIQUE D'EXÉCUTION IA",
-          description:
-            "Un routeur explicable qui compare coût, délai, confidentialité, qualité requise et énergie estimée avant de choisir un mode d'exécution.",
-          tech: "Politique lisible · Simulateur local · Estimations documentées",
-        },
-        {
-          code: "FUT-006",
-          title: "RCS Passport",
-          status: "PROJET FUTUR",
-          type: "PORTABILITÉ DES AGENTS",
-          description:
-            "Un entretien guidé et un format ouvert pour décrire, exporter et faire évoluer la mission, les limites et les réglages d'un agent.",
-          tech: "Entretien guidé · Export texte · Journal d'évolution",
         },
       ],
     },
@@ -792,13 +721,9 @@ export const copyByLocale: Record<Locale, RcsCopy> = {
     },
     projects: {
       eyebrow: "07 // RCS PROJECTS",
-      title: "Active systems. Future systems.",
-      lead: "RCS distinguishes active capabilities from its next projects: systems to explore, document and prototype without presenting them as already delivered.",
+      title: "Systems in operation.",
+      lead: "Each project documents a concrete Raiju Cloud System capability with its context, stack and real status.",
       techLabel: "TECH",
-      futureEyebrow: "07.A // RCS FUTURE SYSTEMS",
-      futureTitle: "Future projects. Designed to remain controllable.",
-      futureLead:
-        "These six projects form RCS's next trajectory. Each will begin as a local, reversible and documented prototype; none is in production yet.",
       items: [
         {
           code: "PRJ-001",
@@ -826,62 +751,6 @@ export const copyByLocale: Record<Locale, RcsCopy> = {
           description:
             "Administration, deployment, permissions, diagnostics, backups and rollback procedures.",
           tech: "SSH · Debian · Git · HTTP · Nginx · VPS",
-        },
-      ],
-      futureItems: [
-        {
-          code: "FUT-001",
-          title: "RCS Agent Passport",
-          status: "FUTURE PROJECT",
-          type: "AGENT GOVERNANCE",
-          description:
-            "An identity, scoped-permission, expiry, revocation and human-validation framework that keeps an AI agent's actions within a defined perimeter.",
-          tech: "Identity profiles · Scoped permissions · Audit trail",
-        },
-        {
-          code: "FUT-002",
-          title: "RCS Offline Node",
-          status: "FUTURE PROJECT",
-          type: "LOCAL AI / CONTINUITY",
-          description:
-            "A local assistant grounded in controlled documents, useful without Internet, when privacy matters or when cloud quota is unavailable.",
-          tech: "Local model · Document index · Offline workspace",
-        },
-        {
-          code: "FUT-003",
-          title: "RCS Digital Continuity Box",
-          status: "FUTURE PROJECT",
-          type: "DIGITAL RESILIENCE",
-          description:
-            "A local kit of procedures, contacts, open exports and checklists to keep essential activity moving during a digital outage.",
-          tech: "Local procedures · Open exports · Recovery checks",
-        },
-        {
-          code: "FUT-004",
-          title: "RCS Compute Commons",
-          status: "FUTURE PROJECT",
-          type: "CONTROLLED DISTRIBUTED COMPUTE",
-          description:
-            "An environment where authorised machines cooperate on public or synthetic workloads with quotas, traceability and verifiable stopping rules.",
-          tech: "Authenticated nodes · Resource quotas · Verifiable jobs",
-        },
-        {
-          code: "FUT-005",
-          title: "RCS AI Energy Router",
-          status: "FUTURE PROJECT",
-          type: "AI EXECUTION POLICY",
-          description:
-            "An explainable router that compares cost, delay, privacy, required quality and estimated energy before selecting an execution mode.",
-          tech: "Readable policy · Local simulator · Documented estimates",
-        },
-        {
-          code: "FUT-006",
-          title: "RCS Passport",
-          status: "FUTURE PROJECT",
-          type: "AGENT PORTABILITY",
-          description:
-            "A guided interview and open format to describe, export and evolve an agent's mission, boundaries and configuration.",
-          tech: "Guided interview · Text export · Change log",
         },
       ],
     },
@@ -1174,14 +1043,9 @@ export const copyByLocale: Record<Locale, RcsCopy> = {
     },
     projects: {
       eyebrow: "07 // RCS PROJECTS",
-      title: "Actieve systemen. Toekomstige systemen.",
-      lead: "RCS maakt onderscheid tussen actieve capaciteiten en volgende projecten: systemen die worden verkend, gedocumenteerd en geprototypeerd zonder ze als al gerealiseerd voor te stellen.",
+      title: "Systemen in werking.",
+      lead: "Elk project documenteert een concrete capaciteit van Raiju Cloud System, met context, stack en reële status.",
       techLabel: "TECH",
-      futureEyebrow: "07.A // TOEKOMSTIGE RCS-SYSTEMEN",
-      futureTitle:
-        "Toekomstige projecten. Ontworpen om beheersbaar te blijven.",
-      futureLead:
-        "Deze zes projecten vormen het volgende traject van RCS. Elk start als een lokaal, omkeerbaar en gedocumenteerd prototype; geen ervan is vandaag in productie.",
       items: [
         {
           code: "PRJ-001",
@@ -1209,62 +1073,6 @@ export const copyByLocale: Record<Locale, RcsCopy> = {
           description:
             "Beheer, deployment, rechten, diagnose, back-ups en rollbackprocedures.",
           tech: "SSH · Debian · Git · HTTP · Nginx · VPS",
-        },
-      ],
-      futureItems: [
-        {
-          code: "FUT-001",
-          title: "RCS Agent Passport",
-          status: "TOEKOMSTIG PROJECT",
-          type: "AGENTGOVERNANCE",
-          description:
-            "Een kader voor identiteit, beperkte rechten, verval, intrekking en menselijke validatie dat de acties van een AI-agent binnen een afgebakende perimeter houdt.",
-          tech: "Identiteitsprofielen · Beperkte rechten · Auditlog",
-        },
-        {
-          code: "FUT-002",
-          title: "RCS Offline Node",
-          status: "TOEKOMSTIG PROJECT",
-          type: "LOKALE AI / CONTINUÏTEIT",
-          description:
-            "Een lokale assistent op basis van gecontroleerde documenten, bruikbaar zonder internet, wanneer privacy belangrijk is of een cloudquotum niet beschikbaar is.",
-          tech: "Lokaal model · Documentindex · Offline werkruimte",
-        },
-        {
-          code: "FUT-003",
-          title: "RCS Digital Continuity Box",
-          status: "TOEKOMSTIG PROJECT",
-          type: "DIGITALE VEERKRACHT",
-          description:
-            "Een lokale kit met procedures, contactpersonen, open exports en checklists om essentiële activiteiten voort te zetten tijdens een digitale storing.",
-          tech: "Lokale procedures · Open exports · Herstelcontroles",
-        },
-        {
-          code: "FUT-004",
-          title: "RCS Compute Commons",
-          status: "TOEKOMSTIG PROJECT",
-          type: "GECONTROLEERD VERDEELD REKENWERK",
-          description:
-            "Een omgeving waarin geautoriseerde machines samenwerken aan publieke of synthetische taken met quota, traceerbaarheid en verifieerbare stopregels.",
-          tech: "Geauthenticeerde nodes · Resourcequota · Verifieerbare taken",
-        },
-        {
-          code: "FUT-005",
-          title: "RCS AI Energy Router",
-          status: "TOEKOMSTIG PROJECT",
-          type: "AI-UITVOERINGSBELEID",
-          description:
-            "Een uitlegbare router die kost, vertraging, privacy, vereiste kwaliteit en geschatte energie vergelijkt voordat hij een uitvoeringsmodus kiest.",
-          tech: "Leesbaar beleid · Lokale simulator · Gedocumenteerde schattingen",
-        },
-        {
-          code: "FUT-006",
-          title: "RCS Passport",
-          status: "TOEKOMSTIG PROJECT",
-          type: "AGENTPORTABILITEIT",
-          description:
-            "Een begeleid interview en open formaat om de missie, grenzen en configuratie van een agent te beschrijven, exporteren en verder te ontwikkelen.",
-          tech: "Begeleid interview · Tekstexport · Wijzigingslog",
         },
       ],
     },
