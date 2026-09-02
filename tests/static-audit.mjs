@@ -208,20 +208,6 @@ const checks = [
     text.includes("HUGUES HENROTTE") && text.includes("HUMAN VALIDATION"),
   ],
   [
-    "future systems roadmap stays explicit",
-    [
-      "RCS Agent Passport",
-      "RCS Offline Node",
-      "RCS Digital Continuity Box",
-      "RCS Compute Commons",
-      "RCS AI Energy Router",
-      "RCS Passport",
-    ].every((title) => text.includes(title)) &&
-      ["PROJET FUTUR", "FUTURE PROJECT", "TOEKOMSTIG PROJECT"].every(
-        (status) => text.includes(status),
-      ),
-  ],
-  [
     "current public CV present",
     fs.existsSync(path.join(root, "public", "CV-Hugues-Henrotte-RCS-2026.pdf")),
   ],

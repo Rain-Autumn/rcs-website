@@ -852,24 +852,6 @@ h3 {
 }
 
 /* PROJECTS / SERVICES / CV / CONTACT */
-.future-projects {
-  margin-top: clamp(3.5rem, 8vw, 7rem);
-  padding-top: 1.25rem;
-  border-top: 1px solid var(--line);
-}
-.future-projects__heading {
-  max-width: 54rem;
-  margin-bottom: 1.5rem;
-}
-.future-projects__heading h3 {
-  margin: 0.45rem 0 0.75rem;
-  font-size: clamp(1.85rem, 3.4vw, 3.5rem);
-  letter-spacing: -0.04em;
-}
-.future-projects__heading > p:last-child {
-  color: var(--ink-soft);
-  font-size: 1.03rem;
-}
 .project-table,
 .service-list {
   border-top: 1px solid var(--line);
@@ -888,9 +870,6 @@ h3 {
   color: var(--ink-soft);
   font: 500 0.56rem var(--mono);
   letter-spacing: 0.1em;
-}
-.project-row--future .project-status {
-  color: var(--copper);
 }
 .project-type {
   margin: 0 0 0.3rem;
