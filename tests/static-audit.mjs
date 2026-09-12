@@ -182,10 +182,22 @@ const checks = [
   [
     "founder certification record present",
     /RCS-TM-001/.test(text) &&
+      /Build an AI Agent/.test(text) &&
+      /CREDLY-3dfee891-aad9-4890-856d-d7c1472b7a4e/.test(text) &&
       /AWS Knowledge: Cloud Essentials/.test(text) &&
       /Azure SQL Database/.test(text) &&
       /Créer un agent dans Microsoft Copilot Studio/.test(text) &&
       /8DDAC1CBF710F1DE/.test(text),
+  ],
+  [
+    "second member and standard dragon mark present",
+    /RCS-TM-002/.test(text) &&
+      /Jacob Matthews/.test(text) &&
+      /DIGITAL FORENSICS/.test(text) &&
+      /CyberFirst Advanced course/.test(text) &&
+      /Regional Finalist — WorldSkills Cyber Security Competition/.test(text) &&
+      /officialTeamMembers/.test(text) &&
+      /src="\/icons\/raiju-dragon-vector\.svg"/.test(text),
   ],
   [
     "team certifications use a compact native disclosure",

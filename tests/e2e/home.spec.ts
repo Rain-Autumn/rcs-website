@@ -140,9 +140,7 @@ test("mobile Research page has no horizontal overflow", async ({ page }) => {
   expect(overflow).toBeFalsy();
 });
 
-test("team routes render Hugues Henrotte and certifications", async ({
-  page,
-}) => {
+test("team routes render both members and certifications", async ({ page }) => {
   await page.goto("/fr/team");
   await expect(
     page.getByRole("heading", { name: "Hugues Henrotte" }),
@@ -164,9 +162,28 @@ test("team routes render Hugues Henrotte and certifications", async ({
       "Microsoft Applied Skills : Créer un agent dans Microsoft Copilot Studio",
     ),
   ).toBeVisible();
+  await expect(page.getByText("Build an AI Agent")).toBeVisible();
+  await expect(
+    page.getByText("CREDLY-3dfee891-aad9-4890-856d-d7c1472b7a4e"),
+  ).toBeVisible();
   await expect(
     page.getByRole("link", { name: /ORCID iD 0009-0009-7729-6552/ }),
   ).toHaveAttribute("href", "https://orcid.org/0009-0009-7729-6552");
+  const jacob = page
+    .locator(".team-member")
+    .filter({ hasText: "Jacob Matthews" });
+  await expect(
+    jacob.getByRole("heading", { name: "Jacob Matthews" }),
+  ).toBeVisible();
+  await expect(jacob.locator(".team-member-mark img")).toBeVisible();
+  await expect(jacob.locator(".team-member-mark--arkenstone")).toHaveCount(0);
+  await jacob.getByText("AFFICHER", { exact: true }).click();
+  await expect(jacob.getByText("CyberFirst Advanced course")).toBeVisible();
+  await expect(
+    jacob.getByText(
+      "Regional Finalist — WorldSkills Cyber Security Competition",
+    ),
+  ).toBeVisible();
 });
 
 test("mobile Team page has no horizontal overflow", async ({ page }) => {
