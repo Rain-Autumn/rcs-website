@@ -20,7 +20,7 @@ export const teamCopy = {
     directoryEyebrow: "01 // DIRECTORY",
     directoryTitle: "Membres de RCS",
     directoryLead:
-      "La structure compte actuellement un membre déclaré. Cette page évoluera avec les contributions réelles.",
+      "La structure compte actuellement deux membres déclarés. Cette page évoluera avec les contributions réelles.",
     specialties: "DOMAINES",
     certifications: "CERTIFICATIONS",
     showCertifications: "AFFICHER",
@@ -56,7 +56,7 @@ export const teamCopy = {
     directoryEyebrow: "01 // DIRECTORY",
     directoryTitle: "RCS members",
     directoryLead:
-      "The structure currently has one declared member. This page will evolve with real contributions.",
+      "The structure currently has two declared members. This page will evolve with real contributions.",
     specialties: "FIELDS",
     certifications: "CERTIFICATIONS",
     showCertifications: "SHOW",
@@ -92,7 +92,7 @@ export const teamCopy = {
     directoryEyebrow: "01 // DIRECTORY",
     directoryTitle: "RCS-leden",
     directoryLead:
-      "De structuur telt momenteel één aangegeven lid. Deze pagina evolueert met echte bijdragen.",
+      "De structuur telt momenteel twee aangegeven leden. Deze pagina evolueert met echte bijdragen.",
     specialties: "DOMEINEN",
     certifications: "CERTIFICERINGEN",
     showCertifications: "TONEN",
@@ -140,6 +140,12 @@ export const founder: TeamMember = {
   ],
   certifications: [
     {
+      provider: "IBM",
+      title: "Build an AI Agent",
+      issued: "2026-09",
+      credentialId: "CREDLY-3dfee891-aad9-4890-856d-d7c1472b7a4e",
+    },
+    {
       provider: "Amazon Web Services (AWS)",
       title: "AWS Knowledge: Cloud Essentials - Training Badge",
       issued: "2026-08",
@@ -181,6 +187,47 @@ export const founder: TeamMember = {
     },
   ],
 };
+
+export const jacobMatthews: TeamMember = {
+  id: "RCS-TM-002",
+  name: "Jacob Matthews",
+  type: "member",
+  translations: {
+    fr: {
+      role: "Membre — Cybersécurité & investigation numérique",
+      bio: "Étudiant en cybersécurité au Coleg Gwent et compétiteur WorldSkills, Jacob développe une expérience pratique en investigation numérique, réponse aux incidents, OSINT, virtualisation et infrastructure auto-hébergée. Son homelab Proxmox VE lui sert à expérimenter avec les réseaux, les serveurs, les outils de sécurité et les systèmes d’IA locaux.",
+    },
+    en: {
+      role: "Member — Cybersecurity & Digital Forensics",
+      bio: "A Cyber Security student at Coleg Gwent and WorldSkills competitor, Jacob develops hands-on experience in digital forensics, incident response, OSINT, virtualisation and self-hosted infrastructure. He uses his Proxmox VE homelab to experiment with networking, servers, security tooling and local AI systems.",
+    },
+    nl: {
+      role: "Lid — Cyberbeveiliging & digitale forensiek",
+      bio: "Als student cyberbeveiliging aan Coleg Gwent en WorldSkills-deelnemer bouwt Jacob praktijkervaring op in digitale forensiek, incidentrespons, OSINT, virtualisatie en zelfgehoste infrastructuur. In zijn Proxmox VE-homelab experimenteert hij met netwerken, servers, beveiligingstools en lokale AI-systemen.",
+    },
+  },
+  specialties: [
+    "CYBERSECURITY",
+    "DIGITAL FORENSICS",
+    "INCIDENT RESPONSE",
+    "OSINT",
+    "HOMELAB INFRASTRUCTURE",
+  ],
+  certifications: [
+    {
+      provider: "CyberFirst",
+      title: "CyberFirst Advanced course",
+      issued: "2026-07",
+    },
+    {
+      provider: "WorldSkills",
+      title: "Regional Finalist — WorldSkills Cyber Security Competition",
+      issued: "2026-04",
+    },
+  ],
+};
+
+export const officialTeamMembers: TeamMember[] = [founder, jacobMatthews];
 
 export function localizedMember(member: TeamMember, locale: Locale) {
   return { ...member, ...member.translations[locale] };

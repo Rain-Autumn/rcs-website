@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { TeamMemberForm } from "@/components/team/TeamMemberForm";
-import { founder, localizedMember, teamCopy } from "@/content/team";
+import { localizedMember, officialTeamMembers, teamCopy } from "@/content/team";
 import { getCopy, isLocale, type Locale } from "@/content/i18n";
 import { loadTeamMembers } from "@/lib/team-members";
 import { socialMetadata } from "@/lib/site-metadata";
@@ -47,7 +47,11 @@ export default async function TeamPage({ params }: PageProps) {
   if (!isLocale(rawLocale)) notFound();
   const locale: Locale = rawLocale;
   const copy = teamCopy[locale];
-  const members = [founder, ...(await loadTeamMembers())].map((member) =>
+  const officialIds = new Set(officialTeamMembers.map((member) => member.id));
+  const additionalMembers = (await loadTeamMembers()).filter(
+    (member) => !officialIds.has(member.id),
+  );
+  const members = [...officialTeamMembers, ...additionalMembers].map((member) =>
     localizedMember(member, locale),
   );
 
@@ -98,22 +102,12 @@ export default async function TeamPage({ params }: PageProps) {
                     }
                     aria-hidden="true"
                   >
-                    {member.id === "RCS-TM-001" ? (
-                      <Image
-                        src="/icons/raiju-dragon-vector.svg"
-                        alt=""
-                        width={113}
-                        height={121}
-                      />
-                    ) : (
-                      <span>
-                        {member.name
-                          .split(/\s+/)
-                          .map((part) => part[0])
-                          .slice(0, 2)
-                          .join("")}
-                      </span>
-                    )}
+                    <Image
+                      src="/icons/raiju-dragon-vector.svg"
+                      alt=""
+                      width={113}
+                      height={121}
+                    />
                   </div>
                   <div>
                     <p className="team-member-code">
