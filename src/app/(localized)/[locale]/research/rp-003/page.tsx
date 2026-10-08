@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/layout/SiteHeader";
@@ -56,6 +57,22 @@ export default async function DiskSpaceStudyPage({ params }: PageProps) {
             </a>
             <a
               className="mechanical-button"
+              href="/research/RCS-RP-003-Package_v2.0.zip"
+              download
+            >
+              {copy.package}
+              <span aria-hidden="true">↓</span>
+            </a>
+            <a
+              className="mechanical-button"
+              href="/research/RCS-RP-003.docx"
+              download
+            >
+              {copy.editableReport}
+              <span aria-hidden="true">↓</span>
+            </a>
+            <a
+              className="mechanical-button"
               href="/research/RCS-RP-003-method.md"
               download
             >
@@ -72,10 +89,26 @@ export default async function DiskSpaceStudyPage({ params }: PageProps) {
             </a>
             <a
               className="mechanical-button"
-              href="/research/RCS-RP-003-test-fixtures.zip"
+              href="/research/RCS-RP-003-data.xlsx"
               download
             >
-              {copy.fixtures}
+              {copy.workbook}
+              <span aria-hidden="true">↓</span>
+            </a>
+            <a
+              className="mechanical-button"
+              href="/research/RCS-RP-003-summary-by-case.csv"
+              download
+            >
+              {copy.caseSummary}
+              <span aria-hidden="true">↓</span>
+            </a>
+            <a
+              className="mechanical-button"
+              href="/research/RCS-RP-003-corpus-manifest.csv"
+              download
+            >
+              {copy.manifest}
               <span aria-hidden="true">↓</span>
             </a>
             <a
@@ -83,7 +116,16 @@ export default async function DiskSpaceStudyPage({ params }: PageProps) {
               href="/research/RCS-RP-003-reproduce.ps1"
               download
             >
-              PowerShell<span aria-hidden="true">↓</span>
+              {copy.reproduce}
+              <span aria-hidden="true">↓</span>
+            </a>
+            <a
+              className="mechanical-button"
+              href="/research/RCS-RP-003-sources.csv"
+              download
+            >
+              {copy.sourcesRegister}
+              <span aria-hidden="true">↓</span>
             </a>
             <Link className="mechanical-button" href={`/${locale}/research`}>
               {copy.back}
@@ -146,6 +188,16 @@ export default async function DiskSpaceStudyPage({ params }: PageProps) {
               </tbody>
             </table>
           </div>
+          <figure className="study-figure">
+            <Image
+              src="/research/RCS-RP-003-Silesia-ratio.png"
+              alt={copy.figureCaption}
+              width={1900}
+              height={1000}
+              sizes="(max-width: 900px) 100vw, 80vw"
+            />
+            <figcaption>{copy.figureCaption}</figcaption>
+          </figure>
           <p className="study-method-note">{copy.resultsNote}</p>
         </section>
 

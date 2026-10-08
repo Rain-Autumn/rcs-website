@@ -5352,6 +5352,9 @@ h2 {
 .study-results-table thead th { color: #79583e; font: 700 .57rem var(--mono); letter-spacing: .08em; }
 .study-results-table tbody th { font-weight: 600; }
 .study-results-table tbody tr:last-child th, .study-results-table tbody tr:last-child td { border-bottom: 0; }
+.study-figure { max-width: 75rem; margin: 1.5rem 0; }
+.study-figure img { display: block; width: 100%; height: auto; border: 1px solid var(--line-soft); }
+.study-figure figcaption { margin-top: .55rem; color: var(--ink-soft); font-size: .82rem; }
 .study-method-note { max-width: 75rem; color: var(--ink-soft); font-size: .88rem; }
 .study-content-section .section-heading h2 { max-width: 24ch; }
 .study-prose { max-width: 75rem; color: var(--ink-soft); }

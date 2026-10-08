@@ -294,7 +294,7 @@ const projectBase = {
       question:
         "Quelles actions libèrent réellement de l’espace local sans supprimer des données utiles ni appliquer une compression inadaptée ?",
       summary:
-        "Étude de gestion du stockage pour un poste personnel : recommandations Windows, rôle de WizTree et mesures contrôlées sur des fichiers synthétiques.",
+        "Étude complète : 26 fichiers de trois corpus publics, cinq cas synthétiques, 220 mesures répétées et données reproductibles. Aucune donnée personnelle analysée.",
       topics: ["WINDOWS", "STOCKAGE", "WIZTREE", "COMPRESSION"],
       evidence: ["measured", "reproduced", "external"],
       href: "/fr/research/rp-003",
@@ -346,7 +346,7 @@ const projectBase = {
       question:
         "Which actions actually free local space without deleting useful data or applying unsuitable compression?",
       summary:
-        "A storage-management study for a personal computer: Windows guidance, WizTree’s role and controlled measurements on synthetic files.",
+        "Full study: 26 files from three public corpora, five synthetic cases, 220 repeated measurements and reproducible data. No personal files analysed.",
       topics: ["WINDOWS", "STORAGE", "WIZTREE", "COMPRESSION"],
       evidence: ["measured", "reproduced", "external"],
       href: "/en/research/rp-003",
@@ -394,11 +394,12 @@ const projectBase = {
       id: "RCS-RP-003",
       slug: "disk-space-windows-pc",
       status: "published",
-      title: "Schijfruimte op een Windows-pc: analyseren, opruimen en comprimeren",
+      title:
+        "Schijfruimte op een Windows-pc: analyseren, opruimen en comprimeren",
       question:
         "Welke acties maken lokaal echt ruimte vrij zonder nuttige gegevens te verwijderen of ongeschikte compressie toe te passen?",
       summary:
-        "Een studie over opslagbeheer op een persoonlijke pc: Windows-aanbevelingen, de rol van WizTree en gecontroleerde metingen met synthetische bestanden.",
+        "Volledige studie: 26 bestanden uit drie openbare corpora, vijf synthetische gevallen en 220 herhaalde metingen met reproduceerbare data. Geen persoonlijke bestanden geanalyseerd.",
       topics: ["WINDOWS", "OPSLAG", "WIZTREE", "COMPRESSIE"],
       evidence: ["measured", "reproduced", "external"],
       href: "/nl/research/rp-003",
