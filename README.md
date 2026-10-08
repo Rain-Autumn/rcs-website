@@ -1,6 +1,7 @@
 # Raiju Cloud System
 
 [![CI](https://github.com/Rain-Autumn/rcs-website/actions/workflows/ci.yml/badge.svg)](https://github.com/Rain-Autumn/rcs-website/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/Rain-Autumn/rcs-website/actions/workflows/codeql.yml/badge.svg)](https://github.com/Rain-Autumn/rcs-website/actions/workflows/codeql.yml)
 
 Public website for **Raiju Cloud System (RCS)**, an independent technology and systems structure founded by Hugues Henrotte. The interface combines a restrained retro-futurist identity with a predominantly light, editorial layout.
 
@@ -8,22 +9,29 @@ Live site: [raijucloudsystem.com](https://raijucloudsystem.com)
 
 ## What the project contains
 
-- A multilingual public presentation in French, English and Dutch.
+- A multilingual system hub in French, English and Dutch.
+- A dedicated institutional presentation preserving the complete RCS narrative.
+- A public **RCS Evidence Engine** overview linked to the Dragon One demonstrator at [`evidence-engine.raijucloudsystem.com`](https://evidence-engine.raijucloudsystem.com). Dragon One coordinates at most two request-scoped ephemeral specialists before the permanent private verifier, Dragon Two, audits the artifact.
 - Dedicated Research routes with structured technical publications.
 - A normalized Team directory with localized roles, profiles and certifications.
 - Separate password-protected administration forms for Research and Team.
 - Private server-side storage for publication metadata and PDF reports.
 - Responsive navigation, reduced-motion support and progressive visual effects.
+- Branded 1200 × 630 social previews for LinkedIn and other Open Graph clients.
+- Structured Organization, Team and Research data expressed through JSON-LD.
+- Automatic IndexNow notification after successful production deployments.
 
-Planned research projects are clearly identified as future work. No result, benchmark or publication is presented as completed unless supporting data exists.
+Published and planned research are distinguished explicitly. RCS-RP-001 v1.0 is publicly archived on Zenodo under DOI [`10.5281/zenodo.21994886`](https://doi.org/10.5281/zenodo.21994886), and RCS-RP-002 v0.2 is publicly archived under DOI [`10.5281/zenodo.22110548`](https://doi.org/10.5281/zenodo.22110548).
 
 ## Routes
 
-| Area | French | English | Dutch |
-| --- | --- | --- | --- |
-| Presentation | `/fr` | `/en` | `/nl` |
-| Research | `/fr/research` | `/en/research` | `/nl/research` |
-| Team | `/fr/team` | `/en/team` | `/nl/team` |
+| Area            | French                | English               | Dutch                 |
+| --------------- | --------------------- | --------------------- | --------------------- |
+| System hub      | `/fr`                 | `/en`                 | `/nl`                 |
+| Presentation    | `/fr/presentation`    | `/en/presentation`    | `/nl/presentation`    |
+| Evidence Engine | `/fr/evidence-engine` | `/en/evidence-engine` | `/nl/evidence-engine` |
+| Research        | `/fr/research`        | `/en/research`        | `/nl/research`        |
+| Team            | `/fr/team`            | `/en/team`            | `/nl/team`            |
 
 The root route `/` provides the language entry point.
 
@@ -33,7 +41,7 @@ The root route `/` provides the language entry point.
 src/
 ├── app/
 │   ├── (portal)/                  # Language entry point
-│   ├── (localized)/[locale]/      # Presentation, Research and Team pages
+│   ├── (localized)/[locale]/      # Hub, Presentation, Evidence Engine, Research and Team
 │   └── api/                       # Authentication, publications and members
 ├── components/
 │   ├── layout/                    # Header and navigation
@@ -61,6 +69,15 @@ The application uses Next.js 16, React 19, TypeScript, Three.js, GSAP, Lenis, Zo
 - Runtime data, production environments, credentials and deployment backups are excluded from this repository.
 
 The examples in [`deploy/`](deploy/) are integration references and must be reviewed against the target server before use.
+
+## Supply-chain controls
+
+- CI permissions are read-only by default; deployment secrets are available only to the production deployment job.
+- Third-party GitHub Actions are pinned to immutable commit SHAs and monitored by Dependabot.
+- Pull requests receive dependency-diff review and CodeQL analysis in addition to the application test suite.
+- Every `main` release is retained as a standalone archive, described by an SPDX SBOM and covered by GitHub artifact attestations before deployment.
+- Sensitive repository and deployment paths have an explicit owner through `CODEOWNERS`.
+- Vulnerability reporting follows [`SECURITY.md`](SECURITY.md); disaster recovery follows [`docs/RECOVERY.md`](docs/RECOVERY.md).
 
 ## Local development
 

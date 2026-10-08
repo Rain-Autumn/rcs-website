@@ -5,9 +5,9 @@ import type { Locale } from '@/content/i18n';
 import type { Certification } from '@/types/team';
 
 const labels = {
-  fr: { access: 'ACCÈS ÉQUIPE', password: 'Mot de passe équipe', unlock: 'OUVRIR LE FORMULAIRE', denied: 'Mot de passe incorrect.', identity: 'Identité', name: 'Nom public', type: 'Type de rôle', roles: 'Rôles localisés', bios: 'Présentations localisées', specialties: 'Domaines, séparés par des virgules', certifications: 'Certifications', provider: 'Organisme', certTitle: 'Intitulé', issued: 'Date d’émission', credentialId: 'Identifiant (facultatif)', credentialUrl: 'Lien de vérification (facultatif)', addCert: 'AJOUTER UNE CERTIFICATION', remove: 'RETIRER', submit: 'AJOUTER LE MEMBRE', sending: 'AJOUT…', success: 'Membre ajouté sous la référence', error: 'L’ajout a échoué. Vérifie les champs.' },
-  en: { access: 'TEAM ACCESS', password: 'Team password', unlock: 'OPEN FORM', denied: 'Incorrect password.', identity: 'Identity', name: 'Public name', type: 'Role type', roles: 'Localised roles', bios: 'Localised profiles', specialties: 'Fields, separated by commas', certifications: 'Certifications', provider: 'Provider', certTitle: 'Title', issued: 'Issue date', credentialId: 'Credential ID (optional)', credentialUrl: 'Verification link (optional)', addCert: 'ADD CERTIFICATION', remove: 'REMOVE', submit: 'ADD MEMBER', sending: 'ADDING…', success: 'Member added under reference', error: 'Unable to add member. Check the fields.' },
-  nl: { access: 'TEAMTOEGANG', password: 'Teamwachtwoord', unlock: 'FORMULIER OPENEN', denied: 'Onjuist wachtwoord.', identity: 'Identiteit', name: 'Publieke naam', type: 'Roltype', roles: 'Gelokaliseerde rollen', bios: 'Gelokaliseerde profielen', specialties: 'Domeinen, gescheiden door komma’s', certifications: 'Certificeringen', provider: 'Organisatie', certTitle: 'Titel', issued: 'Uitgiftedatum', credentialId: 'Referentie (optioneel)', credentialUrl: 'Verificatielink (optioneel)', addCert: 'CERTIFICERING TOEVOEGEN', remove: 'VERWIJDEREN', submit: 'LID TOEVOEGEN', sending: 'TOEVOEGEN…', success: 'Lid toegevoegd met referentie', error: 'Lid toevoegen mislukt. Controleer de velden.' },
+  fr: { access: 'ACCÈS ÉQUIPE', password: 'Mot de passe équipe', unlock: 'OUVRIR LE FORMULAIRE', unlocking: 'VÉRIFICATION…', denied: 'Mot de passe incorrect.', locked: 'Trop de tentatives. Réessayez dans', seconds: 'secondes.', identity: 'Identité', name: 'Nom public', type: 'Type de rôle', roles: 'Rôles localisés', bios: 'Présentations localisées', specialties: 'Domaines, séparés par des virgules', certifications: 'Certifications', provider: 'Organisme', certTitle: 'Intitulé', issued: 'Date d’émission', credentialId: 'Identifiant (facultatif)', credentialUrl: 'Lien de vérification (facultatif)', addCert: 'AJOUTER UNE CERTIFICATION', remove: 'RETIRER', submit: 'AJOUTER LE MEMBRE', sending: 'AJOUT…', success: 'Membre ajouté sous la référence', error: 'L’ajout a échoué. Vérifie les champs.' },
+  en: { access: 'TEAM ACCESS', password: 'Team password', unlock: 'OPEN FORM', unlocking: 'VERIFYING…', denied: 'Incorrect password.', locked: 'Too many attempts. Try again in', seconds: 'seconds.', identity: 'Identity', name: 'Public name', type: 'Role type', roles: 'Localised roles', bios: 'Localised profiles', specialties: 'Fields, separated by commas', certifications: 'Certifications', provider: 'Provider', certTitle: 'Title', issued: 'Issue date', credentialId: 'Credential ID (optional)', credentialUrl: 'Verification link (optional)', addCert: 'ADD CERTIFICATION', remove: 'REMOVE', submit: 'ADD MEMBER', sending: 'ADDING…', success: 'Member added under reference', error: 'Unable to add member. Check the fields.' },
+  nl: { access: 'TEAMTOEGANG', password: 'Teamwachtwoord', unlock: 'FORMULIER OPENEN', unlocking: 'CONTROLEREN…', denied: 'Onjuist wachtwoord.', locked: 'Te veel pogingen. Probeer opnieuw over', seconds: 'seconden.', identity: 'Identiteit', name: 'Publieke naam', type: 'Roltype', roles: 'Gelokaliseerde rollen', bios: 'Gelokaliseerde profielen', specialties: 'Domeinen, gescheiden door komma’s', certifications: 'Certificeringen', provider: 'Organisatie', certTitle: 'Titel', issued: 'Uitgiftedatum', credentialId: 'Referentie (optioneel)', credentialUrl: 'Verificatielink (optioneel)', addCert: 'CERTIFICERING TOEVOEGEN', remove: 'VERWIJDEREN', submit: 'LID TOEVOEGEN', sending: 'TOEVOEGEN…', success: 'Lid toegevoegd met referentie', error: 'Lid toevoegen mislukt. Controleer de velden.' },
 } as const;
 
 const emptyCertification = (): Certification => ({ provider: '', title: '', issued: '', credentialId: '', credentialUrl: '' });
@@ -15,16 +15,28 @@ const emptyCertification = (): Certification => ({ provider: '', title: '', issu
 export function TeamMemberForm({ locale }: { locale: Locale }) {
   const copy = labels[locale];
   const [unlocked, setUnlocked] = useState(false);
+  const [authenticating, setAuthenticating] = useState(false);
   const [certifications, setCertifications] = useState<Certification[]>([emptyCertification()]);
   const [state, setState] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
 
   async function unlock(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const password = String(new FormData(event.currentTarget).get('password') || '');
-    const response = await fetch('/api/team-auth', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password }) });
-    if (response.ok) { setUnlocked(true); setMessage(''); } else setMessage(copy.denied);
-    event.currentTarget.reset();
+    setAuthenticating(true);
+    const form = event.currentTarget;
+    const password = String(new FormData(form).get('password') || '');
+    try {
+      const response = await fetch('/api/team-auth', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password }) });
+      const payload = await response.json().catch(() => ({})) as { retryAfter?: number };
+      if (response.ok) { setUnlocked(true); setMessage(''); }
+      else if (response.status === 429) setMessage(`${copy.locked} ${Math.max(1, payload.retryAfter || 1)} ${copy.seconds}`);
+      else setMessage(copy.denied);
+    } catch {
+      setMessage(copy.denied);
+    } finally {
+      form.reset();
+      setAuthenticating(false);
+    }
   }
 
   function updateCertification(index: number, field: keyof Certification, value: string) {
@@ -51,7 +63,7 @@ export function TeamMemberForm({ locale }: { locale: Locale }) {
   if (!unlocked) return <form className="research-login team-login" onSubmit={unlock}>
     <p className="eyebrow">LOCK // {copy.access}</p>
     <label><span>{copy.password}</span><input name="password" type="password" required autoComplete="current-password" /></label>
-    <button className="mechanical-button mechanical-button--dark" type="submit">{copy.unlock}<span aria-hidden="true">↳</span></button>
+    <button className="mechanical-button mechanical-button--dark" type="submit" disabled={authenticating}>{authenticating ? copy.unlocking : copy.unlock}<span aria-hidden="true">↳</span></button>
     <p className="research-form-message" role="status">{message}</p>
   </form>;
 

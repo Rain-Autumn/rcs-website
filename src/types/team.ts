@@ -9,8 +9,9 @@ export type Certification = {
 export type TeamMember = {
   id: string;
   name: string;
-  type: 'direction' | 'member' | 'collaborator';
-  translations: Record<'fr' | 'en' | 'nl', { role: string; bio: string }>;
+  orcid?: string;
+  type: "direction" | "member" | "collaborator";
+  translations: Record<"fr" | "en" | "nl", { role: string; bio: string }>;
   specialties: string[];
   certifications: Certification[];
   createdAt?: string;

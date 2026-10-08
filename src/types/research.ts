@@ -12,6 +12,10 @@ export type ResearchProject = {
   summary: string;
   topics: string[];
   evidence: EvidenceKind[];
+  publicationDate?: string;
+  doi?: string;
+  publicationUrl?: string;
+  authorOrcid?: string;
   href?: string;
 };
 

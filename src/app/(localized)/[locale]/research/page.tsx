@@ -3,9 +3,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { ResearchProposalForm } from "@/components/research/ResearchProposalForm";
+import { StructuredData } from "@/components/seo/StructuredData";
 import { getResearchProjects, researchCopy } from "@/content/research";
 import { getCopy, isLocale, type Locale } from "@/content/i18n";
 import { loadResearch } from "@/lib/research-publications";
+import { socialMetadata } from "@/lib/site-metadata";
+import { researchStructuredData } from "@/lib/structured-data";
 
 type PageProps = { params: Promise<{ locale: string }> };
 export const dynamic = "force-dynamic";
@@ -16,6 +19,12 @@ export async function generateMetadata({
   const { locale } = await params;
   if (!isLocale(locale)) return {};
   const copy = researchCopy[locale];
+  const social = socialMetadata({
+    title: copy.metadataTitle,
+    description: copy.metadataDescription,
+    path: `/${locale}/research`,
+    locale: getCopy(locale).metadata.ogLocale,
+  });
   return {
     title: copy.metadataTitle,
     description: copy.metadataDescription,
@@ -28,6 +37,7 @@ export async function generateMetadata({
         "x-default": "/en/research",
       },
     },
+    ...social,
   };
 }
 
@@ -37,7 +47,12 @@ export default async function ResearchPage({ params }: PageProps) {
   const locale: Locale = rawLocale;
   const copy = researchCopy[locale];
   const projects = getResearchProjects(locale);
-  const publications = await loadResearch(locale);
+  const staticProjectIds = new Set<string>(
+    projects.map((project) => project.id),
+  );
+  const publications = (await loadResearch(locale)).filter(
+    (publication) => !staticProjectIds.has(publication.id),
+  );
   const adminCopy = {
     fr: [
       "03 // PUBLICATION",
@@ -58,6 +73,9 @@ export default async function ResearchPage({ params }: PageProps) {
 
   return (
     <>
+      <StructuredData
+        data={researchStructuredData(locale, projects, publications)}
+      />
       <SiteHeader locale={locale} copy={getCopy(locale)} mode="research" />
       <main id="main" className="research-page">
         <section className="technical-panel research-hero" data-section="RCS-R">
@@ -92,7 +110,14 @@ export default async function ResearchPage({ params }: PageProps) {
           </div>
           <div className="research-project-grid">
             {projects.map((project) => (
-              <article className="research-project-card" key={project.id}>
+              <article
+                className={
+                  project.status === "published"
+                    ? "research-project-card research-project-card--published"
+                    : "research-project-card"
+                }
+                key={project.id}
+              >
                 <div className="research-project-meta">
                   <strong>{project.id}</strong>
                   <span>{copy.status[project.status]}</span>
@@ -106,12 +131,22 @@ export default async function ResearchPage({ params }: PageProps) {
                     <span key={topic}>{topic}</span>
                   ))}
                 </div>
-                {project.href && (
+                {project.publicationUrl ? (
+                  <a
+                    className="mechanical-button"
+                    href={project.publicationUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    DOI {project.doi}
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                ) : project.href ? (
                   <Link className="mechanical-button" href={project.href}>
                     {copy.openStudy}
                     <span aria-hidden="true">↗</span>
                   </Link>
-                )}
+                ) : null}
               </article>
             ))}
             {publications.map((project) => (

@@ -67,9 +67,8 @@ export function LanguageGate() {
       );
   };
 
-  const choose = (locale: Locale) => {
+  const rememberLocale = (locale: Locale) => {
     window.localStorage.setItem('rcs-locale', locale);
-    window.location.assign(`/${locale}`);
   };
 
   if (stage === 'portal') {
@@ -93,7 +92,12 @@ export function LanguageGate() {
             priority
           />
 
-          <p className="boot-brand">RAIJU CLOUD SYSTEM</p>
+          <h1 className="boot-brand">RAIJU CLOUD SYSTEM</h1>
+
+          <p className="boot-summary">
+            Independent technology, systems, infrastructure, artificial intelligence and
+            documented research from Belgium.
+          </p>
 
           <p className="boot-label">
             <span aria-hidden="true" />
@@ -112,6 +116,20 @@ export function LanguageGate() {
             <i className="boot-corner boot-corner--br" aria-hidden="true" />
             <span>ENTER</span>
           </button>
+
+          <nav className="boot-language-links" aria-label="Direct language access">
+            {options.map((option) => (
+              <a
+                key={option.locale}
+                href={`/${option.locale}`}
+                hrefLang={option.locale}
+                lang={option.locale}
+                onClick={() => rememberLocale(option.locale)}
+              >
+                {option.code}
+              </a>
+            ))}
+          </nav>
         </div>
 
         <div className="boot-meta boot-meta--tl">RCS // PORTAL</div>
@@ -153,16 +171,18 @@ export function LanguageGate() {
         <p className="language-panel__lead">Choose the interface language.</p>
         <div className="language-panel__options">
           {options.map((option) => (
-            <button
+            <a
               key={option.locale}
-              type="button"
+              href={`/${option.locale}`}
+              hrefLang={option.locale}
+              lang={option.locale}
               className="language-option"
-              onClick={() => choose(option.locale)}
+              onClick={() => rememberLocale(option.locale)}
             >
               <span>{option.code}</span>
               <strong>{option.label}</strong>
               <i aria-hidden="true">↳</i>
-            </button>
+            </a>
           ))}
         </div>
         <p className="language-panel__meta">FR / EN / NL · LANGUAGE CAN BE CHANGED AT ANY TIME</p>

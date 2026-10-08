@@ -1,17 +1,13 @@
-import type { Metadata } from 'next';
-import { notFound } from 'next/navigation';
-import { SiteHeader } from '@/components/layout/SiteHeader';
-import { HeroSection } from '@/components/sections/HeroSection';
-import { DivisionsSection } from '@/components/sections/DivisionsSection';
-import { WebSection } from '@/components/sections/WebSection';
-import { LinuxSection } from '@/components/sections/LinuxSection';
-import { AiSection } from '@/components/sections/AiSection';
-import { ResearchSection } from '@/components/sections/ResearchSection';
-import { ProjectsSection } from '@/components/sections/ProjectsSection';
-import { DirectorSection } from '@/components/sections/DirectorSection';
-import { ContactSection } from '@/components/sections/ContactSection';
-import { SmoothMotion } from '@/components/ui/SmoothMotion';
-import { getCopy, isLocale, locales, type Locale } from '@/content/i18n';
+import type { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { SiteHeader } from "@/components/layout/SiteHeader";
+import { StructuredData } from "@/components/seo/StructuredData";
+import { hubCopy } from "@/content/architecture";
+import { getCopy, isLocale, locales, type Locale } from "@/content/i18n";
+import { socialMetadata } from "@/lib/site-metadata";
+import { hubStructuredData } from "@/lib/structured-data";
 
 export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
@@ -24,33 +20,31 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   if (!isLocale(locale)) return {};
-  const copy = getCopy(locale);
-  const url = `https://raijucloudsystem.com/${locale}`;
+  const copy = hubCopy[locale];
+  const social = socialMetadata({
+    title: copy.metadataTitle,
+    description: copy.metadataDescription,
+    path: `/${locale}`,
+    locale: getCopy(locale).metadata.ogLocale,
+  });
 
   return {
-    title: copy.metadata.title,
-    description: copy.metadata.description,
+    title: copy.metadataTitle,
+    description: copy.metadataDescription,
     alternates: {
       canonical: `/${locale}`,
       languages: {
-        'fr-BE': '/fr',
-        en: '/en',
-        'nl-BE': '/nl',
-        'x-default': '/',
+        "fr-BE": "/fr",
+        en: "/en",
+        "nl-BE": "/nl",
+        "x-default": "/",
       },
     },
-    openGraph: {
-      type: 'website',
-      locale: copy.metadata.ogLocale,
-      url,
-      siteName: 'Raiju Cloud System',
-      title: copy.metadata.title,
-      description: copy.metadata.description,
-    },
+    ...social,
   };
 }
 
-export default async function LocalizedHomePage({
+export default async function LocalizedHubPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
@@ -59,27 +53,98 @@ export default async function LocalizedHomePage({
   if (!isLocale(rawLocale)) notFound();
 
   const locale: Locale = rawLocale;
-  const copy = getCopy(locale);
+  const copy = hubCopy[locale];
+  const siteCopy = getCopy(locale);
 
   return (
     <>
-      <a className="skip-link" href="#main">{copy.skipLink}</a>
-      <SmoothMotion />
-      <SiteHeader locale={locale} copy={copy} />
-      <main id="main" tabIndex={-1}>
-        <HeroSection copy={copy.hero} />
-        <DivisionsSection copy={copy.divisions} />
-        <WebSection copy={copy.web} />
-        <LinuxSection copy={copy.infrastructure} />
-        <AiSection copy={copy.intelligence} />
-        <ResearchSection copy={copy.research} locale={locale} />
-        <ProjectsSection copy={copy.projects} />
-        <DirectorSection copy={copy.director} />
-        <ContactSection copy={copy.contact} />
+      <StructuredData
+        data={hubStructuredData(locale, copy.metadataDescription)}
+      />
+      <a className="skip-link" href="#main">
+        {siteCopy.skipLink}
+      </a>
+      <SiteHeader locale={locale} copy={siteCopy} mode="hub" />
+      <main id="main" className="rcs-hub-page" tabIndex={-1}>
+        <section className="technical-panel hub-hero" data-section="RCS-00">
+          <div className="hub-hero__copy">
+            <p className="eyebrow">{copy.eyebrow}</p>
+            <h1>{copy.title}</h1>
+            <p className="hero-lead">{copy.lead}</p>
+          </div>
+          <div className="hub-atlas" aria-hidden="true">
+            <div className="hub-atlas__field" />
+            <div className="hub-atlas__orbit hub-atlas__orbit--outer" />
+            <div className="hub-atlas__orbit hub-atlas__orbit--inner" />
+            {copy.cards.map((card, index) => (
+              <div
+                className={`hub-atlas__plane hub-atlas__plane--${index + 1}`}
+                key={card.code}
+              >
+                <span>{card.code}</span>
+                <strong>{card.title}</strong>
+              </div>
+            ))}
+            <div className="hub-atlas__core">
+              <Image
+                src="/icons/raiju-dragon-vector.svg"
+                width={113}
+                height={121}
+                alt=""
+                priority
+              />
+              <span>RCS</span>
+            </div>
+            <div className="hub-atlas__axis hub-atlas__axis--x" />
+            <div className="hub-atlas__axis hub-atlas__axis--y" />
+            <div className="hub-atlas__scan" />
+            <p className="hub-atlas__caption">
+              <span>04</span>
+              {" // "}
+              SYSTEM SPACES
+            </p>
+          </div>
+        </section>
+
+        <section
+          className="technical-panel hub-directory"
+          data-section="RCS-MAP"
+        >
+          <div className="section-heading">
+            <p className="eyebrow">{copy.directoryEyebrow}</p>
+            <h2>{copy.directoryTitle}</h2>
+            <p className="section-lead">{copy.directoryLead}</p>
+          </div>
+          <div className="hub-system-grid">
+            {copy.cards.map((card, index) => (
+              <Link
+                className="hub-system-card"
+                href={`/${locale}${card.path}`}
+                key={card.code}
+              >
+                <div className="hub-system-card__meta">
+                  <span>{card.code}</span>
+                  <small>{String(index + 1).padStart(2, "0")}</small>
+                </div>
+                <div>
+                  <p>{card.status}</p>
+                  <h3>{card.title}</h3>
+                  <span className="hub-system-card__summary">
+                    {card.summary}
+                  </span>
+                </div>
+                <strong>
+                  {card.action}
+                  <span aria-hidden="true">↗</span>
+                </strong>
+              </Link>
+            ))}
+          </div>
+        </section>
       </main>
       <footer className="site-footer">
         <span>RAIJU CLOUD SYSTEM</span>
-        <span>RCS CORE</span>
+        <span>RCS DIRECTORY</span>
         <span>{copy.footer}</span>
       </footer>
     </>

@@ -8,6 +8,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/en`, changeFrequency: "weekly", priority: 1 },
     { url: `${base}/nl`, changeFrequency: "weekly", priority: 1 },
     ...["fr", "en", "nl"].map((locale) => ({
+      url: `${base}/${locale}/presentation`,
+      changeFrequency: "monthly" as const,
+      priority: 0.9,
+    })),
+    ...["fr", "en", "nl"].map((locale) => ({
+      url: `${base}/${locale}/evidence-engine`,
+      changeFrequency: "weekly" as const,
+      priority: 0.9,
+    })),
+    ...["fr", "en", "nl"].map((locale) => ({
       url: `${base}/${locale}/research`,
       changeFrequency: "weekly" as const,
       priority: 0.9,
