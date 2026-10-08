@@ -5334,3 +5334,41 @@ h2 {
   }
 }
 /* === RCS EDITORIAL SCENES V5 END === */
+
+/* === RCS-RP-003 STUDY PAGE === */
+.research-study-hero { display: block; min-height: auto; }
+.research-study-hero h1 { max-width: 18ch; margin: 1rem 0; font-size: clamp(2.8rem, 7vw, 6rem); line-height: .98; }
+.research-study-hero .hero-lead { max-width: 70rem; }
+.study-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin: 1.5rem 0 2rem; }
+.study-actions .mechanical-button { margin: 0; }
+.study-facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; margin: 2rem 0; }
+.study-facts article, .study-question { padding: 1.2rem; border: 1px solid var(--line); background: rgba(247,243,234,.42); }
+.study-facts article > span, .study-question > span { color: #79583e; font: 700 .58rem var(--mono); letter-spacing: .13em; }
+.study-facts p, .study-question p { margin-bottom: 0; color: var(--ink-soft); }
+.study-question p { margin-top: .65rem; color: var(--ink); font-size: 1.1rem; }
+.study-table-wrap { max-width: 100%; overflow-x: auto; border: 1px solid var(--line); }
+.study-results-table { width: 100%; min-width: 54rem; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.study-results-table th, .study-results-table td { padding: .9rem 1rem; border-bottom: 1px solid var(--line-soft); text-align: left; vertical-align: top; }
+.study-results-table thead th { color: #79583e; font: 700 .57rem var(--mono); letter-spacing: .08em; }
+.study-results-table tbody th { font-weight: 600; }
+.study-results-table tbody tr:last-child th, .study-results-table tbody tr:last-child td { border-bottom: 0; }
+.study-method-note { max-width: 75rem; color: var(--ink-soft); font-size: .88rem; }
+.study-content-section .section-heading h2 { max-width: 24ch; }
+.study-prose { max-width: 75rem; color: var(--ink-soft); }
+.study-prose p { margin: 0 0 1.2rem; }
+.study-prose ul { display: grid; gap: .8rem; padding-left: 1.2rem; }
+.study-prose li { padding-left: .3rem; }
+.study-sources { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .8rem 2rem; padding-left: 1.4rem; }
+.study-sources a { color: var(--ink); text-underline-offset: .2em; }
+.study-sources a:hover { color: var(--copper); }
+
+@media (max-width: 900px) {
+  .study-facts, .study-sources { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 700px) {
+  .study-actions { display: grid; grid-template-columns: 1fr; }
+  .research-study-hero h1 { font-size: clamp(2.6rem, 12vw, 4rem); }
+  .study-facts { grid-template-columns: 1fr; }
+  .study-results-table { min-width: 48rem; }
+}

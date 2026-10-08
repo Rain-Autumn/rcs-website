@@ -16,6 +16,7 @@ export type ResearchProject = {
   doi?: string;
   publicationUrl?: string;
   authorOrcid?: string;
+  href?: string;
 };
 
 export type ResearchSubmissionResponse = {

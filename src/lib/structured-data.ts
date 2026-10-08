@@ -247,6 +247,7 @@ export function researchStructuredData(
       ? { datePublished: project.publicationDate }
       : {}),
     ...(project.publicationUrl ? { url: project.publicationUrl } : {}),
+    ...(project.href ? { url: `${RCS_SITE_URL}${project.href}` } : {}),
     ...(project.authorOrcid
       ? {
           author: {

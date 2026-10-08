@@ -20,7 +20,8 @@ export const researchCopy = {
     catalogEyebrow: "01 // PROGRAMME",
     catalogTitle: "Projets de recherche",
     catalogLead:
-      "RCS-RP-001 et RCS-RP-002 sont publiés avec leurs rapports et leurs données documentées. Les travaux futurs restent explicitement signalés comme tels.",
+      "RCS-RP-001 et RCS-RP-002 sont publiés avec leurs rapports. RCS-RP-003 est publié sur le site ; son DOI Zenodo est réservé, mais son dépôt Zenodo n’est pas encore publié.",
+    openStudy: "CONSULTER L’ÉTUDE",
     status: {
       planned: "PROJET ENVISAGÉ",
       "in-preparation": "EN PRÉPARATION",
@@ -99,7 +100,8 @@ export const researchCopy = {
     catalogEyebrow: "01 // PROGRAM",
     catalogTitle: "Research projects",
     catalogLead:
-      "RCS-RP-001 and RCS-RP-002 are published with their reports and documented data. Future work remains explicitly labelled as such.",
+      "RCS-RP-001 and RCS-RP-002 are published with their reports. RCS-RP-003 is published on this site; its Zenodo DOI is reserved, but its Zenodo deposit is not yet published.",
+    openStudy: "READ THE STUDY",
     status: {
       planned: "PLANNED PROJECT",
       "in-preparation": "IN PREPARATION",
@@ -178,7 +180,8 @@ export const researchCopy = {
     catalogEyebrow: "01 // PROGRAMMA",
     catalogTitle: "Onderzoeksprojecten",
     catalogLead:
-      "RCS-RP-001 en RCS-RP-002 zijn gepubliceerd met hun rapporten en gedocumenteerde gegevens. Toekomstig werk blijft uitdrukkelijk als zodanig aangeduid.",
+      "RCS-RP-001 en RCS-RP-002 zijn gepubliceerd met hun rapporten. RCS-RP-003 staat op deze website; de Zenodo-DOI is gereserveerd, maar de Zenodo-depositie is nog niet gepubliceerd.",
+    openStudy: "BEKIJK DE STUDIE",
     status: {
       planned: "GEPLAND PROJECT",
       "in-preparation": "IN VOORBEREIDING",
@@ -283,6 +286,19 @@ const projectBase = {
       publicationUrl: "https://doi.org/10.5281/zenodo.22110548",
       authorOrcid: "https://orcid.org/0009-0009-7729-6552",
     },
+    {
+      id: "RCS-RP-003",
+      slug: "disk-space-windows-pc",
+      status: "published",
+      title: "Espace disque sur PC Windows : diagnostic, tri et compression",
+      question:
+        "Quelles actions libèrent réellement de l’espace local sans supprimer des données utiles ni appliquer une compression inadaptée ?",
+      summary:
+        "Étude de gestion du stockage pour un poste personnel : recommandations Windows, rôle de WizTree et mesures contrôlées sur des fichiers synthétiques.",
+      topics: ["WINDOWS", "STOCKAGE", "WIZTREE", "COMPRESSION"],
+      evidence: ["measured", "reproduced", "external"],
+      href: "/fr/research/rp-003",
+    },
   ],
   en: [
     {
@@ -322,6 +338,19 @@ const projectBase = {
       publicationUrl: "https://doi.org/10.5281/zenodo.22110548",
       authorOrcid: "https://orcid.org/0009-0009-7729-6552",
     },
+    {
+      id: "RCS-RP-003",
+      slug: "disk-space-windows-pc",
+      status: "published",
+      title: "Disk space on a Windows PC: diagnose, sort and compress",
+      question:
+        "Which actions actually free local space without deleting useful data or applying unsuitable compression?",
+      summary:
+        "A storage-management study for a personal computer: Windows guidance, WizTree’s role and controlled measurements on synthetic files.",
+      topics: ["WINDOWS", "STORAGE", "WIZTREE", "COMPRESSION"],
+      evidence: ["measured", "reproduced", "external"],
+      href: "/en/research/rp-003",
+    },
   ],
   nl: [
     {
@@ -360,6 +389,19 @@ const projectBase = {
       doi: "10.5281/zenodo.22110548",
       publicationUrl: "https://doi.org/10.5281/zenodo.22110548",
       authorOrcid: "https://orcid.org/0009-0009-7729-6552",
+    },
+    {
+      id: "RCS-RP-003",
+      slug: "disk-space-windows-pc",
+      status: "published",
+      title: "Schijfruimte op een Windows-pc: analyseren, opruimen en comprimeren",
+      question:
+        "Welke acties maken lokaal echt ruimte vrij zonder nuttige gegevens te verwijderen of ongeschikte compressie toe te passen?",
+      summary:
+        "Een studie over opslagbeheer op een persoonlijke pc: Windows-aanbevelingen, de rol van WizTree en gecontroleerde metingen met synthetische bestanden.",
+      topics: ["WINDOWS", "OPSLAG", "WIZTREE", "COMPRESSIE"],
+      evidence: ["measured", "reproduced", "external"],
+      href: "/nl/research/rp-003",
     },
   ],
 } as const;

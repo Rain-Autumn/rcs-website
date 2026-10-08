@@ -131,7 +131,7 @@ export default async function ResearchPage({ params }: PageProps) {
                     <span key={topic}>{topic}</span>
                   ))}
                 </div>
-                {project.publicationUrl && (
+                {project.publicationUrl ? (
                   <a
                     className="mechanical-button"
                     href={project.publicationUrl}
@@ -141,7 +141,12 @@ export default async function ResearchPage({ params }: PageProps) {
                     DOI {project.doi}
                     <span aria-hidden="true">↗</span>
                   </a>
-                )}
+                ) : project.href ? (
+                  <Link className="mechanical-button" href={project.href}>
+                    {copy.openStudy}
+                    <span aria-hidden="true">↗</span>
+                  </Link>
+                ) : null}
               </article>
             ))}
             {publications.map((project) => (

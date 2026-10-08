@@ -157,6 +157,37 @@ const checks = [
       /publicationDate: ["']2026-08-26["']/.test(text),
   ],
   [
+    "RP-003 localized study routes and reserved DOI present",
+    fs.existsSync(
+      path.join(
+        root,
+        "src",
+        "app",
+        "(localized)",
+        "[locale]",
+        "research",
+        "rp-003",
+        "page.tsx",
+      ),
+    ) &&
+      /10\.5281\/zenodo\.23233639/.test(text) &&
+      /research\/rp-003/.test(
+        fs.readFileSync(path.join(root, "src", "app", "sitemap.ts"), "utf8"),
+      ),
+  ],
+  [
+    "RP-003 public research artifacts present",
+    [
+      "RCS-RP-003.pdf",
+      "RCS-RP-003-method.md",
+      "RCS-RP-003-results.csv",
+      "RCS-RP-003-reproduce.ps1",
+      "RCS-RP-003-test-fixtures.zip",
+    ].every((name) =>
+      fs.existsSync(path.join(root, "public", "research", name)),
+    ),
+  ],
+  [
     "research storage stays private",
     !fs.existsSync(path.join(root, "public", "research-publications")) &&
       /MAX_PDF_BYTES/.test(text),

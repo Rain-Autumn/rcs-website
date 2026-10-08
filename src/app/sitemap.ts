@@ -23,6 +23,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     })),
     ...["fr", "en", "nl"].map((locale) => ({
+      url: `${base}/${locale}/research/rp-003`,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
+    })),
+    ...["fr", "en", "nl"].map((locale) => ({
       url: `${base}/${locale}/team`,
       changeFrequency: "monthly" as const,
       priority: 0.8,
