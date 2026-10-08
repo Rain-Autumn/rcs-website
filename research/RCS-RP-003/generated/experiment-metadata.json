@@ -1,0 +1,15 @@
+﻿{
+    "study":  "RCS-RP-003",
+    "executionDateLocal":  "2026-10-08",
+    "operatingSystem":  "Windows desktop",
+    "filesystem":  "NTFS",
+    "archiveMethod":  "PowerShell Compress-Archive -CompressionLevel Optimal",
+    "nativeCompression":  "compact.exe /c /q; GetCompressedFileSizeW for allocated-byte measurement",
+    "publicCorpusRepeats":  3,
+    "syntheticRepeats":  5,
+    "sourceFiles":  26,
+    "testCases":  34,
+    "resultRows":  220,
+    "allIntegrityChecksPassed":  true,
+    "timings":  "Descriptive end-to-end wall time only; not used as a general performance comparison."
+}

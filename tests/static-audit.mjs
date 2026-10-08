@@ -179,8 +179,15 @@ const checks = [
     "RP-003 public research artifacts present",
     [
       "RCS-RP-003.pdf",
+      "RCS-RP-003-Package_v2.0.zip",
+      "RCS-RP-003.docx",
       "RCS-RP-003-method.md",
       "RCS-RP-003-results.csv",
+      "RCS-RP-003-data.xlsx",
+      "RCS-RP-003-summary-by-case.csv",
+      "RCS-RP-003-corpus-manifest.csv",
+      "RCS-RP-003-sources.csv",
+      "RCS-RP-003-Silesia-ratio.png",
       "RCS-RP-003-reproduce.ps1",
       "RCS-RP-003-test-fixtures.zip",
     ].every((name) =>
