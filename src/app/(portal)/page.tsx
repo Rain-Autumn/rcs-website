@@ -1,12 +1,5 @@
-import { LanguageGate } from '@/components/ui/LanguageGate';
-import { StructuredData } from '@/components/seo/StructuredData';
-import { portalStructuredData } from '@/lib/structured-data';
+import { permanentRedirect } from "next/navigation";
 
-export default function LanguageEntryPage() {
-  return (
-    <>
-      <StructuredData data={portalStructuredData()} />
-      <LanguageGate />
-    </>
-  );
+export default function RootPage() {
+  permanentRedirect("/fr");
 }

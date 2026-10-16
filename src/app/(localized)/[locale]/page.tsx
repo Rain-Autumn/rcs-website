@@ -1,152 +1,68 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { SiteHeader } from "@/components/layout/SiteHeader";
+import { OnePage } from "@/components/onepage/OnePage";
+import "@/components/onepage/document.css";
 import { StructuredData } from "@/components/seo/StructuredData";
-import { hubCopy } from "@/content/architecture";
-import { getCopy, isLocale, locales, type Locale } from "@/content/i18n";
+import { copy, getOnePagePublications, htmlLanguages } from "@/content/onepage";
+import { isLocale, type Locale } from "@/content/i18n";
+import { localizedMember, officialTeamMembers } from "@/content/team";
+import { loadResearch } from "@/lib/research-publications";
+import { loadTeamMembers } from "@/lib/team-members";
 import { socialMetadata } from "@/lib/site-metadata";
-import { hubStructuredData } from "@/lib/structured-data";
+import { onePageStructuredData } from "@/lib/structured-data";
 
-export function generateStaticParams() {
-  return locales.map((locale) => ({ locale }));
-}
+export const dynamic = "force-dynamic";
+type PageProps = { params: Promise<{ locale: string }> };
 
 export async function generateMetadata({
   params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
+}: PageProps): Promise<Metadata> {
   const { locale } = await params;
   if (!isLocale(locale)) return {};
-  const copy = hubCopy[locale];
-  const social = socialMetadata({
-    title: copy.metadataTitle,
-    description: copy.metadataDescription,
-    path: `/${locale}`,
-    locale: getCopy(locale).metadata.ogLocale,
-  });
-
+  const t = copy[locale];
+  const description = t.heroDescription + " " + t.researchIntro;
   return {
-    title: copy.metadataTitle,
-    description: copy.metadataDescription,
+    title: t.title,
+    description,
     alternates: {
       canonical: `/${locale}`,
       languages: {
         "fr-BE": "/fr",
         en: "/en",
         "nl-BE": "/nl",
-        "x-default": "/",
+        "x-default": "/fr",
       },
     },
-    ...social,
+    ...socialMetadata({
+      title: t.title,
+      description,
+      path: `/${locale}`,
+      locale:
+        locale === "en" ? "en_US" : htmlLanguages[locale].replace("-", "_"),
+    }),
   };
 }
 
-export default async function LocalizedHubPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}) {
+export default async function HomePage({ params }: PageProps) {
   const { locale: rawLocale } = await params;
   if (!isLocale(rawLocale)) notFound();
-
   const locale: Locale = rawLocale;
-  const copy = hubCopy[locale];
-  const siteCopy = getCopy(locale);
-
+  const [storedResearch, storedMembers] = await Promise.all([
+    loadResearch(locale),
+    loadTeamMembers(),
+  ]);
+  const ids = new Set(officialTeamMembers.map((member) => member.id));
+  const members = [
+    ...officialTeamMembers,
+    ...storedMembers.filter((member) => !ids.has(member.id)),
+  ].map((member) => localizedMember(member, locale));
+  const publications = getOnePagePublications(locale, storedResearch);
   return (
     <>
       <StructuredData
-        data={hubStructuredData(locale, copy.metadataDescription)}
+        data={onePageStructuredData(locale, publications, members)}
       />
-      <a className="skip-link" href="#main">
-        {siteCopy.skipLink}
-      </a>
-      <SiteHeader locale={locale} copy={siteCopy} mode="hub" />
-      <main id="main" className="rcs-hub-page" tabIndex={-1}>
-        <section className="technical-panel hub-hero" data-section="RCS-00">
-          <div className="hub-hero__copy">
-            <p className="eyebrow">{copy.eyebrow}</p>
-            <h1>{copy.title}</h1>
-            <p className="hero-lead">{copy.lead}</p>
-          </div>
-          <div className="hub-atlas" aria-hidden="true">
-            <div className="hub-atlas__field" />
-            <div className="hub-atlas__orbit hub-atlas__orbit--outer" />
-            <div className="hub-atlas__orbit hub-atlas__orbit--inner" />
-            {copy.cards.map((card, index) => (
-              <div
-                className={`hub-atlas__plane hub-atlas__plane--${index + 1}`}
-                key={card.code}
-              >
-                <span>{card.code}</span>
-                <strong>{card.title}</strong>
-              </div>
-            ))}
-            <div className="hub-atlas__core">
-              <Image
-                src="/icons/raiju-dragon-vector.svg"
-                width={113}
-                height={121}
-                alt=""
-                priority
-              />
-              <span>RCS</span>
-            </div>
-            <div className="hub-atlas__axis hub-atlas__axis--x" />
-            <div className="hub-atlas__axis hub-atlas__axis--y" />
-            <div className="hub-atlas__scan" />
-            <p className="hub-atlas__caption">
-              <span>04</span>
-              {" // "}
-              SYSTEM SPACES
-            </p>
-          </div>
-        </section>
-
-        <section
-          className="technical-panel hub-directory"
-          data-section="RCS-MAP"
-        >
-          <div className="section-heading">
-            <p className="eyebrow">{copy.directoryEyebrow}</p>
-            <h2>{copy.directoryTitle}</h2>
-            <p className="section-lead">{copy.directoryLead}</p>
-          </div>
-          <div className="hub-system-grid">
-            {copy.cards.map((card, index) => (
-              <Link
-                className="hub-system-card"
-                href={`/${locale}${card.path}`}
-                key={card.code}
-              >
-                <div className="hub-system-card__meta">
-                  <span>{card.code}</span>
-                  <small>{String(index + 1).padStart(2, "0")}</small>
-                </div>
-                <div>
-                  <p>{card.status}</p>
-                  <h3>{card.title}</h3>
-                  <span className="hub-system-card__summary">
-                    {card.summary}
-                  </span>
-                </div>
-                <strong>
-                  {card.action}
-                  <span aria-hidden="true">↗</span>
-                </strong>
-              </Link>
-            ))}
-          </div>
-        </section>
-      </main>
-      <footer className="site-footer">
-        <span>RAIJU CLOUD SYSTEM</span>
-        <span>RCS DIRECTORY</span>
-        <span>{copy.footer}</span>
-      </footer>
+      <OnePage locale={locale} publications={publications} members={members} />
     </>
   );
 }

@@ -1,44 +1,43 @@
-import type { Metadata, Viewport } from 'next';
-import '@/app/globals.css';
-import { socialMetadata } from '@/lib/site-metadata';
+import type { Metadata, Viewport } from "next";
+import "@/app/globals.css";
+import { socialMetadata } from "@/lib/site-metadata";
 
 const social = socialMetadata({
-  title: 'Raiju Cloud System | RCS Core',
-  description: 'Technology, systems, infrastructure and intelligence.',
-  path: '/',
-  locale: 'en_US',
+  title: "Raiju Cloud System — AI & Research",
+  description: "Applied AI engineering and research.",
+  path: "/",
+  locale: "en_US",
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://raijucloudsystem.com'),
+  metadataBase: new URL("https://raijucloudsystem.com"),
 
-  title: 'Raiju Cloud System | RCS Core',
+  title: "Raiju Cloud System — AI & Research",
 
-  description:
-    'Technology, systems, infrastructure and intelligence. Raiju Cloud System.',
+  description: "Applied AI engineering and research. Raiju Cloud System.",
 
   alternates: {
-    canonical: '/',
+    canonical: "/",
     languages: {
-      'fr-BE': '/fr',
-      en: '/en',
-      'nl-BE': '/nl',
-      'x-default': '/',
+      "fr-BE": "/fr",
+      en: "/en",
+      "nl-BE": "/nl",
+      "x-default": "/fr",
     },
   },
 
   ...social,
 
   icons: {
-    icon: '/icons/raiju-mark.svg',
+    icon: "/icons/raiju-dragon-vector.svg",
   },
 };
 
 export const viewport: Viewport = {
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
-  themeColor: '#0A0A09',
-  colorScheme: 'dark light',
+  themeColor: "#f8f8f4",
+  colorScheme: "light",
 };
 
 export default function PortalRootLayout({
@@ -47,7 +46,7 @@ export default function PortalRootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" data-scroll-behavior="smooth">
       <body>{children}</body>
     </html>
   );

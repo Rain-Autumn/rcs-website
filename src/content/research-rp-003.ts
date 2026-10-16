@@ -76,7 +76,7 @@ export const rp003Copy: Record<Locale, StudyCopy> = {
     date: "Essais réalisés le 8 octobre 2026 · version 2.0",
     reservedDoi: "DOI ZENODO RÉSERVÉ",
     doiNotice:
-      "10.5281/zenodo.23233639 — dépôt Zenodo non publié à ce stade. Le DOI ne doit pas être présenté comme une référence publiée avant la mise en ligne du dépôt.",
+      "10.5281/zenodo.23373563 — dépôt Zenodo non publié à ce stade. Le DOI ne doit pas être présenté comme une référence publiée avant la mise en ligne du dépôt.",
     resultsTitle: "Résultats mesurés",
     caseLabel: "Corpus / cas",
     inputLabel: "Entrée (octets)",
@@ -222,7 +222,7 @@ export const rp003Copy: Record<Locale, StudyCopy> = {
     date: "Tests performed 8 October 2026 · version 2.0",
     reservedDoi: "ZENODO DOI RESERVED",
     doiNotice:
-      "10.5281/zenodo.23233639 — the Zenodo deposit is not yet published. Do not present this DOI as a published record until the deposit is online.",
+      "10.5281/zenodo.23373563 — the Zenodo deposit is not yet published. Do not present this DOI as a published record until the deposit is online.",
     resultsTitle: "Measured results",
     caseLabel: "Corpus / case",
     inputLabel: "Input (bytes)",
@@ -368,7 +368,7 @@ export const rp003Copy: Record<Locale, StudyCopy> = {
     date: "Tests uitgevoerd op 8 oktober 2026 · versie 2.0",
     reservedDoi: "ZENODO-DOI GERESERVEERD",
     doiNotice:
-      "10.5281/zenodo.23233639 — de Zenodo-depositie is nog niet gepubliceerd. Presenteer deze DOI niet als een gepubliceerde registratie voordat de depositie online staat.",
+      "10.5281/zenodo.23373563 — de Zenodo-depositie is nog niet gepubliceerd. Presenteer deze DOI niet als een gepubliceerde registratie voordat de depositie online staat.",
     resultsTitle: "Gemeten resultaten",
     caseLabel: "Corpus / geval",
     inputLabel: "Invoer (bytes)",

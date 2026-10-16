@@ -1,21 +1,21 @@
-import type { Metadata, Viewport } from 'next';
-import '@/app/globals.css';
+import type { Metadata, Viewport } from "next";
+import "@/app/globals.css";
 
-import { isLocale } from '@/content/i18n';
+import { isLocale } from "@/content/i18n";
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://raijucloudsystem.com'),
+  metadataBase: new URL("https://raijucloudsystem.com"),
 
   icons: {
-    icon: '/icons/raiju-mark.svg',
+    icon: "/icons/raiju-dragon-vector.svg",
   },
 };
 
 export const viewport: Viewport = {
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
-  themeColor: '#0A0A09',
-  colorScheme: 'dark light',
+  themeColor: "#f8f8f4",
+  colorScheme: "light",
 };
 
 export default async function LocalizedRootLayout({
@@ -29,13 +29,11 @@ export default async function LocalizedRootLayout({
 }>) {
   const { locale } = await params;
 
-  const lang = isLocale(locale)
-    ? locale
-    : 'en';
+  const lang = isLocale(locale) ? locale : "en";
 
   return (
-    <html lang={lang}>
-      <body>{children}</body>
+    <html lang={lang} data-scroll-behavior="smooth">
+      <body className="portal-entered">{children}</body>
     </html>
   );
 }
