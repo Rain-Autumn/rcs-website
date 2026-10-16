@@ -1,0 +1,18 @@
+html:has(.rcs-onepage-root) {
+  background: #f8f8f4;
+  scroll-padding-top: 110px;
+}
+body:has(.rcs-onepage-root) {
+  overflow: visible;
+  background: #f8f8f4;
+}
+@media (max-width: 800px) {
+  html:has(.rcs-onepage-root) {
+    scroll-padding-top: 90px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html:has(.rcs-onepage-root) {
+    scroll-behavior: auto;
+  }
+}

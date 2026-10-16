@@ -1,87 +1,12 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import { SiteHeader } from "@/components/layout/SiteHeader";
-import { HeroSection } from "@/components/sections/HeroSection";
-import { DivisionsSection } from "@/components/sections/DivisionsSection";
-import { WebSection } from "@/components/sections/WebSection";
-import { LinuxSection } from "@/components/sections/LinuxSection";
-import { AiSection } from "@/components/sections/AiSection";
-import { ResearchSection } from "@/components/sections/ResearchSection";
-import { ProjectsSection } from "@/components/sections/ProjectsSection";
-import { DirectorSection } from "@/components/sections/DirectorSection";
-import { ContactSection } from "@/components/sections/ContactSection";
-import { StructuredData } from "@/components/seo/StructuredData";
-import { SmoothMotion } from "@/components/ui/SmoothMotion";
-import { getCopy, isLocale, type Locale } from "@/content/i18n";
-import { socialMetadata } from "@/lib/site-metadata";
-import { coreStructuredData } from "@/lib/structured-data";
+import { notFound, permanentRedirect } from "next/navigation";
+import { isLocale } from "@/content/i18n";
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ locale: string }>;
-}): Promise<Metadata> {
-  const { locale } = await params;
-  if (!isLocale(locale)) return {};
-  const copy = getCopy(locale);
-  const social = socialMetadata({
-    title: copy.metadata.title,
-    description: copy.metadata.description,
-    path: `/${locale}/presentation`,
-    locale: copy.metadata.ogLocale,
-  });
-
-  return {
-    title: copy.metadata.title,
-    description: copy.metadata.description,
-    alternates: {
-      canonical: `/${locale}/presentation`,
-      languages: {
-        "fr-BE": "/fr/presentation",
-        en: "/en/presentation",
-        "nl-BE": "/nl/presentation",
-        "x-default": "/en/presentation",
-      },
-    },
-    ...social,
-  };
-}
-
-export default async function PresentationPage({
+export default async function LegacyPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  const { locale: rawLocale } = await params;
-  if (!isLocale(rawLocale)) notFound();
-
-  const locale: Locale = rawLocale;
-  const copy = getCopy(locale);
-
-  return (
-    <>
-      <StructuredData data={coreStructuredData(locale)} />
-      <a className="skip-link" href="#main">
-        {copy.skipLink}
-      </a>
-      <SmoothMotion />
-      <SiteHeader locale={locale} copy={copy} mode="presentation" />
-      <main id="main" tabIndex={-1}>
-        <HeroSection copy={copy.hero} />
-        <DivisionsSection copy={copy.divisions} />
-        <WebSection copy={copy.web} />
-        <LinuxSection copy={copy.infrastructure} />
-        <AiSection copy={copy.intelligence} />
-        <ResearchSection copy={copy.research} locale={locale} />
-        <ProjectsSection copy={copy.projects} />
-        <DirectorSection copy={copy.director} />
-        <ContactSection copy={copy.contact} />
-      </main>
-      <footer className="site-footer">
-        <span>RAIJU CLOUD SYSTEM</span>
-        <span>RCS CORE</span>
-        <span>{copy.footer}</span>
-      </footer>
-    </>
-  );
+  const { locale } = await params;
+  if (!isLocale(locale)) notFound();
+  permanentRedirect(`/${locale}#accueil`);
 }

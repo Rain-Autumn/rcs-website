@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 560" fill="none">
+<title>RCS — de l’idée au système</title>
+<desc>Composition isométrique originale de documents, de couches de calcul et d’une interface abstraite. Illustration conceptuelle, pas une capture du produit.</desc>
+<defs>
+  <linearGradient id="floor" x1="720" y1="245" x2="720" y2="530" gradientUnits="userSpaceOnUse"><stop stop-color="#e5e9de" stop-opacity="0"/><stop offset=".5" stop-color="#e5e9de" stop-opacity=".7"/><stop offset="1" stop-color="#e5e9de" stop-opacity="0"/></linearGradient>
+  <linearGradient id="side" x1="600" y1="200" x2="840" y2="350" gradientUnits="userSpaceOnUse"><stop stop-color="#e8eddf"/><stop offset="1" stop-color="#f3f5ed"/></linearGradient>
+  <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".8" fill="#c3cbbc"/></pattern>
+  <pattern id="micro" width="8" height="8" patternUnits="userSpaceOnUse"><path d="M0 0h1v1H0z" fill="#c4cbb9"/></pattern>
+</defs>
+<ellipse cx="730" cy="393" rx="570" ry="136" fill="url(#floor)"/>
+<g stroke="#d9ded1" stroke-width=".8">
+<path d="m186 369 526 175 533-177M244 341l526 176m-470-201 526 176m-470-201 526 176m-470-201 526 176m-470-201 526 176m-470-201 526 176m-470-201 526 176m-470-201 526 176"/>
+<path d="m243 391 526-178m-467 197 525-179m-467 198 525-179m-467 198 525-179m-467 198 525-179m-467 198 525-179m-467 198 525-179m-467 198 525-179"/>
+</g>
+<g stroke="#b8c3aa" stroke-width="1"><ellipse cx="724" cy="404" rx="209" ry="70" stroke-dasharray="2 6"/><path d="M515 404h-12m430 0h12M724 334v-10m0 150v10"/></g>
+<path d="m395 322 118 40 128-43m194 34 86-30 105 35" stroke="#53604b" stroke-width="1.1" stroke-dasharray="4 6"/>
+<g fill="#5c6c4d"><circle cx="477" cy="350" r="3"/><circle cx="894" cy="332" r="3"/><circle cx="982" cy="344" r="3"/></g>
+<g stroke="#4c5145" stroke-width="1.1" stroke-linejoin="round">
+<path d="m255 224 139-46 118 40-139 47z" fill="#f8f8f4"/><path d="m255 224 118 41v153l-118-40z" fill="#f0f2e9"/><path d="m373 265 139-47v153l-139 47z" fill="#f8f8f4"/>
+<path d="m266 215 139-46 118 40-139 47z" fill="#f8f8f4"/><path d="m266 215 118 41v153l-118-40z" fill="#edf0e5"/><path d="m384 256 139-47v153l-139 47z" fill="#f8f8f4"/>
+<path d="m277 206 139-46 118 40-139 47z" fill="#f8f8f4"/><path d="m277 206 118 41v153l-118-40z" fill="#f1f3ea"/><path d="m395 247 139-47v153l-139 47z" fill="#f8f8f4"/>
+<path d="m288 197 139-46 118 40-139 47z" fill="#f8f8f4"/><path d="m288 197 118 41v153l-118-40z" fill="#f2f4ec"/><path d="m406 238 139-47v153l-139 47z" fill="#fafaf7"/>
+<path d="m424 271 98-33m-98 55 98-33m-98 55 77-26m-77 48 98-33m-98 55 64-21" stroke="#a1a992"/>
+<path d="m424 255 48-16v7l-48 16z" fill="#dce5d3" stroke="#7d8d6a"/>
+<path d="m311 226 70 24m-70-7 70 24m-70-7 70 24m-70-7 40 14" stroke="#b8c1ac"/>
+</g>
+<g stroke="#4c5145" stroke-width="1.15" stroke-linejoin="round">
+<path d="m574 358 149-52 151 53-150 52z" fill="#eef2e6"/><path d="m574 358 150 53v19l-150-53z" fill="#e4eadb"/><path d="m724 411 150-52v19l-150 52z" fill="#f5f7ef"/>
+<path d="m589 354 135-46 136 47-136 47z" stroke="#aab89a"/><path d="m603 354 121-41 121 42-121 42z" stroke="#d0d9c4"/>
+<path d="m574 307 149-52 151 53-150 52z" fill="#f8f9f3"/><path d="m574 307 150 53v15l-150-53z" fill="#e5eadc"/><path d="m724 360 150-52v15l-150 52z" fill="#f0f4e8"/>
+<path d="m593 305 130-44 131 46-130 44z" stroke="#aebba0"/>
+<path d="m574 256 149-52 151 53-150 52z" fill="#f9faf6"/><path d="m574 256 150 53v15l-150-53z" fill="#e5eadc"/><path d="m724 309 150-52v15l-150 52z" fill="#f0f4e8"/>
+<path d="m593 254 130-44 131 46-130 44z" stroke="#aebba0"/>
+<path d="m574 205 149-52 151 53-150 52z" fill="url(#side)"/><path d="m574 205 150 53v15l-150-53z" fill="#dfe7d5"/><path d="m724 258 150-52v15l-150 52z" fill="#eff3e7"/>
+<path d="m593 203 130-44 131 46-130 44z" stroke="#99ab86"/>
+<path d="m612 202 111-38 111 39-110 39z" fill="url(#micro)" stroke="#c0cdb1"/>
+<path d="m654 202 69-24 71 25-70 24z" fill="#f8f9f3" stroke="#5f7150"/>
+<path d="m674 201 49-17 50 18-49 17z" stroke="#a7b897"/>
+<path d="M608 230v15m29-5v15m29-5v15m29-5v15m58-10v15m29-25v15m29-25v15m29-25v15" stroke="#909f7e"/>
+<path d="M608 281v15m29-5v15m29-5v15m29-5v15m58-10v15m29-25v15m29-25v15m29-25v15" stroke="#b1bca4"/>
+<path d="M608 332v15m29-5v15m29-5v15m29-5v15m58-10v15m29-25v15m29-25v15m29-25v15" stroke="#b1bca4"/>
+</g>
+<g stroke="#748665" stroke-width="1" fill="none"><path d="M724 149V91m-8 8 8-8 8 8"/><circle cx="724" cy="78" r="5" fill="#e4ebda"/><ellipse cx="724" cy="78" rx="35" ry="12" stroke="#b5c2a7"/><path d="m687 78-12 0m86 0h12" stroke="#bac6ad"/></g>
+<text x="704" y="208" fill="#506141" font-size="11" font-family="Consolas,monospace" transform="rotate(0 724 205)">RCS</text>
+<g stroke="#4c5145" stroke-width="1.1" stroke-linejoin="round">
+<path d="m980 154 252 88v213l-252-88z" fill="#e5eadc"/><path d="m969 148 252 88v213l-252-88z" fill="#fafbf7"/>
+<path d="m969 179 252 88m-252-99 252 88" stroke="#bac4ae"/>
+<ellipse cx="983" cy="168" rx="2.4" ry="3.7" transform="rotate(-20 983 168)" fill="#d5dfca"/><ellipse cx="995" cy="172" rx="2.4" ry="3.7" transform="rotate(-20 995 172)"/><ellipse cx="1007" cy="176" rx="2.4" ry="3.7" transform="rotate(-20 1007 176)"/>
+<path d="m1007 233 74 26 80-7m-154-19 72 83 82-64m-154 35 74-28 80 75m-154-47 72 29 82 18m-82-18 7 65 75-47m-154 6 79 41m-79-41 72-24m-72-83v54m0 0v53m74-81-2 57m82-64v82" stroke="#a6b198"/>
+<g fill="#f8faf3" stroke="#536448"><ellipse cx="1007" cy="233" rx="7" ry="10" transform="rotate(-20 1007 233)"/><ellipse cx="1007" cy="287" rx="7" ry="10" transform="rotate(-20 1007 287)"/><ellipse cx="1007" cy="340" rx="7" ry="10" transform="rotate(-20 1007 340)"/><ellipse cx="1081" cy="259" rx="7" ry="10" transform="rotate(-20 1081 259)"/><ellipse cx="1079" cy="316" rx="7" ry="10" transform="rotate(-20 1079 316)"/><ellipse cx="1086" cy="381" rx="7" ry="10" transform="rotate(-20 1086 381)"/><ellipse cx="1161" cy="252" rx="7" ry="10" transform="rotate(-20 1161 252)"/><ellipse cx="1161" cy="334" rx="7" ry="10" transform="rotate(-20 1161 334)" fill="#d7e2c9"/></g>
+<path d="m986 380 84 29m-84-20 56 20" stroke="#b1bca4"/>
+</g>
+<g stroke="#a2af94" stroke-width=".8"><path d="M214 180h-15v15m350-59h15v15M550 426h15v-15m-350-5h-15v-15M928 132h-15v15m350 98h15v15m-15 209h15v-15"/></g>
+<g fill="#7d886e" font-family="Consolas,monospace" font-size="9" letter-spacing="1.2"><text x="249" y="453">IDEAS / DOCUMENTS</text><text x="642" y="478">RCS / EXPERIMENTATION</text><text x="1009" y="484">INTELLIGENCE / INTERFACE</text></g>
+<g stroke="#adb99f" stroke-width=".8"><path d="m555 289 3 1m5 2 3 1m5 2 3 1M893 278l4 1m5 2 3 1m5 2 3 1"/></g>
+<path d="M155 440h68v57h-68zM1245 118h67v75h-67z" fill="url(#dots)" opacity=".5"/>
+</svg>
+

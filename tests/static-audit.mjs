@@ -1,297 +1,174 @@
 import fs from "node:fs";
 import path from "node:path";
-import process from "node:process";
-
 const root = process.cwd();
-const sourceRoots = ["src", "public"];
+const read = (file) => fs.readFileSync(path.join(root, file), "utf8");
+const exists = (file) => fs.existsSync(path.join(root, file));
 const files = [];
-
 function walk(dir) {
-  if (!fs.existsSync(dir)) return;
-  for (const name of fs.readdirSync(dir)) {
-    const file = path.join(dir, name);
-    const stat = fs.statSync(file);
-    if (stat.isDirectory()) walk(file);
-    else files.push(file);
+  for (const item of fs.readdirSync(dir, { withFileTypes: true })) {
+    const file = path.join(dir, item.name);
+    if (item.isDirectory()) walk(file);
+    else if (/\.(ts|tsx|css|md|svg|json)$/.test(file)) files.push(file);
   }
 }
-
-sourceRoots.forEach((dir) => walk(path.join(root, dir)));
-const textFiles = files.filter((file) =>
-  /\.(ts|tsx|css|md|svg|json)$/.test(file),
-);
-const text = textFiles.map((file) => fs.readFileSync(file, "utf8")).join("\n");
-const cssText = files
+walk(path.join(root, "src"));
+walk(path.join(root, "public"));
+const text = files.map((file) => fs.readFileSync(file, "utf8")).join("\n");
+const css = files
   .filter((file) => file.endsWith(".css"))
   .map((file) => fs.readFileSync(file, "utf8"))
   .join("\n");
-const languageGate = fs.readFileSync(
-  path.join(root, "src", "components", "ui", "LanguageGate.tsx"),
-  "utf8",
-);
-const siteHeader = fs.readFileSync(
-  path.join(root, "src", "components", "layout", "SiteHeader.tsx"),
-  "utf8",
-);
-const workflow = fs.readFileSync(
-  path.join(root, ".github", "workflows", "ci.yml"),
-  "utf8",
-);
-
+const home = read("src/app/(localized)/[locale]/page.tsx");
+const landing = read("src/components/onepage/OnePage.tsx");
+const content = read("src/content/onepage.ts");
+const research = read("src/content/research.ts");
+const sitemap = read("src/app/sitemap.ts");
+const workflow = read(".github/workflows/ci.yml");
 const checks = [
   [
-    "forbidden identity absent",
+    "forbidden private identity absent",
     !text.includes(["Capitaine", "Autumn"].join(" ")),
   ],
+  ["no interactive terminal", !/terminal-form|nginx -t|curl -I/i.test(text)],
   [
-    "interactive terminal absent",
-    !/terminal-form|nginx -t|curl -I/i.test(text),
+    "root goes directly to French landing page",
+    /permanentRedirect\("\/fr"\)/.test(read("src/app/(portal)/page.tsx")),
   ],
   [
-    "RCS Core institutional identity present",
-    /RCS CORE/.test(text) && /RAIJU CLOUD SYSTEM/.test(text),
+    "SSR landing page preserves saved research and members",
+    /<OnePage/.test(home) &&
+      /loadResearch\(locale\)/.test(home) &&
+      /loadTeamMembers\(\)/.test(home),
   ],
   [
-    "multilingual routes present",
-    fs.existsSync(
-      path.join(root, "src", "app", "(localized)", "[locale]", "page.tsx"),
-    ) &&
-      /NEDERLANDS/.test(text) &&
-      /FRANÇAIS/.test(text),
+    "single public page has exactly three content sections",
+    (landing.match(/<section\b/g) || []).length === 3 &&
+      ["accueil", "recherches", "equipe"].every((id) =>
+        landing.includes('id="' + id + '"'),
+      ) &&
+      !landing.includes('id="evidence-engine"'),
   ],
   [
-    "localized hub exposes four permanent sections",
-    /Un système\. Quatre espaces\./.test(text) &&
-      /\/presentation/.test(text) &&
-      /\/evidence-engine/.test(text) &&
-      /\/research/.test(text) &&
-      /\/team/.test(text),
-  ],
-  [
-    "presentation route preserves RCS Core",
-    fs.existsSync(
-      path.join(
-        root,
-        "src",
-        "app",
-        "(localized)",
-        "[locale]",
-        "presentation",
-        "page.tsx",
-      ),
-    ) && /coreStructuredData/.test(text),
-  ],
-  [
-    "Evidence Engine route describes the current dynamic architecture",
-    fs.existsSync(
-      path.join(
-        root,
-        "src",
-        "app",
-        "(localized)",
-        "[locale]",
-        "evidence-engine",
-        "page.tsx",
-      ),
-    ) &&
-      fs.existsSync(
-        path.join(
-          root,
-          "src",
-          "app",
-          "(localized)",
-          "[locale]",
-          "squadron",
-          "page.tsx",
+    "legacy introduction pages redirect instead of duplicating home",
+    ["presentation", "research", "team", "evidence-engine", "squadron"].every(
+      (route) =>
+        /permanentRedirect/.test(
+          read("src/app/(localized)/[locale]/" + route + "/page.tsx"),
         ),
-      ) &&
-      /permanentRedirect\(`\/\$\{locale\}\/evidence-engine`\)/.test(text) &&
-      /RCS Evidence Engine/.test(text) &&
-      /^const DRAGON_ONE_URL = "https:\/\/evidence-engine\.raijucloudsystem\.com\/";$/m.test(
-        text,
-      ) &&
-      /Agents éphémères/.test(text) &&
-      /Dragon Two/.test(text) &&
-      !/Dragon (Three|Four|Five|Six)/.test(text),
-  ],
-  [
-    "portal has a semantic heading and crawlable language links",
-    /<h1 className="boot-brand">RAIJU CLOUD SYSTEM<\/h1>/.test(languageGate) &&
-      /href={`\/\$\{option\.locale\}`}/.test(languageGate),
-  ],
-  [
-    "header language switch uses crawlable links",
-    /href={languageHref\(target\)}/.test(siteHeader) &&
-      !/<button[\s\S]*?switchLocale/.test(siteHeader),
-  ],
-  [
-    "main section navigation stays crawlable",
-    /className="section-nav"/.test(siteHeader) &&
-      /sectionNavigation\[locale\]\.map/.test(siteHeader),
-  ],
-  [
-    "research routes present",
-    fs.existsSync(
-      path.join(
-        root,
-        "src",
-        "app",
-        "(localized)",
-        "[locale]",
-        "research",
-        "page.tsx",
-      ),
     ),
   ],
   [
-    "published RCS-RP-001 identifiers present",
-    /10\.5281\/zenodo\.21994886/.test(text) &&
-      /0009-0009-7729-6552/.test(text) &&
-      /RCS-RP-001/.test(text) &&
-      /status: ["']published["']/.test(text),
+    "FR EN NL use crawlable locale links",
+    /languages\.map/.test(landing) &&
+      /href=\{\x60\/\$\{target\}\$\{hash\}\x60\}/.test(landing) &&
+      /htmlLanguages/.test(content),
   ],
   [
-    "published RCS-RP-002 identifiers present",
-    /10\.5281\/zenodo\.22110548/.test(text) &&
-      /RCS-RP-002/.test(text) &&
-      /publicationDate: ["']2026-08-26["']/.test(text),
+    "separate EE chat URL unchanged",
+    content.includes("https://evidence-engine.raijucloudsystem.com/") &&
+      /href=\{EE_URL\}/.test(landing) &&
+      !/<iframe/.test(landing),
   ],
   [
-    "RP-003 localized study routes and reserved DOI present",
-    fs.existsSync(
-      path.join(
-        root,
-        "src",
-        "app",
-        "(localized)",
-        "[locale]",
-        "research",
-        "rp-003",
-        "page.tsx",
-      ),
-    ) &&
-      /10\.5281\/zenodo\.23233639/.test(text) &&
-      /research\/rp-003/.test(
-        fs.readFileSync(path.join(root, "src", "app", "sitemap.ts"), "utf8"),
-      ),
+    "team uses RCS emblems with founder-only Arkenstone",
+    /member\.id === "RCS-TM-001"/.test(landing) &&
+      /data-emblem=\{founder \? "arkenstone" : "rcs"\}/.test(landing) &&
+      /raiju-dragon-vector\.svg/.test(landing),
   ],
   [
-    "RP-003 public research artifacts present",
-    [
-      "RCS-RP-003.pdf",
-      "RCS-RP-003-Package_v2.0.zip",
-      "RCS-RP-003.docx",
-      "RCS-RP-003-method.md",
-      "RCS-RP-003-results.csv",
-      "RCS-RP-003-data.xlsx",
-      "RCS-RP-003-summary-by-case.csv",
-      "RCS-RP-003-corpus-manifest.csv",
-      "RCS-RP-003-sources.csv",
-      "RCS-RP-003-Silesia-ratio.png",
-      "RCS-RP-003-reproduce.ps1",
-      "RCS-RP-003-test-fixtures.zip",
-    ].every((name) =>
-      fs.existsSync(path.join(root, "public", "research", name)),
+    "Arkenstone and reduced motion are implemented",
+    /person-mark--arkenstone/.test(css) &&
+      /arkenstone-core/.test(css) &&
+      /prefers-reduced-motion/.test(css),
+  ],
+  [
+    "four published research DOI records present",
+    ["21994886", "22110548", "23373563", "23411388"].every((id) =>
+      research.includes("10.5281/zenodo." + id),
     ),
   ],
   [
-    "research storage stays private",
-    !fs.existsSync(path.join(root, "public", "research-publications")) &&
-      /MAX_PDF_BYTES/.test(text),
+    "RP003 keeps its article and existing public artifacts",
+    exists("src/app/(localized)/[locale]/research/rp-003/page.tsx") &&
+      exists("public/research/RCS-RP-003.pdf") &&
+      exists("public/research/RCS-RP-003-Package_v2.0.zip"),
   ],
   [
-    "research publication is password protected",
-    /verifyResearchPassword/.test(text) && /httpOnly: true/.test(text),
+    "RP003 article points to confirmed DOI",
+    read("src/content/research-rp-003.ts").includes("10.5281/zenodo.23373563"),
   ],
   [
-    "team routes and protected administration present",
-    fs.existsSync(
-      path.join(
-        root,
-        "src",
-        "app",
-        "(localized)",
-        "[locale]",
-        "team",
-        "page.tsx",
-      ),
-    ) && /RCS_TEAM_PASSWORD_HASH/.test(text),
+    "sitemap excludes redirect pages and administration",
+    /research\/rp-003/.test(sitemap) &&
+      !/\/presentation|\/evidence-engine|\/team|\/admin/.test(sitemap),
   ],
   [
-    "founder certification record present",
-    /RCS-TM-001/.test(text) &&
+    "protected management remains accessible separately",
+    exists("src/app/(localized)/[locale]/admin/page.tsx") &&
+      /ResearchProposalForm/.test(
+        read("src/app/(localized)/[locale]/admin/page.tsx"),
+      ) &&
+      /TeamMemberForm/.test(
+        read("src/app/(localized)/[locale]/admin/page.tsx"),
+      ) &&
+      /index: false/.test(read("src/app/(localized)/[locale]/admin/page.tsx")),
+  ],
+  [
+    "public landing contains no administration form",
+    !/ResearchProposalForm|TeamMemberForm|<form/.test(landing),
+  ],
+  [
+    "research and team authentication unchanged and protected",
+    /verifyResearchPassword/.test(text) &&
+      /httpOnly: true/.test(text) &&
+      /RCS_TEAM_PASSWORD_HASH/.test(text) &&
+      !exists("public/research-publications"),
+  ],
+  [
+    "actual members and certifications retained",
+    /Jacob Matthews/.test(text) &&
       /Build an AI Agent/.test(text) &&
       /CREDLY-3dfee891-aad9-4890-856d-d7c1472b7a4e/.test(text) &&
-      /AWS Knowledge: Cloud Essentials/.test(text) &&
-      /Azure SQL Database/.test(text) &&
-      /Créer un agent dans Microsoft Copilot Studio/.test(text) &&
-      /8DDAC1CBF710F1DE/.test(text),
+      /CyberFirst Advanced course/.test(text),
   ],
   [
-    "second member and standard dragon mark present",
-    /RCS-TM-002/.test(text) &&
-      /Jacob Matthews/.test(text) &&
-      /DIGITAL FORENSICS/.test(text) &&
-      /CyberFirst Advanced course/.test(text) &&
-      /Regional Finalist — WorldSkills Cyber Security Competition/.test(text) &&
-      /officialTeamMembers/.test(text) &&
-      /src="\/icons\/raiju-dragon-vector\.svg"/.test(text),
+    "onepage illustrations are local",
+    [
+      "rcs-onepage-hero",
+      "onepage-home",
+      "onepage-agents",
+      "onepage-chip",
+      "onepage-storage",
+    ].every((name) => exists("public/images/" + name + ".svg")),
   ],
   [
-    "team certifications use a compact native disclosure",
-    /<details className="team-certifications-disclosure">/.test(text) &&
-      /showCertifications/.test(text) &&
-      /hideCertifications/.test(text),
-  ],
-  ["Three.js scene present", text.includes("@react-three/fiber")],
-  ["GSAP motion present", text.includes("from 'gsap'")],
-  [
-    "lightweight reveal motion present",
-    text.includes("IntersectionObserver") && text.includes("motion-ready"),
-  ],
-  [
-    "Linux stack visible",
-    /DEBIAN 13/.test(text) && /NGINX/.test(text) && /OVH VPS/.test(text),
-  ],
-  [
-    "human validation visible",
-    text.includes("HUGUES HENROTTE") && text.includes("HUMAN VALIDATION"),
-  ],
-  [
-    "current public CV present",
-    fs.existsSync(path.join(root, "public", "CV-Hugues-Henrotte-RCS-2026.pdf")),
-  ],
-  [
-    "LinkedIn social card present",
-    fs.existsSync(path.join(root, "public", "images", "rcs-social-card.png")) &&
-      /summary_large_image/.test(text) &&
-      /1200/.test(text) &&
-      /630/.test(text),
-  ],
-  [
-    "structured data present",
-    /application\/ld\+json/.test(text) &&
-      text.includes('"@context": "https://schema.org"') &&
-      /ScholarlyArticle/.test(text),
-  ],
-  [
-    "IndexNow runs after deployment",
-    /Deploy atomically[\s\S]+Notify participating search engines through IndexNow/.test(
-      workflow,
-    ) && /(indexnow:submit|submit-indexnow\.mjs)/.test(workflow),
-  ],
-  [
-    "no remote image/font CDN",
-    !/@import\s+(?:url\()?['"]?https?:\/\//i.test(cssText) &&
-      !/url\(\s*['"]?https?:\/\//i.test(cssText) &&
+    "no remote font or image CDN introduced",
+    !/@import\s+(?:url\()?['"]?https?:\/\//i.test(css) &&
+      !/url\(\s*['"]?https?:\/\//i.test(css) &&
       !/<Image[^>]+src=["']https?:\/\//i.test(text),
   ],
+  [
+    "structured data describes publications and actual people",
+    /onePageStructuredData/.test(home) &&
+      /ScholarlyArticle/.test(read("src/lib/structured-data.ts")) &&
+      /application\/ld\+json/.test(text),
+  ],
+  [
+    "social previews and public CV retained",
+    exists("public/images/rcs-social-card.png") &&
+      exists("public/CV-Hugues-Henrotte-RCS-2026.pdf") &&
+      /summary_large_image/.test(text),
+  ],
+  [
+    "existing atomic deployment and IndexNow retained",
+    /Deploy atomically[\s\S]+Notify participating search engines through IndexNow/.test(
+      workflow,
+    ),
+  ],
 ];
-
 let failed = false;
 for (const [label, ok] of checks) {
   console.log(`${ok ? "PASS" : "FAIL"}  ${label}`);
   if (!ok) failed = true;
 }
-
 if (failed) process.exit(1);

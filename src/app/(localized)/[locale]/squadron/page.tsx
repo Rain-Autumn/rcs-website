@@ -1,8 +1,12 @@
-import { permanentRedirect } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
+import { isLocale } from "@/content/i18n";
 
-type PageProps = { params: Promise<{ locale: string }> };
-
-export default async function LegacySquadronPage({ params }: PageProps) {
+export default async function LegacyPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
   const { locale } = await params;
-  permanentRedirect(`/${locale}/evidence-engine`);
+  if (!isLocale(locale)) notFound();
+  permanentRedirect(`/${locale}#accueil`);
 }

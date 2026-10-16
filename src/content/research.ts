@@ -250,6 +250,23 @@ export const researchCopy = {
 const projectBase = {
   fr: [
     {
+      id: "RCS-RP-004",
+      slug: "from-cloud-to-living-room",
+      status: "published",
+      title:
+        "From the Cloud to the Living Room: Consumer Hardware and the Rise of Home AI Agents",
+      question:
+        "Quel rôle le matériel grand public, la mémoire et les architectures locales ou hybrides jouent-ils dans l’émergence des agents IA domestiques ?",
+      summary:
+        "Des agents IA à la maison : le rôle des machines grand public, de la mémoire et des architectures locales ou hybrides.",
+      topics: ["AI AGENTS", "CONSUMER HARDWARE", "MEMORY"],
+      evidence: [],
+      publicationDate: "2026-10-16",
+      doi: "10.5281/zenodo.23411388",
+      publicationUrl: "https://doi.org/10.5281/zenodo.23411388",
+      authorOrcid: "https://orcid.org/0009-0009-7729-6552",
+    },
+    {
       id: "RCS-RP-001",
       slug: "supervised-multi-agent-orchestration",
       status: "published",
@@ -298,9 +315,28 @@ const projectBase = {
       topics: ["WINDOWS", "STOCKAGE", "WIZTREE", "COMPRESSION"],
       evidence: ["measured", "reproduced", "external"],
       href: "/fr/research/rp-003",
+      doi: "10.5281/zenodo.23373563",
+      publicationUrl: "https://doi.org/10.5281/zenodo.23373563",
     },
   ],
   en: [
+    {
+      id: "RCS-RP-004",
+      slug: "from-cloud-to-living-room",
+      status: "published",
+      title:
+        "From the Cloud to the Living Room: Consumer Hardware and the Rise of Home AI Agents",
+      question:
+        "What role do consumer hardware, memory and local or hybrid architectures play in the rise of home AI agents?",
+      summary:
+        "AI agents at home: the role of consumer hardware, memory and local or hybrid architectures.",
+      topics: ["AI AGENTS", "CONSUMER HARDWARE", "MEMORY"],
+      evidence: [],
+      publicationDate: "2026-10-16",
+      doi: "10.5281/zenodo.23411388",
+      publicationUrl: "https://doi.org/10.5281/zenodo.23411388",
+      authorOrcid: "https://orcid.org/0009-0009-7729-6552",
+    },
     {
       id: "RCS-RP-001",
       slug: "supervised-multi-agent-orchestration",
@@ -350,9 +386,28 @@ const projectBase = {
       topics: ["WINDOWS", "STORAGE", "WIZTREE", "COMPRESSION"],
       evidence: ["measured", "reproduced", "external"],
       href: "/en/research/rp-003",
+      doi: "10.5281/zenodo.23373563",
+      publicationUrl: "https://doi.org/10.5281/zenodo.23373563",
     },
   ],
   nl: [
+    {
+      id: "RCS-RP-004",
+      slug: "from-cloud-to-living-room",
+      status: "published",
+      title:
+        "From the Cloud to the Living Room: Consumer Hardware and the Rise of Home AI Agents",
+      question:
+        "Welke rol spelen consumentenhardware, geheugen en lokale of hybride architecturen bij de opkomst van AI-agents thuis?",
+      summary:
+        "AI-agents thuis: de rol van consumentenhardware, geheugen en lokale of hybride architecturen.",
+      topics: ["AI AGENTS", "CONSUMER HARDWARE", "MEMORY"],
+      evidence: [],
+      publicationDate: "2026-10-16",
+      doi: "10.5281/zenodo.23411388",
+      publicationUrl: "https://doi.org/10.5281/zenodo.23411388",
+      authorOrcid: "https://orcid.org/0009-0009-7729-6552",
+    },
     {
       id: "RCS-RP-001",
       slug: "supervised-multi-agent-orchestration",
@@ -403,6 +458,8 @@ const projectBase = {
       topics: ["WINDOWS", "OPSLAG", "WIZTREE", "COMPRESSIE"],
       evidence: ["measured", "reproduced", "external"],
       href: "/nl/research/rp-003",
+      doi: "10.5281/zenodo.23373563",
+      publicationUrl: "https://doi.org/10.5281/zenodo.23373563",
     },
   ],
 } as const;

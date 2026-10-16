@@ -1,3 +1,4 @@
+import type { OnePagePublication } from "@/content/onepage";
 import type { Locale } from "@/content/i18n";
 import type { StoredResearch } from "@/lib/research-publications";
 import type { ResearchProject } from "@/types/research";
@@ -12,7 +13,7 @@ const language: Record<Locale, string> = {
 
 const organizationId = `${RCS_SITE_URL}/#organization`;
 const websiteId = `${RCS_SITE_URL}/#website`;
-const founderId = `${RCS_SITE_URL}/fr/team#RCS-TM-001`;
+const founderId = `${RCS_SITE_URL}/fr#RCS-TM-001`;
 
 export function coreStructuredData(locale: Locale) {
   const pageUrl = `${RCS_SITE_URL}/${locale}/presentation`;
@@ -300,6 +301,68 @@ export function researchStructuredData(
         },
       },
       ...works,
+    ],
+  };
+}
+
+/** Structured data for the single public landing page; no model-quality claims. */
+export function onePageStructuredData(
+  locale: Locale,
+  publications: OnePagePublication[],
+  members: LocalizedMember[],
+) {
+  const pageUrl = `${RCS_SITE_URL}/${locale}`;
+  const base = portalStructuredData();
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      ...base["@graph"],
+      {
+        "@type": "WebPage",
+        "@id": pageUrl + "#webpage",
+        url: pageUrl,
+        name: "Raiju Cloud System — AI & Research",
+        inLanguage: language[locale],
+        isPartOf: { "@id": websiteId },
+        about: { "@id": organizationId },
+        hasPart: ["accueil", "recherches", "equipe", "contact"].map((id) => ({
+          "@type": "WebPageElement",
+          "@id": pageUrl + "#" + id,
+        })),
+      },
+      {
+        "@type": "WebApplication",
+        "@id": RCS_SITE_URL + "/#evidence-engine",
+        name: "RCS Evidence Engine",
+        url: "https://evidence-engine.raijucloudsystem.com/",
+        applicationCategory: "Artificial Intelligence",
+        operatingSystem: "Web",
+        description: "Experimental AI application",
+        creator: { "@id": organizationId },
+      },
+      ...members.map((member) => ({
+        "@type": "Person",
+        "@id": pageUrl + "#" + member.id,
+        name: member.name,
+        jobTitle: member.role,
+        description: member.bio,
+        memberOf: { "@id": organizationId },
+        ...(member.orcid ? { sameAs: [member.orcid] } : {}),
+      })),
+      ...publications.map((publication) => ({
+        "@type": "ScholarlyArticle",
+        "@id": pageUrl + "#" + publication.id,
+        identifier: publication.doi
+          ? [publication.id, publication.doi]
+          : publication.id,
+        name: publication.title,
+        description: publication.summary,
+        about: publication.tags,
+        url: publication.href.startsWith("/")
+          ? RCS_SITE_URL + publication.href
+          : publication.href,
+        publisher: { "@id": organizationId },
+      })),
     ],
   };
 }
