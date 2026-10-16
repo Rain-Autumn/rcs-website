@@ -287,6 +287,14 @@
   background: #41463c;
   transform: translateY(-2px);
 }
+.page .arrow-icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+  line-height: 1;
+}
 .page .button span:last-child {
   font-size: 18px;
   line-height: 1;
@@ -889,11 +897,14 @@
   z-index: -1;
   right: 4px;
   top: -130px;
+  width: 1em;
+  height: 1em;
   font-size: 440px;
   line-height: 1;
   font-weight: 100;
   color: #2f3528;
   user-select: none;
+  pointer-events: none;
 }
 .page .site-footer {
   padding-bottom: 24px;
