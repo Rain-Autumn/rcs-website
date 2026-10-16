@@ -33,8 +33,35 @@ const getHash = () =>
     : "";
 const serverHash = () => "";
 
-function Arrow({ direction = "↗" }: { direction?: string }) {
-  return <span aria-hidden="true">{direction}</span>;
+function Arrow({
+  direction = "up-right",
+}: {
+  direction?: "up-right" | "down" | "up";
+}) {
+  const paths = {
+    "up-right": "M5 19 19 5M5 5h14v14",
+    down: "M12 4v16m-6-6 6 6 6-6",
+    up: "M12 20V4m-6 6 6-6 6 6",
+  };
+
+  return (
+    <span className={c("arrow-icon")} aria-hidden="true">
+      <svg
+        width="1em"
+        height="1em"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <path d={paths[direction]} />
+      </svg>
+    </span>
+  );
 }
 
 export function OnePage({
@@ -198,7 +225,7 @@ export function OnePage({
                 </a>
                 <a className={c("text-link")} href="#recherches">
                   <span>{t.exploreResearch}</span>
-                  <Arrow direction="↓" />
+                  <Arrow direction="down" />
                 </a>
               </div>
               <span className={c("experimental")}>
@@ -229,7 +256,7 @@ export function OnePage({
             <span>{t.heroBottom}</span>
             <a href="#recherches">
               <span>{t.scroll}</span>
-              <Arrow direction="↓" />
+              <Arrow direction="down" />
             </a>
           </div>
         </section>
@@ -492,7 +519,7 @@ export function OnePage({
                                   target="_blank"
                                   rel="noopener noreferrer"
                                 >
-                                  {credential.title} ↗
+                                  {credential.title} <Arrow />
                                 </a>
                               ) : (
                                 credential.title
@@ -562,7 +589,7 @@ export function OnePage({
               </p>
             </div>
             <span className={c("contact-decoration")} aria-hidden="true">
-              ↗
+              <Arrow />
             </span>
           </div>
         </section>
@@ -582,7 +609,7 @@ export function OnePage({
           </a>
           <a className={c("text-link", "back-top")} href="#accueil">
             <span>{t.backTop}</span>
-            <Arrow direction="↑" />
+            <Arrow direction="up" />
           </a>
         </div>
         <div className={c("footer-bottom")}>

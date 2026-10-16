@@ -42,9 +42,11 @@ test("team logos use the Arkenstone variant only for the founder", async ({
   await expect(
     page.locator("#RCS-TM-002 [data-emblem=arkenstone]"),
   ).toHaveCount(0);
-  await page.locator("#RCS-TM-001 summary").click();
+  const credentials = page.locator("#RCS-TM-001 details");
+  await credentials.locator("summary").click();
+  await expect(credentials).toHaveAttribute("open", "");
   await expect(
-    page.getByText("Build an AI Agent", { exact: true }),
+    credentials.getByRole("listitem").filter({ hasText: "Build an AI Agent" }),
   ).toBeVisible();
 });
 test("language links preserve the current section", async ({ page }) => {
@@ -95,4 +97,81 @@ test("public landing does not expose administration forms", async ({
   await expect(page.locator("input[type=password]")).toHaveCount(0);
   await page.goto("/fr/admin");
   await expect(page.locator("input[type=password]")).toHaveCount(2);
+});
+
+test("contact arrows stay monochrome vectors in every language", async ({
+  page,
+}, testInfo) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+
+  for (const locale of ["fr", "en", "nl"]) {
+    await page.goto(`/${locale}#contact`);
+    const contact = page.locator("#contact");
+    const decoration = contact.locator('[class*="contact-decoration"]');
+    const email = contact.getByRole("link", {
+      name: "contact@raijucloudsystem.com",
+      exact: true,
+    });
+
+    await expect(contact.getByRole("heading", { level: 2 })).toBeVisible();
+    await expect(email).toBeVisible();
+    await expect(email).toHaveAttribute(
+      "href",
+      "mailto:contact@raijucloudsystem.com",
+    );
+    await expect(contact).toHaveCSS("background-color", "rgb(36, 40, 32)");
+    await expect(decoration).toHaveAttribute("aria-hidden", "true");
+    await expect(decoration).toHaveCSS("pointer-events", "none");
+    await expect(decoration.locator("svg")).toHaveCount(1);
+    await expect(decoration.locator("svg")).toHaveAttribute(
+      "focusable",
+      "false",
+    );
+    await expect(decoration.locator("svg")).toHaveCSS("fill", "none");
+    await expect(decoration.locator("svg")).toHaveCSS(
+      "stroke",
+      "rgb(47, 53, 40)",
+    );
+    await expect(decoration).toHaveText("");
+    await expect(email.locator("svg")).toHaveAttribute(
+      "stroke",
+      "currentColor",
+    );
+    const iconSize = await email.locator("svg").boundingBox();
+    expect(iconSize).not.toBeNull();
+    expect(iconSize!.width).toBeGreaterThanOrEqual(12);
+    expect(iconSize!.width).toBeLessThanOrEqual(24);
+    expect(iconSize!.height).toBeCloseTo(iconSize!.width, 1);
+    expect(await page.locator(".rcs-onepage-root").textContent()).not.toMatch(
+      /[\u2191\u2193\u2197]/u,
+    );
+
+    if (locale === "en") {
+      await contact.screenshot({
+        path: testInfo.outputPath("contact-en.png"),
+      });
+    }
+  }
+});
+
+test("contact remains within mobile and desktop viewports", async ({
+  page,
+}) => {
+  for (const width of [320, 375, 430, 1440]) {
+    await page.setViewportSize({ width, height: 844 });
+    await page.goto("/en#contact");
+    const contact = page.locator("#contact");
+    await expect(contact.getByRole("heading", { level: 2 })).toBeVisible();
+    const bounds = await contact.boundingBox();
+    expect(bounds).not.toBeNull();
+    expect(bounds!.x).toBeGreaterThanOrEqual(0);
+    expect(bounds!.x + bounds!.width).toBeLessThanOrEqual(width + 1);
+    expect(
+      await page.evaluate(
+        () =>
+          document.documentElement.scrollWidth <=
+          document.documentElement.clientWidth + 1,
+      ),
+    ).toBe(true);
+  }
 });

@@ -64,4 +64,83 @@ describe("approved onepage", () => {
     for (const item of getOnePagePublications("fr"))
       expect(html).toContain(item.href);
   });
+
+  it.each(languages)(
+    "%s renders decorative arrows as monochrome SVGs instead of platform emoji",
+    (locale) => {
+      const members = officialTeamMembers.map((member) =>
+        localizedMember(member, locale),
+      );
+      const host = document.createElement("div");
+      host.innerHTML = renderToStaticMarkup(
+        <OnePage
+          locale={locale}
+          publications={getOnePagePublications(locale)}
+          members={members}
+        />,
+      );
+
+      expect(host.textContent).not.toMatch(/[\u2197\u2191\u2193]/u);
+
+      const arrows = host.querySelectorAll('[class*="arrow-icon"] > svg');
+      expect(arrows.length).toBeGreaterThan(0);
+      for (const arrow of arrows) {
+        expect(arrow.getAttribute("width")).toBe("1em");
+        expect(arrow.getAttribute("height")).toBe("1em");
+        expect(arrow.getAttribute("fill")).toBe("none");
+        expect(arrow.getAttribute("stroke")).toBe("currentColor");
+        expect(arrow.getAttribute("focusable")).toBe("false");
+        expect(arrow.closest('[aria-hidden="true"]')).not.toBeNull();
+        expect(arrow.querySelector("path")?.getAttribute("d")).toBeTruthy();
+        expect(arrow.querySelector("title")).toBeNull();
+      }
+
+      const decoration = host.querySelector('[class*="contact-decoration"]');
+      expect(decoration?.getAttribute("aria-hidden")).toBe("true");
+      expect(
+        decoration?.querySelector('[class*="arrow-icon"] svg path'),
+      ).not.toBeNull();
+
+      const email = host.querySelector(
+        'a[href="mailto:contact@raijucloudsystem.com"]',
+      );
+      expect(email?.textContent?.trim()).toBe("contact@raijucloudsystem.com");
+      expect(
+        email?.querySelector('[class*="arrow-icon"] > svg'),
+      ).not.toBeNull();
+
+      const externalArrow = email?.querySelector("path")?.getAttribute("d");
+      const researchArrow = host
+        .querySelector('#accueil a[href="#recherches"] path')
+        ?.getAttribute("d");
+      const backToTopArrow = host
+        .querySelector('footer a[class*="back-top"] path')
+        ?.getAttribute("d");
+      expect(researchArrow).toBeTruthy();
+      expect(backToTopArrow).toBeTruthy();
+      expect(new Set([externalArrow, researchArrow, backToTopArrow]).size).toBe(
+        3,
+      );
+      expect(decoration?.querySelector("path")?.getAttribute("d")).toBe(
+        externalArrow,
+      );
+
+      for (const member of members) {
+        for (const credential of member.certifications) {
+          if (!credential.credentialUrl) continue;
+          const link = Array.from(host.querySelectorAll("details a")).find(
+            (candidate) =>
+              candidate.getAttribute("href") === credential.credentialUrl,
+          );
+          expect(link, credential.title).toBeDefined();
+          expect(link?.textContent?.trim()).toBe(credential.title);
+          expect(link?.getAttribute("target")).toBe("_blank");
+          expect(link?.getAttribute("rel")).toBe("noopener noreferrer");
+          expect(
+            link?.querySelector('[class*="arrow-icon"] > svg'),
+          ).not.toBeNull();
+        }
+      }
+    },
+  );
 });
