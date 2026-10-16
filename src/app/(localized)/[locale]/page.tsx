@@ -37,7 +37,8 @@ export async function generateMetadata({
       title: t.title,
       description,
       path: `/${locale}`,
-      locale: htmlLanguages[locale].replace("-", "_"),
+      locale:
+        locale === "en" ? "en_US" : htmlLanguages[locale].replace("-", "_"),
     }),
   };
 }

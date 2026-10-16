@@ -21,6 +21,9 @@ const css = files
 const home = read("src/app/(localized)/[locale]/page.tsx");
 const landing = read("src/components/onepage/OnePage.tsx");
 const content = read("src/content/onepage.ts");
+const chatUrl = content.match(
+  /^export const EE_URL = ["']([^"']+)["'];$/m,
+)?.[1];
 const research = read("src/content/research.ts");
 const sitemap = read("src/app/sitemap.ts");
 const workflow = read(".github/workflows/ci.yml");
@@ -65,7 +68,7 @@ const checks = [
   ],
   [
     "separate EE chat URL unchanged",
-    content.includes("https://evidence-engine.raijucloudsystem.com/") &&
+    chatUrl === "https://evidence-engine.raijucloudsystem.com/" &&
       /href=\{EE_URL\}/.test(landing) &&
       !/<iframe/.test(landing),
   ],
