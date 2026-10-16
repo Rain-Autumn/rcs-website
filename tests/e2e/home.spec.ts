@@ -99,6 +99,21 @@ test("public landing does not expose administration forms", async ({
   await expect(page.locator("input[type=password]")).toHaveCount(2);
 });
 
+test("image optimization serves a local PNG with the patched image stack", async ({
+  request,
+}) => {
+  const response = await request.get("/_next/image", {
+    params: {
+      url: "/images/rcs-social-card.png",
+      w: "64",
+      q: "75",
+    },
+  });
+  expect(response.status()).toBe(200);
+  expect(response.headers()["content-type"]).toMatch(/^image\//);
+  expect((await response.body()).length).toBeGreaterThan(0);
+});
+
 test("contact arrows stay monochrome vectors in every language", async ({
   page,
 }, testInfo) => {
