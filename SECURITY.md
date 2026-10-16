@@ -30,3 +30,19 @@ is encountered.
 Secrets, production environment files and private runtime data must never be committed. Any secret
 suspected of exposure must be revoked and replaced through the relevant service, not edited into
 repository history.
+
+## Dependency audit follow-up (2026-10-17)
+
+After the security dependency updates, `pnpm audit --prod` reports no known
+vulnerabilities. This is an audit result, not a guarantee that the application has
+no vulnerabilities. CI also checks the production audit before building a release.
+
+The full development audit still reports
+[GHSA-vfj7-8cjw-p6xm](https://github.com/advisories/GHSA-vfj7-8cjw-p6xm)
+for `braces@3.0.3`. No patched release was published at the time of this review.
+In this project it is reached through the ESLint and glTF development tools;
+`pnpm why braces --prod` finds no production dependency path.
+
+No audit suppression or vulnerability dismissal has been added. Run these
+development tools only against trusted repository files and patterns, and
+recheck the advisory during the next dependency update.
