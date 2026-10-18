@@ -5,6 +5,8 @@ out/
 coverage/
 playwright-report/
 test-results/
+integrations/dist/
+integrations/.wrangler/
 *.tsbuildinfo
 *.log
 
