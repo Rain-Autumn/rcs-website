@@ -1,0 +1,34 @@
+name: Integrations portal
+
+on:
+  pull_request:
+    paths:
+      - "integrations/**"
+      - "public/icons/raiju-dragon-vector.svg"
+      - ".github/workflows/integrations.yml"
+  push:
+    branches: [main]
+    paths:
+      - "integrations/**"
+      - "public/icons/raiju-dragon-vector.svg"
+      - ".github/workflows/integrations.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  static-portal:
+    name: Validate independent integrations portal
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+      - name: Build static documentation
+        run: node integrations/build.mjs
+      - name: Check content, links and isolation
+        run: node --test integrations/test.mjs
