@@ -14,6 +14,7 @@ import {
 import type { Locale } from "@/content/i18n";
 import type { TeamMember } from "@/types/team";
 import styles from "./OnePage.module.css";
+import { Dashboard, dashboardCopy } from "./Dashboard";
 
 export type OnePageMember = TeamMember & { role: string; bio: string };
 const c = (...names: string[]) =>
@@ -26,7 +27,7 @@ const subscribeHash = (onChange: () => void) => {
   return () => window.removeEventListener("hashchange", onChange);
 };
 const getHash = () =>
-  ["#accueil", "#recherches", "#equipe", "#contact"].includes(
+  ["#accueil", "#recherches", "#securite", "#equipe", "#contact"].includes(
     window.location.hash,
   )
     ? window.location.hash
@@ -135,6 +136,7 @@ export function OnePage({
             {(
               [
                 ["recherches", t.navResearch],
+                ["securite", dashboardCopy[locale].security],
                 ["equipe", t.navTeam],
                 ["contact", t.navContact],
               ] as const
@@ -213,48 +215,16 @@ export function OnePage({
             </div>
             <div className={c("hero-intro")}>
               <p>{t.heroDescription}</p>
-              <div className={c("hero-buttons")}>
-                <a
-                  className={c("button", "button-dark")}
-                  href={EE_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span>{t.openEE}</span>
-                  <Arrow />
-                </a>
-                <a className={c("text-link")} href="#recherches">
-                  <span>{t.exploreResearch}</span>
-                  <Arrow direction="down" />
-                </a>
-              </div>
               <span className={c("experimental")}>
                 <span aria-hidden="true" />
                 <span>{t.experimental}</span>
               </span>
             </div>
           </div>
-          <figure className={c("hero-art")}>
-            <Image
-              src="/images/rcs-onepage-hero.svg"
-              width={1440}
-              height={560}
-              priority
-              alt={t.heroAlt}
-            />
-            <figcaption>
-              <span>
-                FIG. 01 <span className={c("caption-divider")}>/</span>{" "}
-                {t.artCaption}
-              </span>
-              <span className={c("art-signature")}>
-                RCS <span aria-hidden="true">✳</span> BELGIUM
-              </span>
-            </figcaption>
-          </figure>
+          <Dashboard locale={locale} publications={publications} />
           <div className={c("hero-bottom")}>
             <span>{t.heroBottom}</span>
-            <a href="#recherches">
+            <a href="#equipe">
               <span>{t.scroll}</span>
               <Arrow direction="down" />
             </a>
