@@ -38,7 +38,8 @@ Transfer ownership of the two application data directories and the current
 release's `.next/cache` to that account. Do not change SSH identities, password
 hashes, provider credentials or Discord configuration.
 
-The executable release stays outside the runtime account's ownership. The
+The executable release is owned by root, with read/traverse permission for the
+runtime group only (not write permission). The
 drop-in limits filesystem writes to those three directories, hides home
 directories, removes capabilities and imposes CPU, memory and task limits.
 The deployment helper preserves the drop-in and prepares the cache for every

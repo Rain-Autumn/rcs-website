@@ -131,7 +131,14 @@ if [[ ! -d "$release" ]]; then
   [[ -d "$staging/.next/static" ]] || fail "static Next.js assets are missing"
   [[ -d "$staging/public" ]] || fail "public assets are missing"
 
-  chown -R debian:debian "$staging"
+  if [[ -f "$HARDENING_FILE" ]]; then
+    [[ ! -L "$HARDENING_FILE" ]] || fail "security configuration is a symlink"
+    id rcs-site >/dev/null 2>&1 || fail "dedicated runtime account is missing"
+    chown -hR root:rcs-site "$staging"
+    chmod -R u=rwX,g=rX,o= "$staging"
+  else
+    chown -hR debian:debian "$staging"
+  fi
   chmod 0755 "$staging"
   mv -- "$staging" "$release"
   staging=""

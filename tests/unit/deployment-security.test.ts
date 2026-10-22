@@ -38,6 +38,8 @@ describe("production runtime isolation", () => {
   it("keeps hardened cache ownership and rollback releases across deployments", () => {
     const script = read("deploy/rcs-deploy");
     expect(script).toContain("zzz-security.conf");
+    expect(script).toContain('chown -hR root:rcs-site "$staging"');
+    expect(script).toContain('chmod -R u=rwX,g=rX,o= "$staging"');
     expect(script).toContain('chown -hR rcs-site:rcs-site "$cache"');
     expect(script).toContain('[[ ! -L "$cache" ]]');
     expect(script).not.toContain('rm -rf --one-file-system -- "$candidate"');
