@@ -8,6 +8,7 @@ readonly CURRENT_LINK="${APP_ROOT}/current"
 readonly INCOMING_ROOT="/var/lib/rcs-deploy/incoming"
 readonly OVERRIDE_DIR="/etc/systemd/system/${SERVICE}.d"
 readonly OVERRIDE_FILE="${OVERRIDE_DIR}/zz-github-cd.conf"
+readonly HARDENING_FILE="${OVERRIDE_DIR}/zzz-security.conf"
 
 fail() {
   printf 'RCS deployment refused: %s\n' "$*" >&2
@@ -130,12 +131,30 @@ if [[ ! -d "$release" ]]; then
   [[ -d "$staging/.next/static" ]] || fail "static Next.js assets are missing"
   [[ -d "$staging/public" ]] || fail "public assets are missing"
 
-  chown -R debian:debian "$staging"
+  if [[ -f "$HARDENING_FILE" ]]; then
+    [[ ! -L "$HARDENING_FILE" ]] || fail "security configuration is a symlink"
+    id rcs-site >/dev/null 2>&1 || fail "dedicated runtime account is missing"
+    chown -hR root:rcs-site "$staging"
+    chmod -R u=rwX,g=rX,o= "$staging"
+  else
+    chown -hR debian:debian "$staging"
+  fi
   chmod 0755 "$staging"
   mv -- "$staging" "$release"
   staging=""
 else
   [[ -f "$release/server.js" ]] || fail "existing release is incomplete"
+fi
+
+# The security drop-in survives deployments. Keep only the image/data cache
+# writable by its dedicated runtime account, never the executable bundle.
+if [[ -f "$HARDENING_FILE" ]]; then
+  [[ ! -L "$HARDENING_FILE" ]] || fail "security configuration is a symlink"
+  id rcs-site >/dev/null 2>&1 || fail "dedicated runtime account is missing"
+  cache="${release}/.next/cache"
+  [[ ! -L "$cache" ]] || fail "runtime cache is a symbolic link"
+  install -d -o rcs-site -g rcs-site -m 0700 "$cache"
+  chown -hR rcs-site:rcs-site "$cache"
 fi
 
 node_bin="$(command -v node)"
@@ -172,20 +191,7 @@ done
 [[ "$healthy" -eq 1 ]] || false
 switched=0
 
-current_target="$(readlink -f -- "$CURRENT_LINK")"
-mapfile -t old_releases < <(
-  find "$RELEASE_ROOT" -mindepth 1 -maxdepth 1 -type d -printf '%T@ %f\n' |
-    sort -rn |
-    tail -n +6 |
-    cut -d' ' -f2-
-)
-
-for release_name in "${old_releases[@]}"; do
-  [[ "$release_name" =~ ^[0-9a-f]{40}$ ]] || continue
-  candidate="$(realpath -e -- "${RELEASE_ROOT}/${release_name}")"
-  [[ "$candidate" == "${RELEASE_ROOT}/"* ]] || continue
-  [[ "$candidate" != "$current_target" ]] || continue
-  rm -rf --one-file-system -- "$candidate"
-done
+# Keep previous releases available for rollback. Retention/cleanup is a separate,
+# explicitly approved maintenance action, not a side effect of deploying code.
 
 printf 'RCS deployment successful: %s\n' "$sha"
