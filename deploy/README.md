@@ -27,3 +27,26 @@ Runtime secrets and publication data remain outside the repository:
 - `/var/lib/rcs/team-members`
 
 The GitHub switch is the repository variable `RCS_DEPLOY_ENABLED`. Set it to `false` to keep CI active while pausing production deployments.
+
+## Runtime isolation
+
+`rcs-site-security.conf` is an operator-installed systemd drop-in, not an
+automatic bootstrap or credential migration. Install it as
+`/etc/systemd/system/raiju-site.service.d/zzz-security.conf` only after a verified
+recovery checkpoint and preparation of the locked, non-login `rcs-site` account.
+Transfer ownership of the two application data directories and the current
+release's `.next/cache` to that account. Do not change SSH identities, password
+hashes, provider credentials or Discord configuration.
+
+The executable release stays outside the runtime account's ownership. The
+drop-in limits filesystem writes to those three directories, hides home
+directories, removes capabilities and imposes CPU, memory and task limits.
+The deployment helper preserves the drop-in and prepares the cache for every
+new release once hardening is enabled. Previous releases are retained rather
+than automatically deleted.
+
+Validate the merged systemd configuration, restart only `raiju-site.service`,
+then check FR/EN/NL pages, image optimisation and access to existing Research
+and Team data. Keep rollback metadata for the previous directory owners and
+drop-in state. A failed health check must restore those owners and the previous
+configuration before restarting the prior runtime.
