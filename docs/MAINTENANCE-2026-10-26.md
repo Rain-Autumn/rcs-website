@@ -12,6 +12,7 @@ No changes to VPS credentials, private data, bots, Evidence Engine or RCS Linux.
 - Adds Vite 8.3.5 explicitly so test tools do not retain an outdated peer copy.
 - Updates the existing undici override to 7.30.1; does not weaken audit policies.
 - Node types 22.20.5 match the deployed Node 22 runtime, rather than #35's Node 26 types.
+  Dependabot keeps their minor/patch updates but does not propose a different runtime's major types.
 - CodeQL action 4.39.1 is pinned to the verified release commit (Dependabot #63).
 - CI audits the entire graph, and tests the production build with Chromium before deployment.
 
