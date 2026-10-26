@@ -57,6 +57,7 @@ export const copy = {
     backTop: "Retour en haut",
     latest: "DERNIÈRE PUBLICATION",
     readStudy: "Lire l’étude",
+    readOnSite: "Lire sur le site RCS",
     categoryAI: "INTELLIGENCE ARTIFICIELLE",
     categorySystems: "SYSTÈMES & COMPRESSION",
     noResults: "Aucune publication ne correspond.",
@@ -121,6 +122,7 @@ export const copy = {
     backTop: "Back to top",
     latest: "LATEST PUBLICATION",
     readStudy: "Read the study",
+    readOnSite: "Read on the RCS site",
     categoryAI: "ARTIFICIAL INTELLIGENCE",
     categorySystems: "SYSTEMS & COMPRESSION",
     noResults: "No matching publications.",
@@ -184,6 +186,7 @@ export const copy = {
     backTop: "Naar boven",
     latest: "NIEUWSTE PUBLICATIE",
     readStudy: "Lees het onderzoek",
+    readOnSite: "Lees op de RCS-site",
     categoryAI: "KUNSTMATIGE INTELLIGENTIE",
     categorySystems: "SYSTEMEN & COMPRESSIE",
     noResults: "Geen overeenkomende publicaties.",
@@ -208,6 +211,7 @@ export type OnePagePublication = {
   art: PublicationArt;
   tags: string[];
   href: string;
+  localHref?: string;
   doi?: string;
   year: string;
 };
@@ -274,6 +278,7 @@ export function getOnePagePublications(
           ? "https://doi.org/" + project.doi
           : (project.href ?? "#recherches")),
       doi: project.doi,
+      localHref: project.href,
       year: project.publicationDate?.slice(0, 4) ?? "2026",
     }),
   );

@@ -568,6 +568,7 @@
 }
 .page .article-links {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   margin-top: auto;
@@ -587,6 +588,7 @@
   text-underline-offset: 4px;
 }
 .page .article-year {
+  margin-left: auto;
   font: 9px var(--mono);
   color: #848978;
 }
