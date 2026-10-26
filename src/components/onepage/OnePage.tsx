@@ -348,6 +348,16 @@ export function OnePage({
                         ))}
                       </div>
                       <div className={c("article-links")}>
+                        {publication.localHref && (
+                          <Link
+                            href={publication.localHref}
+                            prefetch={false}
+                            aria-label={`${t.readOnSite} — ${publication.title}`}
+                          >
+                            <span>{t.readOnSite}</span>
+                            <Arrow />
+                          </Link>
+                        )}
                         <a
                           href={publication.href}
                           target="_blank"

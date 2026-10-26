@@ -3,6 +3,7 @@ node_modules/
 .next/
 out/
 coverage/
+.vitest/
 playwright-report/
 test-results/
 integrations/dist/

@@ -8,6 +8,10 @@ updates:
       time: "05:00"
       timezone: Europe/Brussels
     open-pull-requests-limit: 5
+    # The deployment and CI use Node 22; newer runtime types are not a runtime update.
+    ignore:
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
     commit-message:
       prefix: deps
     groups:

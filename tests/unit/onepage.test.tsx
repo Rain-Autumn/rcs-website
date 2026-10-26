@@ -35,6 +35,33 @@ describe("approved onepage", () => {
     );
     expect(filterPublications(items, "all", "zzzzzz")).toHaveLength(0);
   });
+  it.each(languages)(
+    "%s SSR links the local RP003 article without replacing its confirmed DOI",
+    (locale) => {
+      const publications = getOnePagePublications(locale);
+      const localPath = `/${locale}/research/rp-003`;
+      expect(publications.filter((item) => item.localHref)).toHaveLength(1);
+      expect(
+        publications.find((item) => item.id === "RCS-RP-003")?.localHref,
+      ).toBe(localPath);
+      const host = document.createElement("div");
+      host.innerHTML = renderToStaticMarkup(
+        <OnePage locale={locale} publications={publications} members={[]} />,
+      );
+      const card = host.querySelector("#RCS-RP-003");
+      const localLink = card?.querySelector(`a[href="${localPath}"]`);
+      expect(localLink?.textContent).toContain(copy[locale].readOnSite);
+      expect(localLink?.getAttribute("aria-label")).toContain(
+        publications.find((item) => item.id === "RCS-RP-003")!.title,
+      );
+      expect(localLink?.hasAttribute("target")).toBe(false);
+      for (const item of publications) {
+        const doiLink = host.querySelector(`a[href="${item.href}"]`);
+        expect(doiLink?.getAttribute("rel")).toBe("noopener noreferrer");
+        expect(doiLink?.getAttribute("target")).toBe("_blank");
+      }
+    },
+  );
   it("has the same copy keys across locales", () => {
     for (const locale of languages)
       expect(Object.keys(copy[locale]).sort()).toEqual(
