@@ -7,7 +7,11 @@ import {
   getOnePagePublications,
   languages,
 } from "@/content/onepage";
-import { localizedMember, officialTeamMembers } from "@/content/team";
+import {
+  localizedMember,
+  malikaKayo,
+  officialTeamMembers,
+} from "@/content/team";
 
 describe("approved onepage", () => {
   it("keeps four publications with their confirmed DOIs in each language", () => {
@@ -83,14 +87,52 @@ describe("approved onepage", () => {
     expect(html).toContain("https://evidence-engine.raijucloudsystem.com/");
     expect(html).toContain("Hugues Henrotte");
     expect(html).toContain("Jacob Matthews");
+    expect(html).toContain("Malika Kayo");
     expect(html.match(/data-emblem="arkenstone"/g) || []).toHaveLength(1);
-    expect(html.match(/data-emblem="rcs"/g) || []).toHaveLength(1);
+    expect(html.match(/data-emblem="rcs"/g) || []).toHaveLength(2);
     expect(html).not.toContain("person-monogram");
     expect(html).not.toContain("PROTOTYPE LOCAL");
     expect(html).not.toContain("<form");
     for (const item of getOnePagePublications("fr"))
       expect(html).toContain(item.href);
   });
+
+  it.each(languages)(
+    "%s welcomes Malika with only her confirmed cybersecurity role",
+    (locale) => {
+      const members = officialTeamMembers.map((member) =>
+        localizedMember(member, locale),
+      );
+      expect(new Set(members.map((member) => member.id)).size).toBe(
+        members.length,
+      );
+      expect(members.map((member) => member.name)).toEqual([
+        "Hugues Henrotte",
+        "Jacob Matthews",
+        "Malika Kayo",
+      ]);
+      expect(malikaKayo.type).toBe("member");
+      expect(malikaKayo.specialties).toEqual(["CYBERSECURITY"]);
+      expect(malikaKayo.certifications).toEqual([]);
+      const host = document.createElement("div");
+      host.innerHTML = renderToStaticMarkup(
+        <OnePage
+          locale={locale}
+          publications={getOnePagePublications(locale)}
+          members={members}
+        />,
+      );
+      const card = host.querySelector("#RCS-TM-003");
+      expect(card?.querySelector("h3")?.textContent).toBe("Malika Kayo");
+      expect(card?.textContent).toContain(malikaKayo.translations[locale].role);
+      expect(card?.textContent).toContain(malikaKayo.translations[locale].bio);
+      expect(card?.querySelector('[data-emblem="rcs"]')).not.toBeNull();
+      expect(card?.querySelector('[data-emblem="arkenstone"]')).toBeNull();
+      expect(card?.querySelector("details")).toBeNull();
+      expect(card?.querySelector("a")).toBeNull();
+      expect(copy[locale].teamIntro).not.toMatch(/^(Deux|Two|Twee)\b/);
+    },
+  );
 
   it.each(languages)(
     "%s renders decorative arrows as monochrome SVGs instead of platform emoji",

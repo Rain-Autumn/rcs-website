@@ -130,6 +130,7 @@ const checks = [
   [
     "actual members and certifications retained",
     /Jacob Matthews/.test(text) &&
+      /Malika Kayo/.test(text) &&
       /Build an AI Agent/.test(text) &&
       /CREDLY-3dfee891-aad9-4890-856d-d7c1472b7a4e/.test(text) &&
       /CyberFirst Advanced course/.test(text),

@@ -58,6 +58,41 @@ test("language links preserve the current section", async ({ page }) => {
   await expect(page).toHaveURL(/\/nl#recherches$/);
   await expect(page.locator("html")).toHaveAttribute("lang", "nl");
 });
+
+test("Malika's cybersecurity card is localized and readable on desktop and mobile", async ({
+  page,
+}, testInfo) => {
+  const roles = {
+    fr: "Membre · Cybersécurité",
+    en: "Member · Cybersecurity",
+    nl: "Lid · Cyberbeveiliging",
+  };
+  for (const width of [1440, 390]) {
+    await page.setViewportSize({ width, height: 900 });
+    for (const [locale, role] of Object.entries(roles)) {
+      await page.goto(`/${locale}#equipe`);
+      await expect(page.locator("#equipe article")).toHaveCount(3);
+      const card = page.locator("#RCS-TM-003");
+      await card.scrollIntoViewIfNeeded();
+      await expect(
+        card.getByRole("heading", { name: "Malika Kayo", exact: true }),
+      ).toBeVisible();
+      await expect(card.getByText(role, { exact: true })).toBeVisible();
+      await expect(card.locator('[data-emblem="rcs"] img')).toBeVisible();
+      await expect(card.locator("details")).toHaveCount(0);
+      const bounds = await card.boundingBox();
+      expect(bounds).not.toBeNull();
+      expect(bounds!.x).toBeGreaterThanOrEqual(0);
+      expect(bounds!.x + bounds!.width).toBeLessThanOrEqual(width + 1);
+      if (locale === "fr") {
+        await page.locator("#equipe").screenshot({
+          path: testInfo.outputPath(`team-fr-${width}.png`),
+        });
+      }
+    }
+  }
+});
+
 test("legacy routes lead to the correct home anchors", async ({ page }) => {
   for (const [route, anchor] of [
     ["presentation", "accueil"],
