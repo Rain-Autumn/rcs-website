@@ -3,17 +3,17 @@
 [![CI](https://github.com/Rain-Autumn/rcs-website/actions/workflows/ci.yml/badge.svg)](https://github.com/Rain-Autumn/rcs-website/actions/workflows/ci.yml)
 [![CodeQL](https://github.com/Rain-Autumn/rcs-website/actions/workflows/codeql.yml/badge.svg)](https://github.com/Rain-Autumn/rcs-website/actions/workflows/codeql.yml)
 
-Public website for **Raiju Cloud System (RCS)**, an independent technology and systems structure founded by Hugues Henrotte. The interface combines a restrained retro-futurist identity with a predominantly light, editorial layout.
+Public website for **Raiju Cloud System (RCS)**, an independent technology and research initiative founded by Hugues Henrotte. The interface combines a restrained retro-futurist identity with a predominantly light, editorial layout.
 
 Live site: [raijucloudsystem.com](https://raijucloudsystem.com)
 
 ## What the project contains
 
-- A multilingual system hub in French, English and Dutch.
-- A dedicated institutional presentation preserving the complete RCS narrative.
-- A public **RCS Evidence Engine** overview linked to the Dragon One demonstrator at [`evidence-engine.raijucloudsystem.com`](https://evidence-engine.raijucloudsystem.com). Dragon One coordinates at most two request-scoped ephemeral specialists before the permanent private verifier, Dragon Two, audits the artifact.
-- Dedicated Research routes with structured technical publications.
-- A normalized Team directory with localized roles, profiles and certifications.
+- A multilingual landing page in French, English and Dutch.
+- A dashboard introducing Even / **RCS Evidence Engine**, Research and Security, followed by the Team and Contact sections.
+- Access to the experimental Evidence Engine application at [`evidence-engine.raijucloudsystem.com`](https://evidence-engine.raijucloudsystem.com), separate from this public website.
+- A searchable, filterable library of four published research records, with confirmed DOI links and an on-site RP003 article.
+- A team directory with localized roles and biographies; certifications appear only when supplied.
 - Separate password-protected administration forms for Research and Team.
 - Private server-side storage for publication metadata and PDF reports.
 - Responsive navigation, reduced-motion support and progressive visual effects.
@@ -21,32 +21,59 @@ Live site: [raijucloudsystem.com](https://raijucloudsystem.com)
 - Structured Organization, Team and Research data expressed through JSON-LD.
 - Automatic IndexNow notification after successful production deployments.
 
-Published and planned research are distinguished explicitly. RCS-RP-001 v1.0 is publicly archived on Zenodo under DOI [`10.5281/zenodo.21994886`](https://doi.org/10.5281/zenodo.21994886), and RCS-RP-002 v0.2 is publicly archived under DOI [`10.5281/zenodo.22110548`](https://doi.org/10.5281/zenodo.22110548).
+Published and planned work are distinguished explicitly. The current library links to:
+
+| Publication | DOI                                                                  |
+| ----------- | -------------------------------------------------------------------- |
+| RCS-RP-001  | [`10.5281/zenodo.21994886`](https://doi.org/10.5281/zenodo.21994886) |
+| RCS-RP-002  | [`10.5281/zenodo.22110548`](https://doi.org/10.5281/zenodo.22110548) |
+| RCS-RP-003  | [`10.5281/zenodo.23373563`](https://doi.org/10.5281/zenodo.23373563) |
+| RCS-RP-004  | [`10.5281/zenodo.23411388`](https://doi.org/10.5281/zenodo.23411388) |
+
+## Team
+
+| Member          | Public role                                |
+| --------------- | ------------------------------------------ |
+| Hugues Henrotte | Founder · Systems engineering              |
+| Jacob Matthews  | Member · Cybersecurity & digital forensics |
+| Malika Kayo     | Member · Cybersecurity                     |
+
+The [public team section](https://raijucloudsystem.com/fr#equipe) is available in
+French, English and Dutch. Official profiles are maintained in
+[`src/content/team.ts`](src/content/team.ts); no photo, external profile,
+certification or experience is inferred for a new member. Even is RCS's virtual
+AI spokesperson, not a human team member.
 
 ## Routes
 
-| Area            | French                | English               | Dutch                 |
-| --------------- | --------------------- | --------------------- | --------------------- |
-| System hub      | `/fr`                 | `/en`                 | `/nl`                 |
-| Presentation    | `/fr/presentation`    | `/en/presentation`    | `/nl/presentation`    |
-| Evidence Engine | `/fr/evidence-engine` | `/en/evidence-engine` | `/nl/evidence-engine` |
-| Research        | `/fr/research`        | `/en/research`        | `/nl/research`        |
-| Team            | `/fr/team`            | `/en/team`            | `/nl/team`            |
+| Area             | French                | English               | Dutch                 |
+| ---------------- | --------------------- | --------------------- | --------------------- |
+| Dashboard / Even | `/fr#accueil`         | `/en#accueil`         | `/nl#accueil`         |
+| Research library | `/fr#recherches`      | `/en#recherches`      | `/nl#recherches`      |
+| Security         | `/fr#securite`        | `/en#securite`        | `/nl#securite`        |
+| Team             | `/fr#equipe`          | `/en#equipe`          | `/nl#equipe`          |
+| Contact          | `/fr#contact`         | `/en#contact`         | `/nl#contact`         |
+| RP003 article    | `/fr/research/rp-003` | `/en/research/rp-003` | `/nl/research/rp-003` |
 
-The root route `/` provides the language entry point.
+The root route `/` redirects to `/fr`, without a language gate. Language links
+preserve the current section. Legacy `/presentation`, `/research`, `/team`,
+`/evidence-engine` and `/squadron` routes redirect to the matching localized
+landing-page anchor; they are not separate public landing pages. Administration
+remains at `/{locale}/admin`, excluded from indexing and password-protected.
 
 ## Technical architecture
 
 ```text
 src/
 ├── app/
-│   ├── (portal)/                  # Language entry point
-│   ├── (localized)/[locale]/      # Hub, Presentation, Evidence Engine, Research and Team
+│   ├── (portal)/                  # Root redirect to /fr
+│   ├── (localized)/[locale]/      # Landing page, RP003 article, admin and legacy redirects
 │   └── api/                       # Authentication, publications and members
 ├── components/
 │   ├── layout/                    # Header and navigation
+│   ├── onepage/                   # Current public dashboard, library, team and contact
 │   ├── research/                  # Research publication form
-│   ├── sections/                  # Institutional presentation sections
+│   ├── sections/                  # Retained institutional presentation components
 │   ├── team/                      # Team member form
 │   ├── three/                     # Progressive Three.js scenes
 │   └── ui/                        # Shared interface primitives
@@ -81,7 +108,7 @@ The examples in [`deploy/`](deploy/) are integration references and must be revi
 
 ## Local development
 
-Requirements: Node.js 22+ and pnpm 11.15.1.
+Requirements: Node.js >=22.13.0 and pnpm 11.15.1.
 
 ```bash
 pnpm install --frozen-lockfile
@@ -106,9 +133,14 @@ pnpm typecheck
 pnpm lint
 pnpm test
 NEXT_TELEMETRY_DISABLED=1 pnpm build
+PLAYWRIGHT_USE_PRODUCTION=1 pnpm exec playwright test --project=chromium --workers=2
 ```
 
-The GitHub Actions workflow runs the same validation chain on every push to `main` and on pull requests.
+The GitHub Actions workflow runs the same validation chain on every push to `main`
+and on pull requests, plus a dependency audit. The team browser test checks all
+three languages at desktop and mobile widths. Production deployment follows
+successful validation and release attestations; credentials and server data are
+not edited by content-only changes.
 
 ## Source availability
 
