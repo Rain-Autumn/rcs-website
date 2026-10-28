@@ -20,7 +20,7 @@ export const teamCopy = {
     directoryEyebrow: "01 // DIRECTORY",
     directoryTitle: "Membres de RCS",
     directoryLead:
-      "La structure compte actuellement deux membres déclarés. Cette page évoluera avec les contributions réelles.",
+      "Découvrez les personnes qui contribuent à RCS et leurs domaines de travail. Cette page évolue avec les contributions réelles.",
     specialties: "DOMAINES",
     certifications: "CERTIFICATIONS",
     showCertifications: "AFFICHER",
@@ -56,7 +56,7 @@ export const teamCopy = {
     directoryEyebrow: "01 // DIRECTORY",
     directoryTitle: "RCS members",
     directoryLead:
-      "The structure currently has two declared members. This page will evolve with real contributions.",
+      "Meet the people contributing to RCS and their fields of work. This page evolves with real contributions.",
     specialties: "FIELDS",
     certifications: "CERTIFICATIONS",
     showCertifications: "SHOW",
@@ -92,7 +92,7 @@ export const teamCopy = {
     directoryEyebrow: "01 // DIRECTORY",
     directoryTitle: "RCS-leden",
     directoryLead:
-      "De structuur telt momenteel twee aangegeven leden. Deze pagina evolueert met echte bijdragen.",
+      "Ontdek de mensen die bijdragen aan RCS en hun werkgebieden. Deze pagina evolueert met echte bijdragen.",
     specialties: "DOMEINEN",
     certifications: "CERTIFICERINGEN",
     showCertifications: "TONEN",
@@ -227,7 +227,33 @@ export const jacobMatthews: TeamMember = {
   ],
 };
 
-export const officialTeamMembers: TeamMember[] = [founder, jacobMatthews];
+export const malikaKayo: TeamMember = {
+  id: "RCS-TM-003",
+  name: "Malika Kayo",
+  type: "member",
+  translations: {
+    fr: {
+      role: "Membre · Cybersécurité",
+      bio: "Malika rejoint Raiju Cloud System en tant que membre de l’équipe cybersécurité.",
+    },
+    en: {
+      role: "Member · Cybersecurity",
+      bio: "Malika joins Raiju Cloud System as a member of the cybersecurity team.",
+    },
+    nl: {
+      role: "Lid · Cyberbeveiliging",
+      bio: "Malika sluit zich aan bij Raiju Cloud System als lid van het cyberbeveiligingsteam.",
+    },
+  },
+  specialties: ["CYBERSECURITY"],
+  certifications: [],
+};
+
+export const officialTeamMembers: TeamMember[] = [
+  founder,
+  jacobMatthews,
+  malikaKayo,
+];
 
 export function localizedMember(member: TeamMember, locale: Locale) {
   return { ...member, ...member.translations[locale] };

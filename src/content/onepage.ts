@@ -40,7 +40,7 @@ export const copy = {
     teamLabel: "L’ÉQUIPE",
     teamTitle: "Derrière les idées.",
     teamIntro:
-      "Deux parcours complémentaires, un même goût pour l’expérimentation technique.",
+      "Des parcours complémentaires, un même goût pour l’expérimentation technique.",
     huguesRole: "Fondateur · Ingénierie des systèmes",
     huguesBio:
       "Développement logiciel, infrastructure et orchestration IA. À l’origine de RCS et de ses travaux de recherche.",
@@ -105,7 +105,7 @@ export const copy = {
     teamLabel: "THE TEAM",
     teamTitle: "The people behind it.",
     teamIntro:
-      "Two complementary backgrounds, a shared curiosity for technical experimentation.",
+      "Complementary backgrounds, a shared curiosity for technical experimentation.",
     huguesRole: "Founder · Systems engineering",
     huguesBio:
       "Software development, infrastructure and AI orchestration. Founder of RCS and author of its research.",
@@ -169,7 +169,7 @@ export const copy = {
     teamLabel: "HET TEAM",
     teamTitle: "De mensen erachter.",
     teamIntro:
-      "Twee aanvullende achtergronden, dezelfde nieuwsgierigheid naar technische experimenten.",
+      "Aanvullende achtergronden, dezelfde nieuwsgierigheid naar technische experimenten.",
     huguesRole: "Oprichter · Systems engineering",
     huguesBio:
       "Softwareontwikkeling, infrastructuur en AI-orkestratie. Oprichter van RCS en auteur van het onderzoek.",
