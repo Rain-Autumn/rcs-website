@@ -52,6 +52,9 @@ jobs:
       - name: Run ESLint
         run: pnpm lint
 
+      - name: Verify migrated toolchain and lint-rule compatibility
+        run: pnpm test:toolchain
+
       - name: Run unit tests
         run: pnpm test
 
