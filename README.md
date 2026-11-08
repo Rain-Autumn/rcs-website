@@ -108,7 +108,9 @@ The examples in [`deploy/`](deploy/) are integration references and must be revi
 
 ## Local development
 
-Requirements: Node.js >=22.13.0 and pnpm 11.15.1.
+Requirements: Node.js 22.22.2+, 24.15.0+, or 26+ and pnpm 11.15.1. CI stays on
+Node 22. See [the toolchain migration notes](docs/MAINTENANCE-2026-11-08.md) for
+the native TypeScript 7 check and the compiler API retained for Next.js.
 
 ```bash
 pnpm install --frozen-lockfile
