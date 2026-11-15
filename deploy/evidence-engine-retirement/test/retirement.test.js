@@ -42,7 +42,13 @@ test("every route and standard method returns 410 without redirect or assets", a
       if (method === "HEAD") assert.equal(body, "");
       else {
         assert.match(body, /service de conversation.*a été retiré/);
-        assert.match(body, /https:\/\/raijucloudsystem\.com\/fr/);
+        assert.ok(
+          body
+            .split("\n")
+            .includes(
+              "Retrouvez Raiju Cloud System : https://raijucloudsystem.com/fr",
+            ),
+        );
         assert.doesNotMatch(body, /<script|<link|<iframe|<form|<!DOCTYPE/i);
       }
     }
