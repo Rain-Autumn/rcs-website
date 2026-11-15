@@ -72,7 +72,7 @@ describe("approved onepage", () => {
         Object.keys(copy.fr).sort(),
       );
   });
-  it("SSR renders the product, publications, actual people and founder-only Arkenstone", () => {
+  it("SSR introduces research, preserves publications and people, and retires the chat entry points", () => {
     const members = officialTeamMembers.map((member) =>
       localizedMember(member, "fr"),
     );
@@ -84,7 +84,9 @@ describe("approved onepage", () => {
       />,
     );
     expect(html.match(/<section\b/g) || []).toHaveLength(3);
-    expect(html).toContain("https://evidence-engine.raijucloudsystem.com/");
+    expect(html).not.toContain("https://evidence-engine.raijucloudsystem.com/");
+    expect(html).not.toContain("even-portrait");
+    expect(html).not.toContain('data-dashboard-panel="even"');
     expect(html).toContain("Hugues Henrotte");
     expect(html).toContain("Jacob Matthews");
     expect(html).toContain("Malika Kayo");

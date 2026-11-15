@@ -58,6 +58,9 @@ jobs:
       - name: Run unit tests
         run: pnpm test
 
+      - name: Check the standalone Even retirement response
+        run: node --test deploy/evidence-engine-retirement/test/retirement.test.js
+
       - name: Build production bundle
         env:
           NEXT_TELEMETRY_DISABLED: 1

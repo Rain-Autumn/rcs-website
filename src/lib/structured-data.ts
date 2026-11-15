@@ -330,16 +330,6 @@ export function onePageStructuredData(
           "@id": pageUrl + "#" + id,
         })),
       },
-      {
-        "@type": "WebApplication",
-        "@id": RCS_SITE_URL + "/#evidence-engine",
-        name: "RCS Evidence Engine",
-        url: "https://evidence-engine.raijucloudsystem.com/",
-        applicationCategory: "Artificial Intelligence",
-        operatingSystem: "Web",
-        description: "Experimental AI application",
-        creator: { "@id": organizationId },
-      },
       ...members.map((member) => ({
         "@type": "Person",
         "@id": pageUrl + "#" + member.id,

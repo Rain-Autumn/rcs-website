@@ -10,8 +10,8 @@ Live site: [raijucloudsystem.com](https://raijucloudsystem.com)
 ## What the project contains
 
 - A multilingual landing page in French, English and Dutch.
-- A dashboard introducing Even / **RCS Evidence Engine**, Research and Security, followed by the Team and Contact sections.
-- Access to the experimental Evidence Engine application at [`evidence-engine.raijucloudsystem.com`](https://evidence-engine.raijucloudsystem.com), separate from this public website.
+- A research-focused introduction with an ivory-and-copper circuit watermark, followed by the existing Research, Team and Contact content.
+- No online Even chat links or localized chat landing page. The separately hosted chat backend requires its own retirement deployment; removing website links alone does not disable its API.
 - A searchable, filterable library of four published research records, with confirmed DOI links and an on-site RP003 article.
 - A team directory with localized roles and biographies; certifications appear only when supplied.
 - Separate password-protected administration forms for Research and Team.
@@ -48,18 +48,20 @@ AI spokesperson, not a human team member.
 
 | Area             | French                | English               | Dutch                 |
 | ---------------- | --------------------- | --------------------- | --------------------- |
-| Dashboard / Even | `/fr#accueil`         | `/en#accueil`         | `/nl#accueil`         |
+| Introduction     | `/fr#accueil`         | `/en#accueil`         | `/nl#accueil`         |
 | Research library | `/fr#recherches`      | `/en#recherches`      | `/nl#recherches`      |
-| Security         | `/fr#securite`        | `/en#securite`        | `/nl#securite`        |
 | Team             | `/fr#equipe`          | `/en#equipe`          | `/nl#equipe`          |
 | Contact          | `/fr#contact`         | `/en#contact`         | `/nl#contact`         |
 | RP003 article    | `/fr/research/rp-003` | `/en/research/rp-003` | `/nl/research/rp-003` |
 
 The root route `/` redirects to `/fr`, without a language gate. Language links
-preserve the current section. Legacy `/presentation`, `/research`, `/team`,
-`/evidence-engine` and `/squadron` routes redirect to the matching localized
+preserve the current section. Legacy `/presentation`, `/research`, `/team`
+and `/squadron` routes redirect to the matching localized
 landing-page anchor; they are not separate public landing pages. Administration
 remains at `/{locale}/admin`, excluded from indexing and password-protected.
+The retired `/{locale}/evidence-engine` route is no longer served and returns 404.
+The RCS Shield panel and its navigation entry are temporarily disabled through
+`src/lib/site-features.ts`; the project content is retained for reactivation.
 
 ## Technical architecture
 

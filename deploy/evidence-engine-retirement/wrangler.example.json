@@ -1,0 +1,9 @@
+{
+  "name": "replace-with-confirmed-worker-name",
+  "main": "src/index.js",
+  "compatibility_date": "2026-11-15",
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [],
+  "observability": { "enabled": false }
+}
