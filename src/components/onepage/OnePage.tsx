@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import {
   copy,
-  EE_URL,
   filterPublications,
   languages,
   type OnePagePublication,
@@ -13,8 +12,10 @@ import {
 } from "@/content/onepage";
 import type { Locale } from "@/content/i18n";
 import type { TeamMember } from "@/types/team";
+import { siteFeatures } from "@/lib/site-features";
 import styles from "./OnePage.module.css";
 import { Dashboard, dashboardCopy } from "./Dashboard";
+import { ResearchHero } from "./ResearchHero";
 
 export type OnePageMember = TeamMember & { role: string; bio: string };
 const c = (...names: string[]) =>
@@ -26,12 +27,15 @@ const subscribeHash = (onChange: () => void) => {
   window.addEventListener("hashchange", onChange);
   return () => window.removeEventListener("hashchange", onChange);
 };
+const sectionHashes = [
+  "#accueil",
+  "#recherches",
+  ...(siteFeatures.securitySection ? ["#securite"] : []),
+  "#equipe",
+  "#contact",
+];
 const getHash = () =>
-  ["#accueil", "#recherches", "#securite", "#equipe", "#contact"].includes(
-    window.location.hash,
-  )
-    ? window.location.hash
-    : "";
+  sectionHashes.includes(window.location.hash) ? window.location.hash : "";
 const serverHash = () => "";
 
 function Arrow({
@@ -140,16 +144,20 @@ export function OnePage({
                 ["equipe", t.navTeam],
                 ["contact", t.navContact],
               ] as const
-            ).map(([id, label]) => (
-              <a
-                key={id}
-                href={`#${id}`}
-                onClick={() => setMenuOpen(false)}
-                aria-current={hash === `#${id}` ? "location" : undefined}
-              >
-                {label}
-              </a>
-            ))}
+            )
+              .filter(
+                ([id]) => id !== "securite" || siteFeatures.securitySection,
+              )
+              .map(([id, label]) => (
+                <a
+                  key={id}
+                  href={`#${id}`}
+                  onClick={() => setMenuOpen(false)}
+                  aria-current={hash === `#${id}` ? "location" : undefined}
+                >
+                  {label}
+                </a>
+              ))}
           </nav>
           <div className={c("header-actions")}>
             <div
@@ -170,13 +178,8 @@ export function OnePage({
                 </Link>
               ))}
             </div>
-            <a
-              className={c("header-chat")}
-              href={EE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span>{t.headerChat}</span>
+            <a className={c("header-chat")} href="#contact">
+              <span>{t.navContact}</span>
               <Arrow />
             </a>
             <button
@@ -200,27 +203,7 @@ export function OnePage({
           id="accueil"
           aria-labelledby="hero-title"
         >
-          <div className={c("hero-top")}>
-            <div className={c("hero-heading")}>
-              <p className={c("eyebrow")}>
-                <span className={c("tiny-square")} aria-hidden="true" />
-                <span>{t.heroEyebrow}</span>
-              </p>
-              <h1 id="hero-title">
-                <span>{t.heroLine1}</span>
-                <br />
-                <span className={c("muted-title")}>{t.heroLine2}</span>
-                <span className={c("title-cursor")} aria-hidden="true" />
-              </h1>
-            </div>
-            <div className={c("hero-intro")}>
-              <p>{t.heroDescription}</p>
-              <span className={c("experimental")}>
-                <span aria-hidden="true" />
-                <span>{t.experimental}</span>
-              </span>
-            </div>
-          </div>
+          <ResearchHero locale={locale} />
           <Dashboard locale={locale} publications={publications} />
           <div className={c("hero-bottom")}>
             <span>{t.heroBottom}</span>

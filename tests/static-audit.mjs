@@ -21,9 +21,7 @@ const css = files
 const home = read("src/app/(localized)/[locale]/page.tsx");
 const landing = read("src/components/onepage/OnePage.tsx");
 const content = read("src/content/onepage.ts");
-const chatUrl = content.match(
-  /^export const EE_URL = ["']([^"']+)["'];$/m,
-)?.[1];
+const dashboard = read("src/components/onepage/Dashboard.tsx");
 const research = read("src/content/research.ts");
 const sitemap = read("src/app/sitemap.ts");
 const workflow = read(".github/workflows/ci.yml");
@@ -53,11 +51,10 @@ const checks = [
   ],
   [
     "legacy introduction pages redirect instead of duplicating home",
-    ["presentation", "research", "team", "evidence-engine", "squadron"].every(
-      (route) =>
-        /permanentRedirect/.test(
-          read("src/app/(localized)/[locale]/" + route + "/page.tsx"),
-        ),
+    ["presentation", "research", "team", "squadron"].every((route) =>
+      /permanentRedirect/.test(
+        read("src/app/(localized)/[locale]/" + route + "/page.tsx"),
+      ),
     ),
   ],
   [
@@ -67,9 +64,10 @@ const checks = [
       /htmlLanguages/.test(content),
   ],
   [
-    "separate EE chat URL unchanged",
-    chatUrl === "https://evidence-engine.raijucloudsystem.com/" &&
-      /href=\{EE_URL\}/.test(landing) &&
+    "retired chat page and landing-page entry points are absent",
+    !exists("src/app/(localized)/[locale]/evidence-engine/page.tsx") &&
+      !/EE_URL/.test(content + landing + dashboard) &&
+      !/even-portrait|data-dashboard-panel="even"/.test(dashboard) &&
       !/<iframe/.test(landing),
   ],
   [

@@ -6,15 +6,15 @@ test("root opens the single French landing page without an entry gate", async ({
   await page.goto("/");
   await expect(page).toHaveURL(/\/fr$/);
   await expect(page.getByRole("heading", { level: 1 })).toContainText(
-    "L’IA, de l’idée",
+    "Explorer l’intelligence",
   );
   await expect(
     page.getByRole("button", { name: "ENTER", exact: true }),
   ).toHaveCount(0);
   await expect(page.locator("main > section")).toHaveCount(3);
   await expect(
-    page.getByRole("link", { name: "Ouvrir Evidence Engine", exact: true }),
-  ).toHaveAttribute("href", "https://evidence-engine.raijucloudsystem.com/");
+    page.locator('a[href*="evidence-engine.raijucloudsystem.com"]'),
+  ).toHaveCount(0);
 });
 test("research filters, empty state and reset work", async ({ page }) => {
   await page.goto("/fr");
@@ -98,7 +98,6 @@ test("legacy routes lead to the correct home anchors", async ({ page }) => {
     ["presentation", "accueil"],
     ["research", "recherches"],
     ["team", "equipe"],
-    ["evidence-engine", "accueil"],
     ["squadron", "accueil"],
   ]) {
     await page.goto("/fr/" + route);

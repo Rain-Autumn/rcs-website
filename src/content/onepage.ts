@@ -3,7 +3,6 @@ import type { ResearchProject } from "@/types/research";
 import type { StoredResearch } from "@/lib/research-publications";
 import { getResearchProjects } from "@/content/research";
 
-export const EE_URL = "https://evidence-engine.raijucloudsystem.com/";
 export const languages = ["fr", "en", "nl"] as const;
 export const copy = {
   fr: {
@@ -13,14 +12,12 @@ export const copy = {
     navResearch: "Recherches",
     navTeam: "Équipe",
     navContact: "Contact",
-    headerChat: "Ouvrir EE",
-    heroEyebrow: "RECHERCHE APPLIQUÉE · INGÉNIERIE IA",
-    heroLine1: "L’IA, de l’idée",
-    heroLine2: "à l’expérience.",
-    heroDescription: "Utilisez Evidence Engine, notre IA expérimentale.",
-    openEE: "Ouvrir Evidence Engine",
+    heroEyebrow: "Recherche indépendante",
+    heroTitle: "Explorer l’intelligence artificielle.",
+    heroDescription:
+      "Raiju Cloud System est une initiative indépendante de recherche et d’expérimentation en intelligence artificielle.",
+    heroDiscover: "Découvrir RCS",
     exploreResearch: "Explorer les recherches",
-    experimental: "Un projet RCS en expérimentation.",
     heroAlt:
       "Illustration filaire originale : des documents reliés à un noyau RCS et à une interface abstraite d’intelligence artificielle.",
     artCaption: "DE L’IDÉE AU SYSTÈME",
@@ -78,14 +75,12 @@ export const copy = {
     navResearch: "Research",
     navTeam: "Team",
     navContact: "Contact",
-    headerChat: "Open EE",
-    heroEyebrow: "APPLIED RESEARCH · AI ENGINEERING",
-    heroLine1: "AI, from idea",
-    heroLine2: "to experiment.",
-    heroDescription: "Try Evidence Engine, our experimental AI.",
-    openEE: "Open Evidence Engine",
+    heroEyebrow: "Independent research",
+    heroTitle: "Exploring artificial intelligence.",
+    heroDescription:
+      "Raiju Cloud System is an independent initiative for research and experimentation in artificial intelligence.",
+    heroDiscover: "Discover RCS",
     exploreResearch: "Explore the research",
-    experimental: "An experimental RCS project.",
     heroAlt:
       "Original wireframe illustration: documents connected to an RCS core and an abstract artificial intelligence interface.",
     artCaption: "FROM IDEA TO SYSTEM",
@@ -142,14 +137,12 @@ export const copy = {
     navResearch: "Onderzoek",
     navTeam: "Team",
     navContact: "Contact",
-    headerChat: "Open EE",
-    heroEyebrow: "TOEGEPAST ONDERZOEK · AI-ENGINEERING",
-    heroLine1: "AI, van idee",
-    heroLine2: "tot experiment.",
-    heroDescription: "Gebruik Evidence Engine, onze experimentele AI.",
-    openEE: "Open Evidence Engine",
+    heroEyebrow: "Onafhankelijk onderzoek",
+    heroTitle: "Kunstmatige intelligentie verkennen.",
+    heroDescription:
+      "Raiju Cloud System is een onafhankelijk initiatief voor onderzoek naar en experimenten met kunstmatige intelligentie.",
+    heroDiscover: "Ontdek RCS",
     exploreResearch: "Ontdek het onderzoek",
-    experimental: "Een experimenteel RCS-project.",
     heroAlt:
       "Originele draadmodelillustratie: documenten verbonden met een RCS-kern en een abstracte interface voor kunstmatige intelligentie.",
     artCaption: "VAN IDEE TOT SYSTEEM",

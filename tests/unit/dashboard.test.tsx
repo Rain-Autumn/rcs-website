@@ -1,11 +1,11 @@
 import { describe, expect, it } from "vitest";
 import { renderToStaticMarkup } from "react-dom/server";
 import { Dashboard, dashboardCopy } from "@/components/onepage/Dashboard";
-import { getOnePagePublications, languages, EE_URL } from "@/content/onepage";
+import { getOnePagePublications, languages } from "@/content/onepage";
 
 describe("RCS dashboard", () => {
   it.each(languages)(
-    "%s preserves genuine product links and bounded security claims",
+    "%s preserves research while chat and Shield remain unavailable",
     (locale) => {
       const host = document.createElement("div");
       const publications = getOnePagePublications(locale);
@@ -16,26 +16,17 @@ describe("RCS dashboard", () => {
         Array.from(host.querySelectorAll("[data-dashboard-panel]")).map(
           (node) => node.getAttribute("data-dashboard-panel"),
         ),
-      ).toEqual(["even", "research", "security"]);
-      expect(
-        host.querySelector(`a[href="${EE_URL}"]`)?.getAttribute("rel"),
-      ).toBe("noopener noreferrer");
+      ).toEqual(["research"]);
+      expect(host.querySelector('a[href*="evidence-engine"]')).toBeNull();
       expect(host.querySelector("iframe, input, form")).toBeNull();
-      expect(host.querySelector("#securite")?.textContent).toContain(
-        "RCS shield",
-      );
-      expect(host.querySelector("#securite")?.textContent).toContain(
-        dashboardCopy[locale].stage,
-      );
+      expect(host.querySelector("#securite")).toBeNull();
+      expect(host.textContent).not.toMatch(/RCS shield/i);
       for (const publication of publications.slice(0, 2))
         expect(
           host.querySelector(`a[href="#${publication.id}"]`)?.textContent,
         ).toContain(publication.title);
       expect(host.querySelector('a[href="#recherches"]')).not.toBeNull();
-      expect(host.querySelector('a[href="#contact"]')).not.toBeNull();
-      expect(host.querySelector("img")?.getAttribute("alt")).toBe(
-        dashboardCopy[locale].mascot,
-      );
+      expect(host.querySelector("img")).toBeNull();
     },
   );
   it("handles an empty research list without invented publications", () => {
