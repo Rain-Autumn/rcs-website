@@ -16,6 +16,7 @@ import { siteFeatures } from "@/lib/site-features";
 import styles from "./OnePage.module.css";
 import { Dashboard, dashboardCopy } from "./Dashboard";
 import { ResearchHero } from "./ResearchHero";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 export type OnePageMember = TeamMember & { role: string; bio: string };
 const c = (...names: string[]) =>
@@ -178,6 +179,7 @@ export function OnePage({
                 </Link>
               ))}
             </div>
+            <ThemeToggle locale={locale} className={c("theme-toggle")} />
             <a className={c("header-chat")} href="#contact">
               <span>{t.navContact}</span>
               <Arrow />

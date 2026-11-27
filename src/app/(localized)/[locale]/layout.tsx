@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from "next";
+import "@/app/theme.css";
 import "@/app/globals.css";
 
 import { isLocale } from "@/content/i18n";
+import { themeColors, themeInitScript } from "@/lib/theme";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://raijucloudsystem.com"),
@@ -14,8 +16,8 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#f8f8f4",
-  colorScheme: "light",
+  themeColor: themeColors,
+  colorScheme: "light dark",
 };
 
 export default async function LocalizedRootLayout({
@@ -32,7 +34,11 @@ export default async function LocalizedRootLayout({
   const lang = isLocale(locale) ? locale : "en";
 
   return (
-    <html lang={lang} data-scroll-behavior="smooth">
+    // The head script sets data-theme before paint, so React must not flag it.
+    <html lang={lang} data-scroll-behavior="smooth" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="portal-entered">{children}</body>
     </html>
   );
