@@ -195,7 +195,7 @@ export const copy = {
 };
 
 export type PublicationCategory = "all" | "ai" | "systems";
-export type PublicationArt = "home" | "agents" | "chip" | "storage";
+export type PublicationArt = "home" | "agents" | "persona" | "chip" | "storage";
 export type OnePagePublication = {
   id: string;
   title: string;
@@ -259,11 +259,13 @@ export function getOnePagePublications(
       art:
         project.id === "RCS-RP-004"
           ? "home"
-          : ["RCS-RP-001", "RCS-RP-005"].includes(project.id)
-            ? "agents"
-            : project.id === "RCS-RP-002"
-              ? "chip"
-              : "storage",
+          : project.id === "RCS-RP-005"
+            ? "persona"
+            : project.id === "RCS-RP-001"
+              ? "agents"
+              : project.id === "RCS-RP-002"
+                ? "chip"
+                : "storage",
       tags: project.topics.slice(0, 3),
       href:
         project.publicationUrl ??
