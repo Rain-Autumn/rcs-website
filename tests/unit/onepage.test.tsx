@@ -28,6 +28,11 @@ describe("approved onepage", () => {
       expect(items.find((item) => item.id === "RCS-RP-005")?.doi).toBe(
         "10.5281/zenodo.24446347",
       );
+      // Each study keeps its own cover illustration.
+      expect(new Set(items.map((item) => item.art)).size).toBe(5);
+      expect(items.find((item) => item.id === "RCS-RP-005")?.art).toBe(
+        "persona",
+      );
     }
   });
   it("supports categories, accents, multiple words and no results", () => {

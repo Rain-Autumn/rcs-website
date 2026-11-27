@@ -139,6 +139,7 @@ const checks = [
       "rcs-onepage-hero",
       "onepage-home",
       "onepage-agents",
+      "onepage-persona",
       "onepage-chip",
       "onepage-storage",
     ].every((name) => exists("public/images/" + name + ".svg")),
