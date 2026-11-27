@@ -149,7 +149,7 @@ export const founder: TeamMember = {
     },
     {
       provider: "Hugging Face",
-      title: "AI Agents Fundamentals",
+      title: "Fundamentals of Agents",
       issued: "2026-11",
       credentialId: "RaijuCloudSystem",
       credentialUrl:
