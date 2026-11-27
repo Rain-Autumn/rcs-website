@@ -14,29 +14,32 @@ import {
 } from "@/content/team";
 
 describe("approved onepage", () => {
-  it("keeps four publications with their confirmed DOIs in each language", () => {
+  it("keeps five publications with their confirmed DOIs in each language", () => {
     for (const locale of languages) {
       const items = getOnePagePublications(locale);
-      expect(items).toHaveLength(4);
-      expect(new Set(items.map((item) => item.doi)).size).toBe(4);
+      expect(items).toHaveLength(5);
+      expect(new Set(items.map((item) => item.doi)).size).toBe(5);
       expect(items.find((item) => item.id === "RCS-RP-003")?.doi).toBe(
         "10.5281/zenodo.23373563",
       );
       expect(items.find((item) => item.id === "RCS-RP-004")?.doi).toBe(
         "10.5281/zenodo.23411388",
       );
+      expect(items.find((item) => item.id === "RCS-RP-005")?.doi).toBe(
+        "10.5281/zenodo.24446347",
+      );
     }
   });
   it("supports categories, accents, multiple words and no results", () => {
     const items = getOnePagePublications("fr");
-    expect(filterPublications(items, "ai", "")).toHaveLength(2);
+    expect(filterPublications(items, "ai", "")).toHaveLength(3);
     expect(filterPublications(items, "systems", "")).toHaveLength(2);
     expect(filterPublications(items, "all", "espace disque")[0].id).toBe(
       "RCS-RP-003",
     );
-    expect(filterPublications(items, "all", "mémoire")[0].id).toBe(
-      "RCS-RP-004",
-    );
+    expect(
+      filterPublications(items, "all", "mémoire").map((item) => item.id),
+    ).toContain("RCS-RP-004");
     expect(filterPublications(items, "all", "zzzzzz")).toHaveLength(0);
   });
   it.each(languages)(
