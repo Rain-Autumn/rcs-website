@@ -74,9 +74,9 @@ export const rp003Copy: Record<Locale, StudyCopy> = {
     environment:
       "26 fichiers publics (225,9 Mo), cinq cas synthétiques et deux méthodes sur un poste Windows/NTFS. 110 exécutions appariées, 220 mesures; 246 contrôles d’intégrité réussis. Aucun fichier personnel analysé.",
     date: "Essais réalisés le 8 octobre 2026 · version 2.0",
-    reservedDoi: "DOI ZENODO RÉSERVÉ",
+    reservedDoi: "DOI ZENODO PUBLIÉ",
     doiNotice:
-      "10.5281/zenodo.23373563 — dépôt Zenodo non publié à ce stade. Le DOI ne doit pas être présenté comme une référence publiée avant la mise en ligne du dépôt.",
+      "10.5281/zenodo.23373563 — dépôt Zenodo publié le 14 octobre 2026. Un dépôt sur Zenodo ne vaut pas évaluation par les pairs.",
     resultsTitle: "Résultats mesurés",
     caseLabel: "Corpus / cas",
     inputLabel: "Entrée (octets)",
@@ -220,9 +220,9 @@ export const rp003Copy: Record<Locale, StudyCopy> = {
     environment:
       "26 public files (225.9 MB), five synthetic cases and two methods on one Windows/NTFS system. 110 paired case executions, 220 measurements; all 246 integrity checks passed. No personal files analysed.",
     date: "Tests performed 8 October 2026 · version 2.0",
-    reservedDoi: "ZENODO DOI RESERVED",
+    reservedDoi: "ZENODO DOI PUBLISHED",
     doiNotice:
-      "10.5281/zenodo.23373563 — the Zenodo deposit is not yet published. Do not present this DOI as a published record until the deposit is online.",
+      "10.5281/zenodo.23373563 — Zenodo deposit published on 14 October 2026. A Zenodo deposit is not peer review.",
     resultsTitle: "Measured results",
     caseLabel: "Corpus / case",
     inputLabel: "Input (bytes)",
@@ -366,9 +366,9 @@ export const rp003Copy: Record<Locale, StudyCopy> = {
     environment:
       "26 openbare bestanden (225,9 MB), vijf synthetische gevallen en twee methoden op één Windows/NTFS-systeem. 110 gepaarde uitvoeringen, 220 metingen; alle 246 integriteitscontroles geslaagd. Geen persoonlijke bestanden geanalyseerd.",
     date: "Tests uitgevoerd op 8 oktober 2026 · versie 2.0",
-    reservedDoi: "ZENODO-DOI GERESERVEERD",
+    reservedDoi: "ZENODO-DOI GEPUBLICEERD",
     doiNotice:
-      "10.5281/zenodo.23373563 — de Zenodo-depositie is nog niet gepubliceerd. Presenteer deze DOI niet als een gepubliceerde registratie voordat de depositie online staat.",
+      "10.5281/zenodo.23373563 — Zenodo-depositie gepubliceerd op 14 oktober 2026. Een Zenodo-depositie staat niet gelijk aan peerreview.",
     resultsTitle: "Gemeten resultaten",
     caseLabel: "Corpus / geval",
     inputLabel: "Invoer (bytes)",
