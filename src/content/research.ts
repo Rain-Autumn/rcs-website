@@ -20,7 +20,7 @@ export const researchCopy = {
     catalogEyebrow: "01 // PROGRAMME",
     catalogTitle: "Projets de recherche",
     catalogLead:
-      "RCS-RP-001 et RCS-RP-002 sont publiés avec leurs rapports. RCS-RP-003 est publié sur le site ; son DOI Zenodo est réservé, mais son dépôt Zenodo n’est pas encore publié.",
+      "Les cinq études RCS-RP-001 à RCS-RP-005 sont publiées avec leurs rapports et leur DOI Zenodo ; RCS-RP-003 est aussi consultable en intégralité sur ce site. Un dépôt sur Zenodo ne vaut pas évaluation par les pairs.",
     openStudy: "CONSULTER L’ÉTUDE",
     status: {
       planned: "PROJET ENVISAGÉ",
@@ -100,7 +100,7 @@ export const researchCopy = {
     catalogEyebrow: "01 // PROGRAM",
     catalogTitle: "Research projects",
     catalogLead:
-      "RCS-RP-001 and RCS-RP-002 are published with their reports. RCS-RP-003 is published on this site; its Zenodo DOI is reserved, but its Zenodo deposit is not yet published.",
+      "All five studies, RCS-RP-001 to RCS-RP-005, are published with their reports and Zenodo DOIs; RCS-RP-003 can also be read in full on this site. A Zenodo deposit is not peer review.",
     openStudy: "READ THE STUDY",
     status: {
       planned: "PLANNED PROJECT",
@@ -180,7 +180,7 @@ export const researchCopy = {
     catalogEyebrow: "01 // PROGRAMMA",
     catalogTitle: "Onderzoeksprojecten",
     catalogLead:
-      "RCS-RP-001 en RCS-RP-002 zijn gepubliceerd met hun rapporten. RCS-RP-003 staat op deze website; de Zenodo-DOI is gereserveerd, maar de Zenodo-depositie is nog niet gepubliceerd.",
+      "De vijf studies RCS-RP-001 tot en met RCS-RP-005 zijn gepubliceerd met hun rapporten en Zenodo-DOI's; RCS-RP-003 is ook volledig op deze website te lezen. Een Zenodo-depositie staat niet gelijk aan peerreview.",
     openStudy: "BEKIJK DE STUDIE",
     status: {
       planned: "GEPLAND PROJECT",
