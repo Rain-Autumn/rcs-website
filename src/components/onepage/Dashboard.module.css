@@ -23,10 +23,10 @@
   padding: 24px 28px;
   display: flex;
   flex-direction: column;
-  background: #fdfdfa;
+  background: var(--tc-fdfdfa);
 }
 .security {
-  background: #edf0e8;
+  background: var(--tc-edf0e8);
 }
 .panelHeading {
   display: flex;
@@ -55,7 +55,7 @@
   margin: 0;
   font-size: 12px;
   line-height: 1.6;
-  color: #555d54;
+  color: var(--tc-555d54);
   max-width: 440px;
 }
 .publications {
@@ -110,8 +110,8 @@
   font: 9px/1.5 var(--mono);
   padding: 7px 10px;
   margin: 14px 0 10px;
-  border: 1px solid #cbd5c4;
-  color: #43513b;
+  border: 1px solid var(--tc-cbd5c4);
+  color: var(--tc-43513b);
   width: fit-content;
   max-width: 100%;
 }
@@ -120,7 +120,7 @@
   padding-left: 15px;
   font-size: 11px;
   line-height: 1.8;
-  color: #555d54;
+  color: var(--tc-555d54);
 }
 @media (max-width: 1000px) {
   .research,

@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
+import "@/app/theme.css";
 import "@/app/globals.css";
 import { socialMetadata } from "@/lib/site-metadata";
+import { themeColors, themeInitScript } from "@/lib/theme";
 
 const social = socialMetadata({
   title: "Raiju Cloud System — AI & Research",
@@ -36,8 +38,8 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#f8f8f4",
-  colorScheme: "light",
+  themeColor: themeColors,
+  colorScheme: "light dark",
 };
 
 export default function PortalRootLayout({
@@ -46,7 +48,11 @@ export default function PortalRootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-scroll-behavior="smooth">
+    // The head script sets data-theme before paint, so React must not flag it.
+    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body>{children}</body>
     </html>
   );

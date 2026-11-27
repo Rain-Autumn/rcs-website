@@ -1,5 +1,5 @@
 .hero {
-  --copper: #94512f;
+  --copper: var(--tc-94512f);
   position: relative;
   isolation: isolate;
   min-height: 520px;
@@ -80,11 +80,11 @@
   padding: 13px 25px;
   border: 1px solid var(--ink);
   background: var(--ink);
-  color: #fffaf4;
+  color: var(--tc-fffaf4);
 }
 
 .actions .primary:hover {
-  background: #40362d;
+  background: var(--tc-40362d);
 }
 
 .actions .secondary {
@@ -125,10 +125,10 @@
   width: 76%;
   max-width: none;
   height: calc(100% + 110px);
-  color: #ac6d45;
+  color: var(--tc-ac6d45);
   opacity: 0.28;
   pointer-events: none;
-  mask-image: linear-gradient(90deg, transparent, #000 27%);
+  mask-image: linear-gradient(90deg, transparent, var(--tc-000000) 27%);
 }
 
 .circuits path,
