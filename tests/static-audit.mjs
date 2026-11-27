@@ -83,8 +83,8 @@ const checks = [
       /prefers-reduced-motion/.test(css),
   ],
   [
-    "four published research DOI records present",
-    ["21994886", "22110548", "23373563", "23411388"].every((id) =>
+    "five published research DOI records present",
+    ["21994886", "22110548", "23373563", "23411388", "24446347"].every((id) =>
       research.includes("10.5281/zenodo." + id),
     ),
   ],

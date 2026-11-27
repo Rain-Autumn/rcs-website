@@ -29,6 +29,7 @@ Published and planned work are distinguished explicitly. The current library lin
 | RCS-RP-002  | [`10.5281/zenodo.22110548`](https://doi.org/10.5281/zenodo.22110548) |
 | RCS-RP-003  | [`10.5281/zenodo.23373563`](https://doi.org/10.5281/zenodo.23373563) |
 | RCS-RP-004  | [`10.5281/zenodo.23411388`](https://doi.org/10.5281/zenodo.23411388) |
+| RCS-RP-005  | [`10.5281/zenodo.24446347`](https://doi.org/10.5281/zenodo.24446347) |
 
 ## Team
 

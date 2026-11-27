@@ -253,13 +253,13 @@ export function getOnePagePublications(
       id: project.id,
       title: project.title,
       summary: project.summary,
-      category: ["RCS-RP-001", "RCS-RP-004"].includes(project.id)
+      category: ["RCS-RP-001", "RCS-RP-004", "RCS-RP-005"].includes(project.id)
         ? "ai"
         : "systems",
       art:
         project.id === "RCS-RP-004"
           ? "home"
-          : project.id === "RCS-RP-001"
+          : ["RCS-RP-001", "RCS-RP-005"].includes(project.id)
             ? "agents"
             : project.id === "RCS-RP-002"
               ? "chip"

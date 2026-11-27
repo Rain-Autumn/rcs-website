@@ -140,6 +140,22 @@ export const founder: TeamMember = {
   ],
   certifications: [
     {
+      provider: "Hugging Face",
+      title: "Hugging Face Agents Course",
+      issued: "2026-11",
+      credentialId: "RaijuCloudSystem",
+      credentialUrl:
+        "https://huggingface.co/datasets/agents-course/final-certificates/resolve/main/certificates/RaijuCloudSystem/2026-11-19.png",
+    },
+    {
+      provider: "Hugging Face",
+      title: "Fundamentals of Agents",
+      issued: "2026-11",
+      credentialId: "RaijuCloudSystem",
+      credentialUrl:
+        "https://huggingface.co/datasets/agents-course/certificates/resolve/main/certificates/RaijuCloudSystem/2026-11-16.png",
+    },
+    {
       provider: "IBM",
       title: "Build an AI Agent",
       issued: "2026-09",

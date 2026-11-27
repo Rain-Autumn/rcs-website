@@ -250,6 +250,23 @@ export const researchCopy = {
 const projectBase = {
   fr: [
     {
+      id: "RCS-RP-005",
+      slug: "project-persona",
+      status: "published",
+      title:
+        "Project PERSONA: Cross-Model Fidelity of an Interaction-Derived Human-AI Persona",
+      question:
+        "Peut-on transférer une personnalité construite au fil d’interactions humain-IA vers un autre modèle, tout en préservant sa mémoire, ses comportements et sa cohérence ?",
+      summary:
+        "Rapport de recherche v1.0 publié le 22 novembre 2026 : prépublication indépendante, non évaluée par les pairs. Trois campagnes (C1, C2, C3bis), 288 appels documentés et 30 scénarios communs sur cinq dimensions (mémoire factuelle, style, valeurs, contraintes, résistance aux faux souvenirs), évalués sur six modèles hôtes (Llama, Kimi, Nemotron, Gemma, Qwen, Mistral), jusqu’à Mistral Large 4 (environ 1 000 milliards de paramètres selon son identifiant). Les 180 évaluations initiales sont des jugements d’IA provisoires : moyenne de 72,0 %, de 53,2 % à 97,2 % selon l’hôte. La fidélité observée est mesurable mais incomplète et dépend du modèle ; aucun transfert autonome d’identité n’est démontré.",
+      topics: ["LLM", "PERSONA", "MEMORY", "AI EVALUATION"],
+      evidence: ["measured", "external"],
+      publicationDate: "2026-11-22",
+      doi: "10.5281/zenodo.24446347",
+      publicationUrl: "https://doi.org/10.5281/zenodo.24446347",
+      authorOrcid: "https://orcid.org/0009-0009-7729-6552",
+    },
+    {
       id: "RCS-RP-004",
       slug: "from-cloud-to-living-room",
       status: "published",
@@ -321,6 +338,23 @@ const projectBase = {
   ],
   en: [
     {
+      id: "RCS-RP-005",
+      slug: "project-persona",
+      status: "published",
+      title:
+        "Project PERSONA: Cross-Model Fidelity of an Interaction-Derived Human-AI Persona",
+      question:
+        "Can a personality built over human-AI interactions be transferred to another model while preserving its memory, behaviour and consistency?",
+      summary:
+        "Research report v1.0 published on 22 November 2026: an independent preprint, not peer reviewed. Three campaigns (C1, C2, C3bis), 288 logged calls and 30 common scenarios across five dimensions (factual recall, style, values, constraints, false-memory resistance), evaluated on six host models (Llama, Kimi, Nemotron, Gemma, Qwen, Mistral), up to Mistral Large 4 (about one trillion parameters according to its model identifier). The 180 initial ratings are provisional AI judgments: 72.0% on average, ranging from 53.2% to 97.2% by host. Observed fidelity is measurable but incomplete and model-dependent; no autonomous identity transfer is demonstrated.",
+      topics: ["LLM", "PERSONA", "MEMORY", "AI EVALUATION"],
+      evidence: ["measured", "external"],
+      publicationDate: "2026-11-22",
+      doi: "10.5281/zenodo.24446347",
+      publicationUrl: "https://doi.org/10.5281/zenodo.24446347",
+      authorOrcid: "https://orcid.org/0009-0009-7729-6552",
+    },
+    {
       id: "RCS-RP-004",
       slug: "from-cloud-to-living-room",
       status: "published",
@@ -391,6 +425,23 @@ const projectBase = {
     },
   ],
   nl: [
+    {
+      id: "RCS-RP-005",
+      slug: "project-persona",
+      status: "published",
+      title:
+        "Project PERSONA: Cross-Model Fidelity of an Interaction-Derived Human-AI Persona",
+      question:
+        "Kan een persoonlijkheid die via mens-AI-interacties is opgebouwd worden overgedragen naar een ander model, met behoud van haar geheugen, gedrag en samenhang?",
+      summary:
+        "Onderzoeksrapport v1.0, gepubliceerd op 22 november 2026: een onafhankelijke preprint, niet door vakgenoten beoordeeld. Drie campagnes (C1, C2, C3bis), 288 gedocumenteerde aanroepen en 30 gemeenschappelijke scenario's over vijf dimensies (feitelijk geheugen, stijl, waarden, beperkingen, weerstand tegen valse herinneringen), geëvalueerd op zes hostmodellen (Llama, Kimi, Nemotron, Gemma, Qwen, Mistral), tot Mistral Large 4 (ongeveer 1 biljoen parameters volgens de modelidentificatie). De 180 initiële beoordelingen zijn voorlopige AI-oordelen: gemiddeld 72,0%, van 53,2% tot 97,2% afhankelijk van de host. De waargenomen getrouwheid is meetbaar maar onvolledig en modelafhankelijk; een autonome overdracht van identiteit wordt niet aangetoond.",
+      topics: ["LLM", "PERSONA", "MEMORY", "AI EVALUATION"],
+      evidence: ["measured", "external"],
+      publicationDate: "2026-11-22",
+      doi: "10.5281/zenodo.24446347",
+      publicationUrl: "https://doi.org/10.5281/zenodo.24446347",
+      authorOrcid: "https://orcid.org/0009-0009-7729-6552",
+    },
     {
       id: "RCS-RP-004",
       slug: "from-cloud-to-living-room",

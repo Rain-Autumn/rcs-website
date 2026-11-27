@@ -21,7 +21,7 @@ test("research filters, empty state and reset work", async ({ page }) => {
   await page
     .getByRole("button", { name: "Intelligence artificielle", exact: true })
     .click();
-  await expect(page.locator("#recherches article")).toHaveCount(2);
+  await expect(page.locator("#recherches article")).toHaveCount(3);
   await page.getByRole("searchbox").fill("zzzz-no-result");
   await expect(
     page.getByText("Aucune publication ne correspond."),
@@ -29,7 +29,7 @@ test("research filters, empty state and reset work", async ({ page }) => {
   await page
     .getByRole("button", { name: "Réinitialiser les filtres", exact: true })
     .click();
-  await expect(page.locator("#recherches article")).toHaveCount(4);
+  await expect(page.locator("#recherches article")).toHaveCount(5);
 });
 test("team logos use the Arkenstone variant only for the founder", async ({
   page,
